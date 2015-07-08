@@ -23,19 +23,43 @@
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WmI-iV-Fte">
+                                    <rect key="frame" x="0.0" y="64" width="600" height="1"/>
+                                    <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="6zU-oi-PuR"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="WzT-hi-SjU" secondAttribute="trailing" constant="8" id="NU6-yH-KlT"/>
                                 <constraint firstAttribute="bottom" secondItem="WzT-hi-SjU" secondAttribute="bottom" constant="8" id="Yu3-1z-LkK"/>
+                                <constraint firstItem="WmI-iV-Fte" firstAttribute="leading" secondItem="ggG-XC-bi8" secondAttribute="leading" id="cyj-Bq-wD1"/>
+                                <constraint firstAttribute="bottom" secondItem="WmI-iV-Fte" secondAttribute="bottom" constant="1" id="gyg-ZO-T0S"/>
                                 <constraint firstItem="WzT-hi-SjU" firstAttribute="leading" secondItem="ggG-XC-bi8" secondAttribute="leading" constant="8" id="spT-lB-rUV"/>
+                                <constraint firstAttribute="trailing" secondItem="WmI-iV-Fte" secondAttribute="trailing" id="vfO-73-i9e"/>
                                 <constraint firstItem="WzT-hi-SjU" firstAttribute="top" secondItem="ggG-XC-bi8" secondAttribute="top" constant="11" id="zTJ-cn-5eC"/>
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="dMg-Oq-VJ0">
                             <rect key="frame" x="0.0" y="262" width="600" height="4"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8a8-o2-g0o">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
+                                    <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="ZsL-4V-X4t"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="8a8-o2-g0o" firstAttribute="leading" secondItem="dMg-Oq-VJ0" secondAttribute="leading" id="61f-FM-cJD"/>
+                                <constraint firstItem="8a8-o2-g0o" firstAttribute="top" secondItem="dMg-Oq-VJ0" secondAttribute="top" id="Xav-ZS-YgP"/>
+                                <constraint firstAttribute="trailing" secondItem="8a8-o2-g0o" secondAttribute="trailing" id="b3W-3x-u3h"/>
+                            </constraints>
                         </view>
                         <sections>
                             <tableViewSection id="izo-um-X2A">
@@ -127,7 +151,7 @@
             </objects>
             <point key="canvasLocation" x="2063" y="-318"/>
         </scene>
-        <!--Orders View Controller-->
+        <!--Orders-->
         <scene sceneID="RJA-X4-W2n">
             <objects>
                 <tableViewController id="ifZ-0g-rph" customClass="OrdersViewController" customModule="BigcommerceApi_Example" customModuleProvider="target" sceneMemberID="viewController">
@@ -148,7 +172,7 @@
                             <outlet property="delegate" destination="ifZ-0g-rph" id="NuE-MC-E2i"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="yqg-aU-0VY">
+                    <navigationItem key="navigationItem" title="Orders" id="yqg-aU-0VY">
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="88b-xX-4Ms">
                             <connections>
                                 <segue destination="Rz1-du-tBi" kind="presentation" identifier="ModalCredentialsSegue" id="4Ky-Du-bfR"/>

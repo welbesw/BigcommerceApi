@@ -30,8 +30,20 @@ public class BigcommerceApi: NSObject {
     }
     
     override init() {
-        //Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders?.updateValue("application/json", forKey: "Accept")
+        super.init()
         
+        initializeAlamofire()
+    }
+    
+    public init(username: String, token: String, storeBaseUrl: String) {
+        super.init()
+        
+        setCredentials(username, token: token, storeBaseUrl: storeBaseUrl)
+        
+        initializeAlamofire()
+    }
+    
+    func initializeAlamofire() {
         var defaultHeaders = Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders ?? [:]
         defaultHeaders["Accept"] = "application/json"
         

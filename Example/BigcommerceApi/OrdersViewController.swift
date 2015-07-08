@@ -59,7 +59,11 @@ class OrdersViewController: UITableViewController {
 
         // Configure the cell...
         let order = orders[indexPath.row]
-        cell.textLabel!.text = order.orderId?.stringValue
+        if let orderId = order.orderId {
+            cell.textLabel!.text = "Order \(orderId.stringValue)"
+        } else {
+            cell.textLabel!.text = "Order (no id)"
+        }
 
         return cell
     }
