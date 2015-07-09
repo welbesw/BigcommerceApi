@@ -10,16 +10,17 @@
 Pod::Spec.new do |s|
   s.name             = "BigcommerceApi"
   s.version          = "0.1.0"
-  s.summary          = "A simple Swift library to access the BigCommerce API."
+  s.summary          = "A simple Swift library to access the Bigcommerce Stores API."
   s.description      = <<-DESC
-                       An optional longer description of BigcommerceApi
+                       A simple Swift library for the Bigcommerce Stores API
+                       An implementation of the order method is the starting point.
 
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+                      More information about the Bigcommerce Stores API can be found at: https://developer.bigcommerce.com/api/legacy/basic-auth
+
                        DESC
   s.homepage         = "https://github.com/welbesw/BigcommerceApi"
   s.license          = 'MIT'
-  s.author           = { "William Welbes" }
+  s.author           = "William Welbes"
   s.source           = { :git => "https://github.com/welbesw/BigcommerceApi.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/welbes'
 
@@ -32,6 +33,6 @@ Pod::Spec.new do |s|
   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  s.frameworks = 'UIKit'
+  s.frameworks = 'Foundation'
   s.dependency 'Alamofire', '~> 1.2'
 end
