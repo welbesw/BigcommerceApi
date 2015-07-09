@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class BigcommerceOrder: NSObject {
+public class BigcommerceOrder: NSObject, Printable {
     public var totalExcludingTax: NSNumber = 0
     public var totalIncludingTax: NSNumber = 0
     public var totalTax: NSNumber = 0
@@ -181,5 +181,14 @@ public class BigcommerceOrder: NSObject {
                 dateShipped = date
             }
         }
+    }
+    
+    public override var description: String {
+        let mirror = reflect(self)
+        
+        let orderIdString = self.orderId != nil ? self.orderId!.stringValue : ""
+        var description = "Order \(orderIdString) : \(self.billingFirstName) \(self.billingLastName)"
+        
+        return description
     }
 }

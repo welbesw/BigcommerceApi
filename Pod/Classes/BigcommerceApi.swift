@@ -60,6 +60,7 @@ public class BigcommerceApi: NSObject {
         self.apiStoreBaseUrl = storeBaseUrl
     }
     
+    //Retrieve an array of Bigcommerce order objects
     public func getOrders(completion: (orders:[BigcommerceOrder], error: NSError?) -> ()) {
         
         let parameters = ["sort" : "date_created:desc", "limit": "50"]
@@ -69,7 +70,6 @@ public class BigcommerceApi: NSObject {
             .responseJSON { (request, response, JSON, error) in
                 
                 if(error == nil) {
-                    //println(JSON)
                     
                     var orders: [BigcommerceOrder] = []
                     
@@ -91,5 +91,29 @@ public class BigcommerceApi: NSObject {
                     completion(orders: [], error: error)
                 }
             }
+    }
+    
+    public func getOrder(#orderId: String, completion: (order:BigcommerceOrder?, error: NSError?) -> ()) {
+        
+        alamofireManager.request(.GET, apiStoreBaseUrl + "order/\(orderId)", parameters:nil)
+            .authenticate(user: apiUsername, password: apiToken)
+            .responseJSON { (request, response, JSON, error) in
+                
+                if(error == nil) {
+                    
+                    var order:BigcommerceOrder? = nil
+                    
+                    if let orderDict = JSON as? NSDictionary {
+                        let order = BigcommerceOrder(jsonDictionary: orderDict)
+                    }
+                    
+                    completion(order: order, error: nil)
+                    
+                    
+                } else {
+                    println(error)
+                    completion(order: nil, error: error)
+                }
+        }
     }
 }

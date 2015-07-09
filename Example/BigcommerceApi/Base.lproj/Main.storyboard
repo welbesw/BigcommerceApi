@@ -165,6 +165,9 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NU2-2G-Hn2" id="OH8-bI-cUw">
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="y7P-J8-1FF" kind="show" identifier="OrderDetailsSegue" id="YLa-Tp-tHA"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -183,6 +186,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zxq-Rt-fQf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1272" y="478"/>
+        </scene>
+        <!--Order Details-->
+        <scene sceneID="llM-P6-qQH">
+            <objects>
+                <viewController title="Order Details" id="y7P-J8-1FF" customClass="OrderDetailsViewController" customModule="BigcommerceApi_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QJo-6Q-5gW"/>
+                        <viewControllerLayoutGuide type="bottom" id="y78-SE-BKL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="scw-7h-fww">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PnH-jU-26Z">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="y78-SE-BKL" firstAttribute="top" secondItem="PnH-jU-26Z" secondAttribute="bottom" id="Fzh-zg-Nms"/>
+                            <constraint firstItem="PnH-jU-26Z" firstAttribute="leading" secondItem="scw-7h-fww" secondAttribute="leadingMargin" constant="-16" id="d7R-j7-Sq0"/>
+                            <constraint firstItem="PnH-jU-26Z" firstAttribute="top" secondItem="scw-7h-fww" secondAttribute="topMargin" id="mrP-h2-JPb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="PnH-jU-26Z" secondAttribute="trailing" constant="-16" id="pnu-Du-qjh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="PnH-jU-26Z" id="ZLN-5A-dZh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b7a-df-5hr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2063" y="478"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ia8-M7-wMn">

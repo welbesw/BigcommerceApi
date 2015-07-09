@@ -1450,6 +1450,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F4AB65E954F579C62E43106F /* Pods-BigcommerceApi_Example.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1508,6 +1509,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4BCFA4DA8BBAFED27C45ADB4 /* Pods-BigcommerceApi_Tests.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1565,6 +1567,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 06AAD7C93416CE368A11270E /* Pods-BigcommerceApi_Tests.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1805,6 +1808,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5CE17D9548930BC46D037751 /* Pods-BigcommerceApi_Example.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
