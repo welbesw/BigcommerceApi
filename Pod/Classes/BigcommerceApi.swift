@@ -116,4 +116,35 @@ public class BigcommerceApi: NSObject {
                 }
         }
     }
+    
+    public func getOrderStatuses(completion: (orderStatuses:[BigcommerceOrderStatus], error: NSError?) -> ()) {
+        alamofireManager.request(.GET, apiStoreBaseUrl + "order_statuses", parameters:nil)
+            .authenticate(user: apiUsername, password: apiToken)
+            .responseJSON { (request, response, JSON, error) in
+                
+                var orderStatuses:[BigcommerceOrderStatus] = []
+                
+                if(error == nil) {
+                    
+                    //Loop over the orders JSON object and create order objects for each one
+                    if let orderStatusArray = JSON as? NSArray {
+                        for orderStatusElement in orderStatusArray {
+                            if let orderStatusDict = orderStatusElement as? NSDictionary {
+                                let orderStatus = BigcommerceOrderStatus(jsonDictionary: orderStatusDict)
+                                orderStatuses.append(orderStatus)
+                            }
+                        }
+                    }
+                    
+                    orderStatuses.sort({ $0.order.intValue > $1.order.intValue })
+                    
+                    completion(orderStatuses: orderStatuses, error: nil)
+                    
+                    
+                } else {
+                    println(error)
+                    completion(orderStatuses: orderStatuses, error: error)
+                }
+        }
+    }
 }

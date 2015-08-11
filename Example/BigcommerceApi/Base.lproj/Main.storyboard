@@ -176,6 +176,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Orders" id="yqg-aU-0VY">
+                        <barButtonItem key="leftBarButtonItem" title="Filter" id="ve2-CW-gHj">
+                            <connections>
+                                <segue destination="NVK-c1-d1q" kind="presentation" identifier="FilterModalSegue" id="q8Q-rZ-2Pe"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="88b-xX-4Ms">
                             <connections>
                                 <segue destination="Rz1-du-tBi" kind="presentation" identifier="ModalCredentialsSegue" id="4Ky-Du-bfR"/>
@@ -186,6 +191,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zxq-Rt-fQf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1272" y="478"/>
+        </scene>
+        <!--Order Statuses-->
+        <scene sceneID="mtD-Lp-FP3">
+            <objects>
+                <tableViewController id="MgB-2G-kbX" customClass="OrderStatusesViewController" customModule="BigcommerceApi_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6B9-6z-Z5i">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="orderStatusCell" id="R0M-i9-gdS">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R0M-i9-gdS" id="SbV-TU-sem">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="MgB-2G-kbX" id="LKk-Uc-t01"/>
+                            <outlet property="delegate" destination="MgB-2G-kbX" id="k9Z-CN-762"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Order Statuses" id="6Og-JW-GJS">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="UFz-1N-1bY">
+                            <connections>
+                                <action selector="didTapDoneButton:" destination="MgB-2G-kbX" id="OFP-Vk-d9f"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DwK-SD-CFo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2084" y="1254"/>
         </scene>
         <!--Order Details-->
         <scene sceneID="llM-P6-qQH">
@@ -258,6 +296,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U53-fN-OkK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="460" y="478"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qIk-Kg-RXO">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NVK-c1-d1q" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="peM-VG-9x9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="MgB-2G-kbX" kind="relationship" relationship="rootViewController" id="844-9e-0SE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UIu-iX-tUh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1272" y="1254"/>
         </scene>
     </scenes>
 </document>
