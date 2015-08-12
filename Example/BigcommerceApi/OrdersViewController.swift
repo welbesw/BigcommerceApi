@@ -23,22 +23,48 @@ class OrdersViewController: UITableViewController {
         } else {
             //Set the API credentials
             BigcommerceApi.sharedInstance.setCredentials(defaultsManager.apiUsername!, token: defaultsManager.apiToken!, storeBaseUrl: defaultsManager.apiStoreBaseUrl!)
-            
-            BigcommerceApi.sharedInstance.getOrders({ (orders, error) -> () in
-                //Check for an error and load the orders
-                if(error == nil) {
-                    self.orders = orders
-                    self.tableView.reloadData()
-                } else {
-                    println("Error loading orders: \(error!.localizedDescription)")
-                }
-            })
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        reloadOrders()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func reloadOrders() {
+        if let orderStatusId = DefaultsManager.sharedInstance.orderStatusIdFilter {
+            BigcommerceApi.sharedInstance.getOrdersWithStatus(orderStatusId, completion: { (orders, error) -> () in
+                //Check for an error and load the orders
+                if(error == nil) {
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        self.orders = orders
+                        self.tableView.reloadData()
+                    })
+                } else {
+                    println("Error loading orders: \(error!.localizedDescription)")
+                }
+            })
+            
+        } else {
+        
+            BigcommerceApi.sharedInstance.getOrdersMostRecent({ (orders, error) -> () in
+                //Check for an error and load the orders
+                if(error == nil) {
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        self.orders = orders
+                        self.tableView.reloadData()
+                    })
+                } else {
+                    println("Error loading orders: \(error!.localizedDescription)")
+                }
+            })
+        }
     }
 
     // MARK: - Table view data source

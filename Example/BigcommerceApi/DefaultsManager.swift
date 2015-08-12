@@ -12,6 +12,8 @@ public class DefaultsManager: NSObject {
    
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
+    var orderStatusIdFilter: Int? = nil //Allows the user to filter based on a specific order status
+    
     var apiUsername: String? {
         get {
             return userDefaults.stringForKey("ApiUsername")

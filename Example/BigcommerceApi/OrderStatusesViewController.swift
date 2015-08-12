@@ -19,8 +19,10 @@ class OrderStatusesViewController: UITableViewController {
         //Load the order statuses from the API
         BigcommerceApi.sharedInstance.getOrderStatuses { (orderStatuses, error) -> () in
             if(error == nil) {
-                self.orderStatuses = orderStatuses
-                self.tableView.reloadData()
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.orderStatuses = orderStatuses
+                    self.tableView.reloadData()
+                })
             } else {
                 let alert = UIAlertView(title: "Error", message: "Error loading statuses: \(error!.localizedDescription)", delegate: nil, cancelButtonTitle: "Ok")
                 alert.show()
@@ -34,6 +36,9 @@ class OrderStatusesViewController: UITableViewController {
     }
     
     @IBAction func didTapDoneButton(sender: AnyObject?) {
+        
+        DefaultsManager.sharedInstance.orderStatusIdFilter = nil
+        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
@@ -59,6 +64,17 @@ class OrderStatusesViewController: UITableViewController {
         cell.textLabel!.text = "\(orderStatus.id) - " + orderStatus.name
 
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //Use the selected row as the status filter
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let orderStatus = self.orderStatuses[indexPath.row]
+        
+        DefaultsManager.sharedInstance.orderStatusIdFilter = orderStatus.id
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     /*
