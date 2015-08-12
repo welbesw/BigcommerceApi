@@ -127,6 +127,43 @@ public class BigcommerceApi: NSObject {
         }
     }
     
+    public func getProductsForOrder(order:BigcommerceOrder, completion: (orderProducts:[BigcommerceOrderProduct], error: NSError?) -> ()) {
+        //Use the resource specified in the order to fetch the products
+        
+        if count(order.productsUrl) > 0 {
+        
+            alamofireManager.request(.GET, order.productsUrl, parameters:nil)
+                .authenticate(user: apiUsername, password: apiToken)
+                .responseJSON { (request, response, JSON, error) in
+                    
+                    if(error == nil) {
+                        
+                        var orderProducts: [BigcommerceOrderProduct] = []
+                        
+                        //Loop over the orders JSON object and create order objects for each one
+                        if let orderProductsArray = JSON as? NSArray {
+                            for orderProductElement in orderProductsArray {
+                                if let productDict = orderProductElement as? NSDictionary {
+                                    let orderProduct = BigcommerceOrderProduct(jsonDictionary: productDict)
+                                    orderProducts.append(orderProduct)
+                                }
+                            }
+                        }
+                        
+                        completion(orderProducts: orderProducts, error: nil)
+                        
+                        
+                    } else {
+                        println(error)
+                        completion(orderProducts: [], error: error)
+                    }
+            }
+        } else {
+            let error = NSError(domain: "com.technomagination.BigcommerceApi", code: 1, userInfo: nil)
+            completion(orderProducts: [], error: error)
+        }
+    }
+    
     public func getOrderStatuses(completion: (orderStatuses:[BigcommerceOrderStatus], error: NSError?) -> ()) {
         alamofireManager.request(.GET, apiStoreBaseUrl + "order_statuses", parameters:nil)
             .authenticate(user: apiUsername, password: apiToken)

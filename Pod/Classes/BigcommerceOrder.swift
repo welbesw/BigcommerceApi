@@ -42,6 +42,15 @@ public class BigcommerceOrder: NSObject, Printable {
     
     public var orderId: NSNumber?
     
+    public var productsResource: String = ""
+    public var productsUrl: String = ""
+    
+    public var shippingAddressesResource: String = ""
+    public var shippingAddressesUrl: String = ""
+    
+    public var couponsResource = ""
+    public var couponsUrl = ""
+    
     public init(jsonDictionary:NSDictionary) {
         //Load the JSON dictionary into the order object
         
@@ -179,6 +188,33 @@ public class BigcommerceOrder: NSObject, Printable {
         if let dateString = jsonDictionary["date_shipped"] as? String {
             if let date = dateFormatter.dateFromString(dateString) {
                 dateShipped = date
+            }
+        }
+        
+        if let productsDict = jsonDictionary["products"] as? NSDictionary {
+            if let resource = productsDict["resource"] as? String {
+                productsResource = resource
+            }
+            if let url = productsDict["url"] as? String {
+                productsUrl = url
+            }
+        }
+        
+        if let shippingAddressesDict = jsonDictionary["shipping_addresses"] as? NSDictionary {
+            if let resource = shippingAddressesDict["resource"] as? String {
+                shippingAddressesResource = resource
+            }
+            if let url = shippingAddressesDict["url"] as? String {
+                shippingAddressesUrl = url
+            }
+        }
+        
+        if let couponsDict = jsonDictionary["coupons"] as? NSDictionary {
+            if let resource = couponsDict["resource"] as? String {
+                couponsResource = resource
+            }
+            if let url = couponsDict["url"] as? String {
+                couponsUrl = url
             }
         }
     }

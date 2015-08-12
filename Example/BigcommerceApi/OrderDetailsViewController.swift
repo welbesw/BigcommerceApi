@@ -21,6 +21,8 @@ public class OrderDetailsViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         loadOrderDetails()
+        
+        loadOrderProducts()
     }
 
     public override func didReceiveMemoryWarning() {
@@ -30,6 +32,19 @@ public class OrderDetailsViewController: UIViewController {
     
     func loadOrderDetails() {
         self.textView.text = self.order.description
+    }
+    
+    func loadOrderProducts() {
+        BigcommerceApi.sharedInstance.getProductsForOrder(order, completion: { (orderProducts, error) -> () in
+            //Check for error
+            if(error == nil) {
+                for orderProduct in orderProducts {
+                    println("Order Product: \(orderProduct.name) - (\(orderProduct.quantity))")
+                }
+            } else {
+                println("Error getting order products: \(error!.localizedDescription)")
+            }
+        })
     }
     
 
