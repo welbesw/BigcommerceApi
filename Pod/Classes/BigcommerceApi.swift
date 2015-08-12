@@ -63,7 +63,7 @@ public class BigcommerceApi: NSObject {
     //Retrieve an array of Bigcommerce order objects
     public func getOrders(completion: (orders:[BigcommerceOrder], error: NSError?) -> ()) {
         
-        let parameters = ["sort" : "date_created:desc", "limit": "50"]
+        let parameters = ["sort" : "date_created:desc", "limit": "50", "status_id" : "1"]
         
         alamofireManager.request(.GET, apiStoreBaseUrl + "orders", parameters:parameters)
             .authenticate(user: apiUsername, password: apiToken)
@@ -136,7 +136,7 @@ public class BigcommerceApi: NSObject {
                         }
                     }
                     
-                    orderStatuses.sort({ $0.order.intValue > $1.order.intValue })
+                    orderStatuses.sort({ $0.id < $1.id })
                     
                     completion(orderStatuses: orderStatuses, error: nil)
                     

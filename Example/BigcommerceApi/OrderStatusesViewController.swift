@@ -56,7 +56,7 @@ class OrderStatusesViewController: UITableViewController {
         // Configure the cell...
         let orderStatus = self.orderStatuses[indexPath.row]
         
-        cell.textLabel!.text = orderStatus.name
+        cell.textLabel!.text = "\(orderStatus.id) - " + orderStatus.name
 
         return cell
     }
