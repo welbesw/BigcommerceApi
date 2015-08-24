@@ -21,6 +21,12 @@ public class BigcommerceOrder: NSObject, Printable {
     public var shippingCostIncludingTax: NSNumber = 0
     public var shippingCostTax: NSNumber = 0
     
+    public var refundedAmount: NSNumber = 0
+    public var couponDiscountAmount: NSNumber = 0
+    public var discountAmount: NSNumber = 0
+    
+    public var ipAddress: String = ""
+    
     public var status: String = ""
     public var statusId: NSNumber?
     
@@ -123,6 +129,28 @@ public class BigcommerceOrder: NSObject, Printable {
             if let numberValue = numberFormatter.numberFromString(stringValue) {
                 shippingCostTax = numberValue
             }
+        }
+        
+        if let stringValue = jsonDictionary["refunded_amount"] as? String {
+            if let numberValue = numberFormatter.numberFromString(stringValue) {
+                refundedAmount = numberValue
+            }
+        }
+        
+        if let stringValue = jsonDictionary["coupon_discount"] as? String {
+            if let numberValue = numberFormatter.numberFromString(stringValue) {
+                couponDiscountAmount = numberValue
+            }
+        }
+        
+        if let stringValue = jsonDictionary["discount_amount"] as? String {
+            if let numberValue = numberFormatter.numberFromString(stringValue) {
+                discountAmount = numberValue
+            }
+        }
+        
+        if let stringValue = jsonDictionary["ip_address"] as? String {
+            ipAddress = stringValue
         }
         
         //Load the billing parameters
