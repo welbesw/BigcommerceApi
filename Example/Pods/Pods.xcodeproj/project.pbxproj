@@ -100,6 +100,8 @@
 		BE1D74E01B7A9D94008509BE /* BigcommerceOrderStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1D74DD1B7A9C8C008509BE /* BigcommerceOrderStatus.swift */; };
 		BE6CBD161B7BDDAC00419080 /* BigcommerceOrderProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6CBD141B7BDD9500419080 /* BigcommerceOrderProduct.swift */; };
 		BE6CBD171B7BDDAE00419080 /* BigcommerceOrderProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6CBD141B7BDD9500419080 /* BigcommerceOrderProduct.swift */; };
+		BE9B67851B8BA88500F6BD45 /* BigcommerceOrderShippingAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B67831B8BA3C100F6BD45 /* BigcommerceOrderShippingAddress.swift */; };
+		BE9B67861B8BA88900F6BD45 /* BigcommerceOrderShippingAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B67831B8BA3C100F6BD45 /* BigcommerceOrderShippingAddress.swift */; };
 		C35829BCA13B030C797FAE7F /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26167EDBBE2C4BC2800661A /* World.swift */; };
 		C7AD176EC1645842A0ECA121 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2114E4E2F7AF87B53B21D828 /* XCTest.framework */; };
 		C89CEBC0B1A7017EF774CCE9 /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3875D73AD38296911816936C /* Upload.swift */; };
@@ -311,6 +313,7 @@
 		BDF75B20CD3EDBFA94F4D680 /* World+DSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "World+DSL.swift"; path = "Quick/DSL/World+DSL.swift"; sourceTree = "<group>"; };
 		BE1D74DD1B7A9C8C008509BE /* BigcommerceOrderStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderStatus.swift; sourceTree = "<group>"; };
 		BE6CBD141B7BDD9500419080 /* BigcommerceOrderProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderProduct.swift; sourceTree = "<group>"; };
+		BE9B67831B8BA3C100F6BD45 /* BigcommerceOrderShippingAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderShippingAddress.swift; sourceTree = "<group>"; };
 		BEDE780586BB277C34D2B282 /* BigcommerceApi.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigcommerceApi.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFB76A6DA7040816C2F8D6F6 /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
 		C08E3B11C2672DD7807FD9A7 /* DSL.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DSL.h; path = Nimble/objc/DSL.h; sourceTree = "<group>"; };
@@ -489,6 +492,7 @@
 				386CEAD59CE11A81DBBC0922 /* BigcommerceOrder.swift */,
 				BE1D74DD1B7A9C8C008509BE /* BigcommerceOrderStatus.swift */,
 				BE6CBD141B7BDD9500419080 /* BigcommerceOrderProduct.swift */,
+				BE9B67831B8BA3C100F6BD45 /* BigcommerceOrderShippingAddress.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1133,6 +1137,7 @@
 				BE1D74E01B7A9D94008509BE /* BigcommerceOrderStatus.swift in Sources */,
 				4A45AD0A0610C33FEEC1B040 /* BigcommerceApi.swift in Sources */,
 				B787884951AD084A62A65390 /* BigcommerceOrder.swift in Sources */,
+				BE9B67861B8BA88900F6BD45 /* BigcommerceOrderShippingAddress.swift in Sources */,
 				BE6CBD171B7BDDAE00419080 /* BigcommerceOrderProduct.swift in Sources */,
 				8BE6D0B6387D973DEBE4A4B9 /* Pods-BigcommerceApi_Tests-BigcommerceApi-dummy.m in Sources */,
 			);
@@ -1168,6 +1173,7 @@
 				BE1D74DF1B7A9D91008509BE /* BigcommerceOrderStatus.swift in Sources */,
 				1ECB102C31A4059C51526FD1 /* BigcommerceApi.swift in Sources */,
 				5FD8FE00BBC4FC93D06E7007 /* BigcommerceOrder.swift in Sources */,
+				BE9B67851B8BA88500F6BD45 /* BigcommerceOrderShippingAddress.swift in Sources */,
 				BE6CBD161B7BDDAC00419080 /* BigcommerceOrderProduct.swift in Sources */,
 				937F8C961230FFACB7864CCC /* Pods-BigcommerceApi_Example-BigcommerceApi-dummy.m in Sources */,
 			);
