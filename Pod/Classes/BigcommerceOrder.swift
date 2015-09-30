@@ -251,7 +251,9 @@ public class BigcommerceOrder: NSObject {
         //let mirror = Mirror(reflecting: self)
         
         let orderIdString = self.orderId != nil ? self.orderId!.stringValue : ""
-        let description = "Order \(orderIdString) : \(self.billingFirstName) \(self.billingLastName)"
+        let orderStatusIdString = self.statusId != nil ? self.statusId!.stringValue : ""
+        var description = "Order \(orderIdString) : \(self.billingFirstName) \(self.billingLastName)"
+        description += "\nStatus: \(self.status) : \(orderStatusIdString)"
         
         return description
     }
