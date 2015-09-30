@@ -251,4 +251,38 @@ public class BigcommerceApi: NSObject {
                 }
         }
     }
+    
+    public func getProducts(completion: (products:[BigcommerceProduct], error: NSError?) -> ()) {
+        //let parameters = ["sort" : "date_created:desc", "limit": "50"]
+        getProducts(nil, completion: completion)
+    }
+    
+    public func getProducts(parameters:[String : String]?, completion: (products:[BigcommerceProduct], error: NSError?) -> ())  {
+        alamofireManager.request(.GET, apiStoreBaseUrl + "products", parameters:parameters)
+            .authenticate(user: apiUsername, password: apiToken)
+            .responseJSON { (request, response, result) in
+                
+                if(result.isSuccess) {
+                    
+                    var products: [BigcommerceProduct] = []
+                    
+                    //Loop over the orders JSON object and create order objects for each one
+                    if let productsArray = result.value as? NSArray {
+                        for productElement in productsArray {
+                            if let productDict = productElement as? NSDictionary {
+                                let product = BigcommerceProduct(jsonDictionary: productDict)
+                                products.append(product)
+                            }
+                        }
+                    }
+                    
+                    completion(products: products, error: nil)
+                    
+                    
+                } else {
+                    print(result.error)
+                    completion(products: [], error: result.error as? NSError)
+                }
+        }
+    }
 }

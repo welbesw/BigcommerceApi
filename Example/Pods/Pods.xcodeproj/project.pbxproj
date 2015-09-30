@@ -86,6 +86,7 @@
 		B157607E05ADEA8751D444C92E375153 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C555CE37FEB460F73A9450692DA28692 /* XCTest.framework */; };
 		BBCD229BB90046D24B9B62C751165A94 /* ExampleGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E08DAF279222C5F74FA35112917DCE /* ExampleGroup.swift */; };
 		BE1E2ADC47C4A1F3F11842BBB69D219A /* NSString+QCKSelectorName.h in Headers */ = {isa = PBXBuildFile; fileRef = DD206D84FA694697DF8655A70948DE81 /* NSString+QCKSelectorName.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		BE75BA531BBC7A9F004B9EC7 /* BigcommerceProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE75BA521BBC7A9F004B9EC7 /* BigcommerceProduct.swift */; settings = {ASSET_TAGS = (); }; };
 		C6C9B332708A4482509693AA5C7A6028 /* AssertionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1FD720C4B5F8F8A17325E74A6B1D2F /* AssertionRecorder.swift */; };
 		C839843F810AAF0339FDC19988E713E5 /* Callsite.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA733D34B7D5A1F9A1E9A06D20ACAE5E /* Callsite.swift */; };
 		C8B28E304EC1DE37BDABA50A3C7606C8 /* MatcherFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A4E3A2998C48817C541B0BF3719E4 /* MatcherFunc.swift */; };
@@ -282,6 +283,7 @@
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BD37CD0B707D6A186EE1456ECBB51A30 /* Error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Error.swift; path = Source/Error.swift; sourceTree = "<group>"; };
 		BE1BA98DC282F317DE234583BD209C4A /* World+DSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "World+DSL.swift"; path = "Quick/DSL/World+DSL.swift"; sourceTree = "<group>"; };
+		BE75BA521BBC7A9F004B9EC7 /* BigcommerceProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigcommerceProduct.swift; sourceTree = "<group>"; };
 		C205F3CC690596305A071BEB5AFB00ED /* World+DSL.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "World+DSL.h"; path = "Quick/DSL/World+DSL.h"; sourceTree = "<group>"; };
 		C3B9FB0C6B7EE9BE22F107F3752C6E54 /* Expectation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Expectation.swift; path = Nimble/Expectation.swift; sourceTree = "<group>"; };
 		C414D73D3BDC8F94CB4670D2557E1FC2 /* QuickSpec.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QuickSpec.m; path = Quick/QuickSpec.m; sourceTree = "<group>"; };
@@ -503,6 +505,7 @@
 				79DFD9272DCD948E8CFB362D1AAF4511 /* BigcommerceOrderProduct.swift */,
 				7FB8E59B0F83852CDD63B9D5851F78ED /* BigcommerceOrderShippingAddress.swift */,
 				77FCBA97EE06C800D3BBD9E825C5A0FA /* BigcommerceOrderStatus.swift */,
+				BE75BA521BBC7A9F004B9EC7 /* BigcommerceProduct.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -983,6 +986,7 @@
 			files = (
 				E8CA251727FC72C776D37E86DD57DE6C /* BigcommerceApi-dummy.m in Sources */,
 				7D841D1B48B040201EA3C097AEDCF7CE /* BigcommerceApi.swift in Sources */,
+				BE75BA531BBC7A9F004B9EC7 /* BigcommerceProduct.swift in Sources */,
 				7716761EE01162F98451C723450C47D3 /* BigcommerceOrder.swift in Sources */,
 				0F57D394ABB513FAAF26D318F7B60839 /* BigcommerceOrderProduct.swift in Sources */,
 				49F01D988B192827198E5B257DC46375 /* BigcommerceOrderShippingAddress.swift in Sources */,
