@@ -56,7 +56,7 @@ class OrderStatusesViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("orderStatusCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("orderStatusCell", forIndexPath: indexPath) 
 
         // Configure the cell...
         let orderStatus = self.orderStatuses[indexPath.row]

@@ -47,7 +47,7 @@ class OrdersViewController: UITableViewController {
                         self.tableView.reloadData()
                     })
                 } else {
-                    println("Error loading orders: \(error!.localizedDescription)")
+                    print("Error loading orders: \(error!.localizedDescription)")
                 }
             })
             
@@ -61,7 +61,7 @@ class OrdersViewController: UITableViewController {
                         self.tableView.reloadData()
                     })
                 } else {
-                    println("Error loading orders: \(error!.localizedDescription)")
+                    print("Error loading orders: \(error!.localizedDescription)")
                 }
             })
         }
@@ -81,7 +81,7 @@ class OrdersViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("orderCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("orderCell", forIndexPath: indexPath) 
 
         // Configure the cell...
         let order = orders[indexPath.row]
@@ -105,7 +105,7 @@ class OrdersViewController: UITableViewController {
         if segue.identifier == "OrderDetailsSegue" {
             if let orderDetailsViewController = segue.destinationViewController as? OrderDetailsViewController {
                 //get the selected row
-                if let selectedIndex = self.tableView.indexPathForSelectedRow() {
+                if let selectedIndex = self.tableView.indexPathForSelectedRow {
                     let order = self.orders[selectedIndex.row]
                     orderDetailsViewController.order = order
                 }

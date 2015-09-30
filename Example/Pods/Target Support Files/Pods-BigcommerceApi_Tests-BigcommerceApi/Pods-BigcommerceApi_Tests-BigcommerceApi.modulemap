@@ -1,6 +1,0 @@
-framework module BigcommerceApi {
-  umbrella header "Pods-BigcommerceApi_Tests-BigcommerceApi-umbrella.h"
-
-  export *
-  module * { export * }
-}

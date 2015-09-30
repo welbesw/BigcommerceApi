@@ -41,10 +41,10 @@ public class OrderDetailsViewController: UIViewController {
             //Check for error
             if(error == nil) {
                 for orderProduct in orderProducts {
-                    println("Order Product: \(orderProduct.name) - (\(orderProduct.quantity))")
+                    print("Order Product: \(orderProduct.name) - (\(orderProduct.quantity))")
                 }
             } else {
-                println("Error getting order products: \(error!.localizedDescription)")
+                print("Error getting order products: \(error!.localizedDescription)")
             }
         })
     }
@@ -53,10 +53,10 @@ public class OrderDetailsViewController: UIViewController {
         BigcommerceApi.sharedInstance.getShippingAddressesForOrder(order, completion: { (orderShippingAddresses, error) -> () in
             if(error == nil) {
                 for orderShippingAddress in orderShippingAddresses {
-                    println("Order Shipping Address: \(orderShippingAddress.street1)")
+                    print("Order Shipping Address: \(orderShippingAddress.street1)")
                 }
             } else {
-                println("Error getting order shipping address: \(error!.localizedDescription)")
+                print("Error getting order shipping address: \(error!.localizedDescription)")
             }
         })
     }
