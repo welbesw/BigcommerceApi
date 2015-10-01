@@ -398,6 +398,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="ctH-OX-Mor" kind="show" identifier="ProductDetailsSegue" id="wMk-a8-O3a"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -409,7 +412,97 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0k2-p8-uKV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="548" y="1877"/>
+            <point key="canvasLocation" x="553" y="2008"/>
+        </scene>
+        <!--Product Details-->
+        <scene sceneID="ktz-4q-phB">
+            <objects>
+                <viewController id="ctH-OX-Mor" customClass="ProductDetailsViewController" customModule="BigcommerceApi_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7rU-mn-hRo"/>
+                        <viewControllerLayoutGuide type="bottom" id="j8s-c5-R6F"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KPD-xN-W8t">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="v8c-gw-gDW">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="v8c-gw-gDW" firstAttribute="leading" secondItem="KPD-xN-W8t" secondAttribute="leadingMargin" constant="-20" id="22t-hM-7kD"/>
+                            <constraint firstItem="v8c-gw-gDW" firstAttribute="top" secondItem="KPD-xN-W8t" secondAttribute="topMargin" id="N1P-Tc-BNg"/>
+                            <constraint firstItem="v8c-gw-gDW" firstAttribute="bottom" secondItem="KPD-xN-W8t" secondAttribute="bottomMargin" id="pRL-Zf-BGM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="v8c-gw-gDW" secondAttribute="trailing" constant="-20" id="vdk-NJ-wyG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Product Details" id="sBf-dX-b3L">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="eft-yu-zsF">
+                            <connections>
+                                <segue destination="oru-Be-cLg" kind="presentation" identifier="ModalEditInventorySegue" id="Ee6-5n-u7j"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="textView" destination="v8c-gw-gDW" id="Aoi-M2-iot"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YbW-ku-fPc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1278" y="2008"/>
+        </scene>
+        <!--Edit Inventory-->
+        <scene sceneID="Xda-Av-Fwt">
+            <objects>
+                <viewController id="9hy-Vo-TsU" customClass="EditInvetoryViewController" customModule="BigcommerceApi_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="voT-tn-fa2"/>
+                        <viewControllerLayoutGuide type="bottom" id="2BC-ka-nfz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QKd-a9-FCM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Inventory Level" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tmg-U6-FDY">
+                                <rect key="frame" x="20" y="111" width="560" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="4MZ-BZ-nbt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tmg-U6-FDY" firstAttribute="top" secondItem="voT-tn-fa2" secondAttribute="bottom" constant="47" id="6I7-jA-hbJ"/>
+                            <constraint firstItem="tmg-U6-FDY" firstAttribute="trailing" secondItem="QKd-a9-FCM" secondAttribute="trailingMargin" id="lGY-gV-MPe"/>
+                            <constraint firstItem="tmg-U6-FDY" firstAttribute="leading" secondItem="QKd-a9-FCM" secondAttribute="leadingMargin" id="qVN-jB-NWA"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit Inventory" id="EcN-aB-ELF">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="igA-Ob-OeU">
+                            <connections>
+                                <action selector="didTapCancelButton" destination="9hy-Vo-TsU" id="y1a-9d-UIt"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="jCw-sE-UH8">
+                            <connections>
+                                <action selector="didTapSaveButton" destination="9hy-Vo-TsU" id="R8O-7Z-Ue0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="textField" destination="tmg-U6-FDY" id="9VN-6o-daQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pec-dh-uui" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2841" y="2008"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qIk-Kg-RXO">
@@ -464,7 +557,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Onz-Kg-8n1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-196" y="1877"/>
+            <point key="canvasLocation" x="-194" y="2008"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="13o-B5-Q9R">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oru-Be-cLg" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Iha-Yj-468">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="9hy-Vo-TsU" kind="relationship" relationship="rootViewController" id="wia-FL-KTg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Rj-DS-vX9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2029" y="2008"/>
         </scene>
     </scenes>
 </document>

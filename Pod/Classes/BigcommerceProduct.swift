@@ -193,4 +193,16 @@ public class BigcommerceProduct: NSObject {
             self.availability = stringValue
         }
     }
+    
+    public override var description: String {
+        //let mirror = Mirror(reflecting: self)
+        
+        let productIdString = self.productId != nil ? self.productId!.stringValue : ""
+        let inventoryLevelString = self.inventoryLevel != nil ? self.inventoryLevel!.stringValue : ""
+
+        var description = "Product \(productIdString) : \(self.name)"
+        description += "\nInventory Level: \(inventoryLevelString)"
+        
+        return description
+    }
 }

@@ -308,4 +308,24 @@ public class BigcommerceApi: NSObject {
                 }
         }
     }
+    
+    public func updateProductInventory(productId:String, newInventoryLevel:Int, completion: (error: NSError?) -> ()) {
+        
+        let parameters = ["inventory_level" : newInventoryLevel]
+        
+        alamofireManager.request(.PUT, apiStoreBaseUrl + "products/\(productId)", parameters:parameters, encoding:.JSON)
+            .authenticate(user: apiUsername, password: apiToken)
+            .responseJSON { (request, response, result) in
+                
+                if(result.isSuccess) {
+                    
+                    completion(error: nil)
+                    
+                    
+                } else {
+                    print(result.error)
+                    completion(error: result.error as? NSError)
+                }
+        }
+    }
 }
