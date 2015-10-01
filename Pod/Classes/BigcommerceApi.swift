@@ -257,6 +257,29 @@ public class BigcommerceApi: NSObject {
         getProducts(nil, completion: completion)
     }
     
+    public func getProductsWithName(name:String, completion: (products:[BigcommerceProduct], error: NSError?) -> ()) {
+        let parameters = ["name" : name]
+        getProducts(parameters, page:-1, limit:50, completion: completion)
+    }
+    
+    public func getProductsWithKeyword(keyword:String, completion: (products:[BigcommerceProduct], error: NSError?) -> ()) {
+        let parameters = ["keyword_filter" : keyword]
+        getProducts(parameters, page:-1, limit:50, completion: completion)
+    }
+    
+    public func getProducts(parameters:[String : String]?, page:Int, limit:Int, completion: (products:[BigcommerceProduct], error: NSError?) -> ()) {
+        var params = parameters
+        if(params == nil) {
+            params = [String : String]()
+        }
+        if(page > 0) {
+            params!.updateValue(String(page), forKey: "page")
+        }
+        params!.updateValue(String(limit), forKey: "limit")
+        
+        getProducts(params, completion: completion)
+    }
+    
     public func getProducts(parameters:[String : String]?, completion: (products:[BigcommerceProduct], error: NSError?) -> ())  {
         alamofireManager.request(.GET, apiStoreBaseUrl + "products", parameters:parameters)
             .authenticate(user: apiUsername, password: apiToken)

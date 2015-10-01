@@ -22,7 +22,7 @@ class ProductsViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        BigcommerceApi.sharedInstance.getProducts { (products, error) -> () in
+        BigcommerceApi.sharedInstance.getProductsWithKeyword("sample") { (products, error) -> () in
             //Check for error
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 if(error == nil) {
