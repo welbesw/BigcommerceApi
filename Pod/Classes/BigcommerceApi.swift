@@ -268,6 +268,11 @@ public class BigcommerceApi: NSObject {
         getProducts(parameters, page:-1, limit:50, completion: completion)
     }
     
+    public func getProductsWithSku(sku:String, completion: (products:[BigcommerceProduct], error: NSError?) -> ()) {
+        let parameters = ["sku" : sku]
+        getProducts(parameters, page:-1, limit:50, completion: completion)
+    }
+    
     public func getProductsWithKeyword(keyword:String, completion: (products:[BigcommerceProduct], error: NSError?) -> ()) {
         let parameters = ["keyword_filter" : keyword]
         getProducts(parameters, page:-1, limit:50, completion: completion)
