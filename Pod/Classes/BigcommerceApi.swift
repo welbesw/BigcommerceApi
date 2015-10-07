@@ -9,6 +9,12 @@
 import Foundation
 import Alamofire
 
+public enum InventoryTrackingType:String {
+    case None = "none"
+    case Simple = "simple"
+    case Sku = "sku"
+}
+
 public class BigcommerceApi: NSObject {
     
     var apiUsername = ""            //Pass in via setCredentials
@@ -309,9 +315,17 @@ public class BigcommerceApi: NSObject {
         }
     }
     
-    public func updateProductInventory(productId:String, newInventoryLevel:Int, completion: (error: NSError?) -> ()) {
+    public func updateProductInventory(productId:String, trackInventory:InventoryTrackingType?, newInventoryLevel:Int, newLowLevel:Int?, completion: (error: NSError?) -> ()) {
         
-        let parameters = ["inventory_level" : newInventoryLevel]
+        var parameters:[String : AnyObject] = ["inventory_level" : newInventoryLevel]
+        
+        if(trackInventory == .None || trackInventory == .Simple) {
+            parameters.updateValue(trackInventory!.rawValue, forKey: "inventory_tracking")
+        }
+    
+        if let lowLevel = newLowLevel {
+            parameters.updateValue(lowLevel, forKey: "inventory_warning_level")
+        }
         
         alamofireManager.request(.PUT, apiStoreBaseUrl + "products/\(productId)", parameters:parameters, encoding:.JSON)
             .authenticate(user: apiUsername, password: apiToken)
