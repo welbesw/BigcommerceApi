@@ -66,6 +66,30 @@ public class BigcommerceApi: NSObject {
         self.apiStoreBaseUrl = storeBaseUrl
     }
     
+    func checkForErrorResponse(response:NSHTTPURLResponse?, result:Result<AnyObject>) -> NSError? {
+        var error:NSError?
+        if let theResponse = response {
+            if(theResponse.statusCode >= 400) {
+                print("Server returned an error status code of: \(theResponse.statusCode)")
+                
+                var userInfo:[String : AnyObject] = [NSLocalizedDescriptionKey : "Error code \(theResponse.statusCode) from the web service."]
+                
+                if let resultArray = result.value as? NSArray {
+                    if(resultArray.count > 0) {
+                        if let resultDict = resultArray[0] as? NSDictionary {
+                            if let message = resultDict["message"] as? String {
+                                userInfo.updateValue(message, forKey: NSLocalizedDescriptionKey)
+                            }
+                        }
+                    }
+                }
+                
+                error = NSError(domain: "com.technomagination.BigcommerceApi", code: theResponse.statusCode, userInfo: userInfo)
+            }
+        }
+        return error
+    }
+    
     public func getOrdersMostRecent(completion: (orders:[BigcommerceOrder], error: NSError?) -> ()) {
         
         let parameters = ["sort" : "date_created:desc", "limit": "50"]
@@ -87,19 +111,24 @@ public class BigcommerceApi: NSObject {
                 
                 if(result.isSuccess) {
                     
-                    var orders: [BigcommerceOrder] = []
+                    if let responseError = self.checkForErrorResponse(response, result: result) {
+                        completion(orders: [], error: responseError)
+                    } else {
                     
-                    //Loop over the orders JSON object and create order objects for each one
-                    if let ordersArray = result.value as? NSArray {
-                        for orderElement in ordersArray {
-                            if let orderDict = orderElement as? NSDictionary {
-                                let order = BigcommerceOrder(jsonDictionary: orderDict)
-                                orders.append(order)
+                        var orders: [BigcommerceOrder] = []
+                        
+                        //Loop over the orders JSON object and create order objects for each one
+                        if let ordersArray = result.value as? NSArray {
+                            for orderElement in ordersArray {
+                                if let orderDict = orderElement as? NSDictionary {
+                                    let order = BigcommerceOrder(jsonDictionary: orderDict)
+                                    orders.append(order)
+                                }
                             }
                         }
+                        
+                        completion(orders: orders, error: nil)
                     }
-                    
-                    completion(orders: orders, error: nil)
                     
                     
                 } else {
@@ -117,13 +146,18 @@ public class BigcommerceApi: NSObject {
                 
                 if(result.isSuccess) {
                     
-                    var order:BigcommerceOrder? = nil
+                    if let responseError = self.checkForErrorResponse(response, result: result) {
+                        completion(order: nil, error: responseError)
+                    } else {
                     
-                    if let orderDict = result.value as? NSDictionary {
-                        order = BigcommerceOrder(jsonDictionary: orderDict)
+                        var order:BigcommerceOrder? = nil
+                        
+                        if let orderDict = result.value as? NSDictionary {
+                            order = BigcommerceOrder(jsonDictionary: orderDict)
+                        }
+                        
+                        completion(order: order, error: nil)
                     }
-                    
-                    completion(order: order, error: nil)
                     
                     
                 } else {
@@ -143,7 +177,11 @@ public class BigcommerceApi: NSObject {
                 
                 if(result.isSuccess) {
                     
-                    completion(error: nil)
+                    if let responseError = self.checkForErrorResponse(response, result: result) {
+                        completion(error: responseError)
+                    } else {
+                        completion(error: nil)
+                    }
                     
                     
                 } else {
@@ -164,19 +202,24 @@ public class BigcommerceApi: NSObject {
                     
                     if(result.isSuccess) {
                         
-                        var orderProducts: [BigcommerceOrderProduct] = []
+                        if let responseError = self.checkForErrorResponse(response, result: result) {
+                            completion(orderProducts: [], error: responseError)
+                        } else {
                         
-                        //Loop over the orders JSON object and create order objects for each one
-                        if let orderProductsArray = result.value as? NSArray {
-                            for orderProductElement in orderProductsArray {
-                                if let productDict = orderProductElement as? NSDictionary {
-                                    let orderProduct = BigcommerceOrderProduct(jsonDictionary: productDict)
-                                    orderProducts.append(orderProduct)
+                            var orderProducts: [BigcommerceOrderProduct] = []
+                            
+                            //Loop over the orders JSON object and create order objects for each one
+                            if let orderProductsArray = result.value as? NSArray {
+                                for orderProductElement in orderProductsArray {
+                                    if let productDict = orderProductElement as? NSDictionary {
+                                        let orderProduct = BigcommerceOrderProduct(jsonDictionary: productDict)
+                                        orderProducts.append(orderProduct)
+                                    }
                                 }
                             }
+                            
+                            completion(orderProducts: orderProducts, error: nil)
                         }
-                        
-                        completion(orderProducts: orderProducts, error: nil)
                         
                         
                     } else {
@@ -201,19 +244,24 @@ public class BigcommerceApi: NSObject {
                     
                     if(result.isSuccess) {
                         
-                        var orderShippingAddresses: [BigcommerceOrderShippingAddress] = []
+                        if let responseError = self.checkForErrorResponse(response, result: result) {
+                            completion(orderShippingAddresses: [], error: responseError)
+                        } else {
                         
-                        //Loop over the orders JSON object and create order objects for each one
-                        if let orderShippingAddressesArray = result.value as? NSArray {
-                            for orderShippingAddressElement in orderShippingAddressesArray {
-                                if let shippingAddressDict = orderShippingAddressElement as? NSDictionary {
-                                    let orderShippingAddress = BigcommerceOrderShippingAddress(jsonDictionary: shippingAddressDict)
-                                    orderShippingAddresses.append(orderShippingAddress)
+                            var orderShippingAddresses: [BigcommerceOrderShippingAddress] = []
+                            
+                            //Loop over the orders JSON object and create order objects for each one
+                            if let orderShippingAddressesArray = result.value as? NSArray {
+                                for orderShippingAddressElement in orderShippingAddressesArray {
+                                    if let shippingAddressDict = orderShippingAddressElement as? NSDictionary {
+                                        let orderShippingAddress = BigcommerceOrderShippingAddress(jsonDictionary: shippingAddressDict)
+                                        orderShippingAddresses.append(orderShippingAddress)
+                                    }
                                 }
                             }
+                            
+                            completion(orderShippingAddresses: orderShippingAddresses, error: nil)
                         }
-                        
-                        completion(orderShippingAddresses: orderShippingAddresses, error: nil)
                         
                         
                     } else {
@@ -236,19 +284,24 @@ public class BigcommerceApi: NSObject {
                 
                 if(result.isSuccess) {
                     
-                    //Loop over the orders JSON object and create order objects for each one
-                    if let orderStatusArray = result.value as? NSArray {
-                        for orderStatusElement in orderStatusArray {
-                            if let orderStatusDict = orderStatusElement as? NSDictionary {
-                                let orderStatus = BigcommerceOrderStatus(jsonDictionary: orderStatusDict)
-                                orderStatuses.append(orderStatus)
+                    if let responseError = self.checkForErrorResponse(response, result: result) {
+                        completion(orderStatuses: orderStatuses, error: responseError)
+                    } else {
+                    
+                        //Loop over the orders JSON object and create order objects for each one
+                        if let orderStatusArray = result.value as? NSArray {
+                            for orderStatusElement in orderStatusArray {
+                                if let orderStatusDict = orderStatusElement as? NSDictionary {
+                                    let orderStatus = BigcommerceOrderStatus(jsonDictionary: orderStatusDict)
+                                    orderStatuses.append(orderStatus)
+                                }
                             }
                         }
+                        
+                        orderStatuses.sortInPlace({ $0.id < $1.id })
+                        
+                        completion(orderStatuses: orderStatuses, error: nil)
                     }
-                    
-                    orderStatuses.sortInPlace({ $0.id < $1.id })
-                    
-                    completion(orderStatuses: orderStatuses, error: nil)
                     
                     
                 } else {
@@ -298,19 +351,24 @@ public class BigcommerceApi: NSObject {
                 
                 if(result.isSuccess) {
                     
-                    var products: [BigcommerceProduct] = []
+                    if let responseError = self.checkForErrorResponse(response, result: result) {
+                        completion(products: [], error: responseError)
+                    } else {
                     
-                    //Loop over the orders JSON object and create order objects for each one
-                    if let productsArray = result.value as? NSArray {
-                        for productElement in productsArray {
-                            if let productDict = productElement as? NSDictionary {
-                                let product = BigcommerceProduct(jsonDictionary: productDict)
-                                products.append(product)
+                        var products: [BigcommerceProduct] = []
+                        
+                        //Loop over the orders JSON object and create order objects for each one
+                        if let productsArray = result.value as? NSArray {
+                            for productElement in productsArray {
+                                if let productDict = productElement as? NSDictionary {
+                                    let product = BigcommerceProduct(jsonDictionary: productDict)
+                                    products.append(product)
+                                }
                             }
                         }
+                        
+                        completion(products: products, error: nil)
                     }
-                    
-                    completion(products: products, error: nil)
                     
                     
                 } else {
@@ -338,7 +396,11 @@ public class BigcommerceApi: NSObject {
                 
                 if(result.isSuccess) {
                     
-                    completion(error: nil)
+                    if let responseError = self.checkForErrorResponse(response, result: result) {
+                        completion(error: responseError)
+                    } else {
+                        completion(error: nil)
+                    }
                     
                     
                 } else {
