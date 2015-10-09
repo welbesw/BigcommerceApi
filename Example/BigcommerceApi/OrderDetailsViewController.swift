@@ -33,6 +33,18 @@ public class OrderDetailsViewController: UIViewController {
     }
     
     func loadOrderDetails() {
+        if let orderId = order.orderId?.stringValue {
+            BigcommerceApi.sharedInstance.getOrder(orderId: orderId, completion: { (order, error) -> () in
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    if(error == nil && order != nil) {
+                        print("Got order: \(order!.orderId)")
+                    } else {
+                        print("Error getting order: \(error!.localizedDescription)")
+                    }
+                })
+            })
+        }
+        
         self.textView.text = self.order.description
     }
     

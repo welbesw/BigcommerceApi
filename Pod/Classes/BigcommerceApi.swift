@@ -140,7 +140,7 @@ public class BigcommerceApi: NSObject {
     
     public func getOrder(orderId orderId: String, completion: (order:BigcommerceOrder?, error: NSError?) -> ()) {
         
-        alamofireManager.request(.GET, apiStoreBaseUrl + "order/\(orderId)", parameters:nil)
+        alamofireManager.request(.GET, apiStoreBaseUrl + "orders/\(orderId)", parameters:nil)
             .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { (request, response, result) in
                 
