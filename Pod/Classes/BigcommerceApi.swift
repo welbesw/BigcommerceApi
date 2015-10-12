@@ -450,4 +450,39 @@ public class BigcommerceApi: NSObject {
                 }
         }
     }
+    
+    public func getCustomerAddresses(customerId:String, completion: (customerAddresses:[BigcommerceCustomerAddress], error: NSError?) -> ()) {
+        
+        alamofireManager.request(.GET, apiStoreBaseUrl + "customers/\(customerId)/addresses", parameters:nil)
+            .authenticate(user: apiUsername, password: apiToken)
+            .responseJSON { (request, response, result) in
+                
+                if(result.isSuccess) {
+                    
+                    if let responseError = self.checkForErrorResponse(response, result: result) {
+                        completion(customerAddresses: [], error: responseError)
+                    } else {
+                        
+                        var customerAddresses: [BigcommerceCustomerAddress] = []
+                        
+                        //Loop over the orders JSON object and create order objects for each one
+                        if let customersAddressArray = result.value as? NSArray {
+                            for customerAddressElement in customersAddressArray {
+                                if let customerAddressDict = customerAddressElement as? NSDictionary {
+                                    let customerAddress = BigcommerceCustomerAddress(jsonDictionary: customerAddressDict)
+                                    customerAddresses.append(customerAddress)
+                                }
+                            }
+                        }
+                        
+                        completion(customerAddresses: customerAddresses, error: nil)
+                    }
+                    
+                    
+                } else {
+                    print(result.error)
+                    completion(customerAddresses: [], error: result.error as? NSError)
+                }
+        }
+    }
 }

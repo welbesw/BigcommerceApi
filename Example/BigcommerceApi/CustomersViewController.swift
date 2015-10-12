@@ -63,14 +63,24 @@ class CustomersViewController: UITableViewController {
     }
 
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if(segue.identifier == "PushCustomerDetailsSegue") {
+            if let customerDetailsViewController = segue.destinationViewController as? CustomerDetailsViewController {
+                    
+                if let selectedIndex = self.tableView.indexPathForSelectedRow {
+                    let customer = self.customers[selectedIndex.row]
+                    
+                    customerDetailsViewController.customer = customer
+                }
+            }
+        }
     }
-    */
 
 }

@@ -617,6 +617,9 @@
                                     <animations/>
                                 </tableViewCellContentView>
                                 <animations/>
+                                <connections>
+                                    <segue destination="pv6-fR-ydz" kind="show" identifier="PushCustomerDetailsSegue" id="Q7N-7F-7eK"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -629,6 +632,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fb8-9V-UrG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="553" y="2729"/>
+        </scene>
+        <!--Customer Details-->
+        <scene sceneID="m4D-Lh-uWH">
+            <objects>
+                <viewController title="Customer Details" id="pv6-fR-ydz" customClass="CustomerDetailsViewController" customModule="BigcommerceApi_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7c2-1I-OBn"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZYG-aw-Tco"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HK8-6m-YHq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CcG-Bw-wli">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="CcG-Bw-wli" firstAttribute="bottom" secondItem="HK8-6m-YHq" secondAttribute="bottomMargin" id="AIc-rD-G2h"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CcG-Bw-wli" secondAttribute="trailing" constant="-20" id="NGS-gt-Mdw"/>
+                            <constraint firstItem="CcG-Bw-wli" firstAttribute="top" secondItem="HK8-6m-YHq" secondAttribute="topMargin" id="XXS-aU-TCU"/>
+                            <constraint firstItem="CcG-Bw-wli" firstAttribute="leading" secondItem="HK8-6m-YHq" secondAttribute="leadingMargin" constant="-20" id="e6u-db-JJh"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Customer Details" id="Xs4-Gh-HFJ"/>
+                    <connections>
+                        <outlet property="textView" destination="CcG-Bw-wli" id="HBi-9U-JrK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="14g-OV-qgV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1278" y="2729"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="13o-B5-Q9R">
