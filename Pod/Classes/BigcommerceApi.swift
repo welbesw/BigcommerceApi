@@ -103,7 +103,7 @@ public class BigcommerceApi: NSObject {
     }
     
     //Retrieve an array of Bigcommerce order objects
-    func getOrders(parameters:[String : String], completion: (orders:[BigcommerceOrder], error: NSError?) -> ()) {
+    public func getOrders(parameters:[String : String], completion: (orders:[BigcommerceOrder], error: NSError?) -> ()) {
         
         alamofireManager.request(.GET, apiStoreBaseUrl + "orders", parameters:parameters)
             .authenticate(user: apiUsername, password: apiToken)
@@ -406,6 +406,47 @@ public class BigcommerceApi: NSObject {
                 } else {
                     print(result.error)
                     completion(error: result.error as? NSError)
+                }
+        }
+    }
+    
+    public func getCustomers(completion: (customers:[BigcommerceCustomer], error: NSError?) -> ()) {
+        //let parameters = ["sort" : "date_created:desc", "limit": "50"]
+        getCustomers(nil, completion: completion)
+    }
+    
+    //Retrieve an array of Bigcommerce customer objects
+    public func getCustomers(parameters:[String : String]?, completion: (customers:[BigcommerceCustomer], error: NSError?) -> ()) {
+        
+        alamofireManager.request(.GET, apiStoreBaseUrl + "customers", parameters:parameters)
+            .authenticate(user: apiUsername, password: apiToken)
+            .responseJSON { (request, response, result) in
+                
+                if(result.isSuccess) {
+                    
+                    if let responseError = self.checkForErrorResponse(response, result: result) {
+                        completion(customers: [], error: responseError)
+                    } else {
+                        
+                        var customers: [BigcommerceCustomer] = []
+                        
+                        //Loop over the orders JSON object and create order objects for each one
+                        if let customersArray = result.value as? NSArray {
+                            for customerElement in customersArray {
+                                if let customerDict = customerElement as? NSDictionary {
+                                    let customer = BigcommerceCustomer(jsonDictionary: customerDict)
+                                    customers.append(customer)
+                                }
+                            }
+                        }
+                        
+                        completion(customers: customers, error: nil)
+                    }
+                    
+                    
+                } else {
+                    print(result.error)
+                    completion(customers: [], error: result.error as? NSError)
                 }
         }
     }
