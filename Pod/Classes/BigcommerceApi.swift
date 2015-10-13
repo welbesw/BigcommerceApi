@@ -90,6 +90,12 @@ public class BigcommerceApi: NSObject {
         return error
     }
     
+    public func getOrdersForCustomer(customerId:String, completion: (orders:[BigcommerceOrder], error: NSError?) -> ()) {
+        
+        let parameters = ["sort" : "date_created:desc", "limit": "50", "customer_id" : customerId]
+        getOrders(parameters, completion: completion)
+    }
+    
     public func getOrdersMostRecent(completion: (orders:[BigcommerceOrder], error: NSError?) -> ()) {
         
         let parameters = ["sort" : "date_created:desc", "limit": "50"]
