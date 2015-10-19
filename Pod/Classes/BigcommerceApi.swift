@@ -281,6 +281,46 @@ public class BigcommerceApi: NSObject {
         }
     }
     
+    public func getShipmentsForOrder(order:BigcommerceOrder, completion: (orderShipments:[BigcommerceOrderShipment], error: NSError?) -> ()) {
+        
+        if let orderId = order.orderId {
+            alamofireManager.request(.GET, apiStoreBaseUrl + "orders/\(orderId.stringValue)/shipments", parameters:nil)
+                .authenticate(user: apiUsername, password: apiToken)
+                .responseJSON { (request, response, result) in
+                    
+                    if(result.isSuccess) {
+                        
+                        if let responseError = self.checkForErrorResponse(response, result: result) {
+                            completion(orderShipments: [], error: responseError)
+                        } else {
+                            
+                            var orderShipments: [BigcommerceOrderShipment] = []
+                            
+                            //Loop over the orders JSON object and create order objects for each one
+                            if let orderShipmentsArray = result.value as? NSArray {
+                                for orderShipmentElement in orderShipmentsArray {
+                                    if let shipmentDict = orderShipmentElement as? NSDictionary {
+                                        let orderShipment = BigcommerceOrderShipment(jsonDictionary: shipmentDict)
+                                        orderShipments.append(orderShipment)
+                                    }
+                                }
+                            }
+                            
+                            completion(orderShipments: orderShipments, error: nil)
+                        }
+                        
+                        
+                    } else {
+                        print(result.error)
+                        completion(orderShipments: [], error: result.error as? NSError)
+                    }
+            }
+        } else {
+            let error = NSError(domain: "com.technomagination.BigcommerceApi", code: 3, userInfo: nil)
+            completion(orderShipments: [], error: error)
+        }
+    }
+    
     public func getOrderStatuses(completion: (orderStatuses:[BigcommerceOrderStatus], error: NSError?) -> ()) {
         alamofireManager.request(.GET, apiStoreBaseUrl + "order_statuses", parameters:nil)
             .authenticate(user: apiUsername, password: apiToken)

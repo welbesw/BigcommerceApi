@@ -25,6 +25,8 @@ public class OrderDetailsViewController: UIViewController {
         loadOrderProducts()
         
         loadShippingAddresses()
+        
+        loadShipments()
     }
 
     public override func didReceiveMemoryWarning() {
@@ -71,6 +73,18 @@ public class OrderDetailsViewController: UIViewController {
                 print("Error getting order shipping address: \(error!.localizedDescription)")
             }
         })
+    }
+    
+    func loadShipments() {
+        BigcommerceApi.sharedInstance.getShipmentsForOrder(order) { (orderShipments, error) -> () in
+            if(error == nil) {
+                for orderShipment in orderShipments {
+                    print("Order Shipment: \(orderShipment.shippingMethod) - \(orderShipment.trackingNumber)")
+                }
+            } else {
+                print("Error getting order shipping address: \(error!.localizedDescription)")
+            }
+        }
     }
 
     
