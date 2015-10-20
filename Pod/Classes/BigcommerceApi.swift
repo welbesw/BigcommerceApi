@@ -456,6 +456,41 @@ public class BigcommerceApi: NSObject {
         }
     }
     
+    public func getProductImages(productId:String, completion: (productImages:[BigcommerceProductImage], error: NSError?) -> ()) {
+        
+        alamofireManager.request(.GET, apiStoreBaseUrl + "products/\(productId)/images", parameters:nil, encoding:.JSON)
+            .authenticate(user: apiUsername, password: apiToken)
+            .responseJSON { (request, response, result) in
+                
+                if(result.isSuccess) {
+                    
+                    if let responseError = self.checkForErrorResponse(response, result: result) {
+                        completion(productImages: [], error: responseError)
+                    } else {
+                        
+                        var productImages: [BigcommerceProductImage] = []
+                        
+                        //Loop over the orders JSON object and create order objects for each one
+                        if let productImagesArray = result.value as? NSArray {
+                            for productImageElement in productImagesArray {
+                                if let productImageDict = productImageElement as? NSDictionary {
+                                    let productImage = BigcommerceProductImage(jsonDictionary: productImageDict)
+                                    productImages.append(productImage)
+                                }
+                            }
+                        }
+                        
+                        completion(productImages: productImages, error: nil)
+                    }
+                    
+                    
+                } else {
+                    print(result.error)
+                    completion(productImages: [], error: result.error as? NSError)
+                }
+        }
+    }
+    
     public func getCustomers(completion: (customers:[BigcommerceCustomer], error: NSError?) -> ()) {
         //let parameters = ["sort" : "date_created:desc", "limit": "50"]
         getCustomers(nil, completion: completion)

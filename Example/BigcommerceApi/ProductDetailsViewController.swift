@@ -19,6 +19,8 @@ class ProductDetailsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        loadProductImages()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -44,6 +46,18 @@ class ProductDetailsViewController: UIViewController {
             if let navController = segue.destinationViewController as? UINavigationController {
                 if let editInventoryViewController = navController.topViewController as? EditInvetoryViewController {
                     editInventoryViewController.product = product
+                }
+            }
+        }
+    }
+    
+    func loadProductImages() {
+        if let productId = product.productId?.stringValue {
+            BigcommerceApi.sharedInstance.getProductImages(productId) { (productImages, error) -> () in
+                if(error == nil) {
+                    for productImage in productImages {
+                        print("Loaded \(productImage.standardUrl) product images")
+                    }
                 }
             }
         }
