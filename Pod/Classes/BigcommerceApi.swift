@@ -566,4 +566,39 @@ public class BigcommerceApi: NSObject {
                 }
         }
     }
+    
+    public func getOrderMessages(orderId:String, completion: (orderMessages:[BigcommerceOrderMessage], error: NSError?) -> ()) {
+        
+        alamofireManager.request(.GET, apiStoreBaseUrl + "orders/\(orderId)/messages", parameters:nil)
+            .authenticate(user: apiUsername, password: apiToken)
+            .responseJSON { (request, response, result) in
+                
+                if(result.isSuccess) {
+                    
+                    if let responseError = self.checkForErrorResponse(response, result: result) {
+                        completion(orderMessages: [], error: responseError)
+                    } else {
+                        
+                        var orderMessages: [BigcommerceOrderMessage] = []
+                        
+                        //Loop over the orders JSON object and create order objects for each one
+                        if let orderMessageArray = result.value as? NSArray {
+                            for orderMessageElement in orderMessageArray {
+                                if let orderMessageDict = orderMessageElement as? NSDictionary {
+                                    let orderMessage = BigcommerceOrderMessage(jsonDictionary: orderMessageDict)
+                                    orderMessages.append(orderMessage)
+                                }
+                            }
+                        }
+                        
+                        completion(orderMessages: orderMessages, error: nil)
+                    }
+                    
+                    
+                } else {
+                    print(result.error)
+                    completion(orderMessages: [], error: result.error as? NSError)
+                }
+        }
+    }
 }

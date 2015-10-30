@@ -4,10 +4,3 @@ use_frameworks!
 target 'BigcommerceApi_Example', :exclusive => true do
   pod "BigcommerceApi", :path => "../"
 end
-
-target 'BigcommerceApi_Tests', :exclusive => true do
-  pod "BigcommerceApi", :path => "../"
-
-  pod 'Quick', '~> 0.6.0'
-  pod 'Nimble', '2.0.0-rc.3'
-end

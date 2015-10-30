@@ -27,6 +27,8 @@ public class OrderDetailsViewController: UIViewController {
         loadShippingAddresses()
         
         loadShipments()
+        
+        loadOrderMessages()
     }
 
     public override func didReceiveMemoryWarning() {
@@ -48,6 +50,22 @@ public class OrderDetailsViewController: UIViewController {
         }
         
         self.textView.text = self.order.description
+    }
+    
+    func loadOrderMessages() {
+        if let orderId = order.orderId?.stringValue {
+            BigcommerceApi.sharedInstance.getOrderMessages(orderId) { (orderMessages, error) -> () in
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    if(error == nil) {
+                        for orderMessage in orderMessages {
+                            print("Order Message: \(orderMessage.subject) - (\(orderMessage.message))")
+                        }
+                    } else {
+                        print("Error getting order messages: \(error!.localizedDescription)")
+                    }
+                })
+            }
+        }
     }
     
     func loadOrderProducts() {

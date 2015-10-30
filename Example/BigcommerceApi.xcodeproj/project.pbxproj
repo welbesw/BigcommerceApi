@@ -7,35 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3BC7E263A063B6EA84482DCE /* Pods_BigcommerceApi_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF26A935BEE949BE4B1FA8CF /* Pods_BigcommerceApi_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		3BC7E263A063B6EA84482DCE /* Pods_BigcommerceApi_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF26A935BEE949BE4B1FA8CF /* Pods_BigcommerceApi_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		BE1D74E21B7AA02A008509BE /* OrderStatusesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1D74E11B7AA02A008509BE /* OrderStatusesViewController.swift */; };
 		BE297D321B4C74B1007A7E0E /* CredentialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE297D311B4C74B1007A7E0E /* CredentialsViewController.swift */; };
-		BE75BA4F1BBC4956004B9EC7 /* UpdateStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE75BA4E1BBC4956004B9EC7 /* UpdateStatusViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		BE75BA551BBC8555004B9EC7 /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE75BA541BBC8555004B9EC7 /* ProductsViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		BE8639351BCC4A3A00F8B2B6 /* CustomersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8639341BCC4A3A00F8B2B6 /* CustomersViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		BE8639371BCC4D3E00F8B2B6 /* CustomerDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8639361BCC4D3E00F8B2B6 /* CustomerDetailsViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		BEC80B3B1BBDC4790087B275 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC80B3A1BBDC4790087B275 /* ProductDetailsViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		BEC80B3D1BBDC64A0087B275 /* EditInvetoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC80B3C1BBDC64A0087B275 /* EditInvetoryViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		BE75BA4F1BBC4956004B9EC7 /* UpdateStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE75BA4E1BBC4956004B9EC7 /* UpdateStatusViewController.swift */; };
+		BE75BA551BBC8555004B9EC7 /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE75BA541BBC8555004B9EC7 /* ProductsViewController.swift */; };
+		BE8639351BCC4A3A00F8B2B6 /* CustomersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8639341BCC4A3A00F8B2B6 /* CustomersViewController.swift */; };
+		BE8639371BCC4D3E00F8B2B6 /* CustomerDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8639361BCC4D3E00F8B2B6 /* CustomerDetailsViewController.swift */; };
+		BEC80B3B1BBDC4790087B275 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC80B3A1BBDC4790087B275 /* ProductDetailsViewController.swift */; };
+		BEC80B3D1BBDC64A0087B275 /* EditInvetoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC80B3C1BBDC64A0087B275 /* EditInvetoryViewController.swift */; };
 		BEE7DFD21B4DC0F000FAEAAE /* OrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE7DFD11B4DC0F000FAEAAE /* OrderDetailsViewController.swift */; };
 		BEF002A41B4C86E700975E0C /* DefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF002A31B4C86E700975E0C /* DefaultsManager.swift */; };
 		BEF002A61B4C88EB00975E0C /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF002A51B4C88EB00975E0C /* OrdersViewController.swift */; };
-		D7C365FAF988E64A1CB9D9ED /* Pods_BigcommerceApi_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0ADA600A26321B133688DF /* Pods_BigcommerceApi_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		607FACE61AFB9204008FA782 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 607FACCF1AFB9204008FA782;
-			remoteInfo = BigcommerceApi;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		5188EA807D6BDF832CA7D721 /* Pods-BigcommerceApi_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigcommerceApi_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigcommerceApi_Tests/Pods-BigcommerceApi_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -45,9 +33,6 @@
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		607FACE51AFB9204008FA782 /* BigcommerceApi_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigcommerceApi_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		64D7DD681AAF761B87D53003 /* BigcommerceApi.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = BigcommerceApi.podspec; path = ../BigcommerceApi.podspec; sourceTree = "<group>"; };
 		6EAF3FE36A784E8D2F1F67E4 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		752185D8273C27F64E4F7599 /* Pods-BigcommerceApi_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigcommerceApi_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-BigcommerceApi_Example/Pods-BigcommerceApi_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -78,14 +63,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		607FACE21AFB9204008FA782 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D7C365FAF988E64A1CB9D9ED /* Pods_BigcommerceApi_Tests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -103,7 +80,6 @@
 			children = (
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for BigcommerceApi */,
-				607FACE81AFB9204008FA782 /* Tests */,
 				607FACD11AFB9204008FA782 /* Products */,
 				96EF24A76A324936447AFC74 /* Pods */,
 				4A592DF0FC5E954D4D2E72BF /* Frameworks */,
@@ -114,7 +90,6 @@
 			isa = PBXGroup;
 			children = (
 				607FACD01AFB9204008FA782 /* BigcommerceApi_Example.app */,
-				607FACE51AFB9204008FA782 /* BigcommerceApi_Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -147,23 +122,6 @@
 			isa = PBXGroup;
 			children = (
 				607FACD41AFB9204008FA782 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		607FACE81AFB9204008FA782 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
-				607FACE91AFB9204008FA782 /* Supporting Files */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		607FACE91AFB9204008FA782 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				607FACEA1AFB9204008FA782 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -212,27 +170,6 @@
 			productReference = 607FACD01AFB9204008FA782 /* BigcommerceApi_Example.app */;
 			productType = "com.apple.product-type.application";
 		};
-		607FACE41AFB9204008FA782 /* BigcommerceApi_Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "BigcommerceApi_Tests" */;
-			buildPhases = (
-				FCDF7177B38E68AF20AD05EF /* Check Pods Manifest.lock */,
-				607FACE11AFB9204008FA782 /* Sources */,
-				607FACE21AFB9204008FA782 /* Frameworks */,
-				607FACE31AFB9204008FA782 /* Resources */,
-				9C51299EA9BDAD0CA371F0ED /* Embed Pods Frameworks */,
-				92AE00B57E2F793A6289E7E0 /* Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				607FACE71AFB9204008FA782 /* PBXTargetDependency */,
-			);
-			name = BigcommerceApi_Tests;
-			productName = Tests;
-			productReference = 607FACE51AFB9204008FA782 /* BigcommerceApi_Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -246,10 +183,6 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-					};
-					607FACE41AFB9204008FA782 = {
-						CreatedOnToolsVersion = 6.3.1;
-						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
 			};
@@ -267,7 +200,6 @@
 			projectRoot = "";
 			targets = (
 				607FACCF1AFB9204008FA782 /* BigcommerceApi_Example */,
-				607FACE41AFB9204008FA782 /* BigcommerceApi_Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -280,13 +212,6 @@
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		607FACE31AFB9204008FA782 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,51 +263,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BigcommerceApi_Example/Pods-BigcommerceApi_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		92AE00B57E2F793A6289E7E0 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BigcommerceApi_Tests/Pods-BigcommerceApi_Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9C51299EA9BDAD0CA371F0ED /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BigcommerceApi_Tests/Pods-BigcommerceApi_Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FCDF7177B38E68AF20AD05EF /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -405,23 +285,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		607FACE11AFB9204008FA782 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		607FACE71AFB9204008FA782 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 607FACCF1AFB9204008FA782 /* BigcommerceApi_Example */;
-			targetProxy = 607FACE61AFB9204008FA782 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		607FACD91AFB9204008FA782 /* Main.storyboard */ = {
@@ -551,38 +415,6 @@
 			};
 			name = Release;
 		};
-		607FACF31AFB9204008FA782 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5188EA807D6BDF832CA7D721 /* Pods-BigcommerceApi_Tests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BigcommerceApi_Example.app/BigcommerceApi_Example";
-			};
-			name = Debug;
-		};
-		607FACF41AFB9204008FA782 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A7457ADC3E457DF754ABF4AF /* Pods-BigcommerceApi_Tests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BigcommerceApi_Example.app/BigcommerceApi_Example";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -600,15 +432,6 @@
 			buildConfigurations = (
 				607FACF01AFB9204008FA782 /* Debug */,
 				607FACF11AFB9204008FA782 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "BigcommerceApi_Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				607FACF31AFB9204008FA782 /* Debug */,
-				607FACF41AFB9204008FA782 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
