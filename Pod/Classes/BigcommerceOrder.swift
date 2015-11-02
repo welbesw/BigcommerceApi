@@ -47,6 +47,11 @@ public class BigcommerceOrder: NSObject {
     public var dateShipped: NSDate?
     
     public var orderId: NSNumber?
+    public var staffNotes: String?
+    
+    public var paymentMethod:String?
+    public var paymentStatus:String?
+    public var paymentProviderId:NSNumber?
     
     public var productsResource: String = ""
     public var productsUrl: String = ""
@@ -75,6 +80,22 @@ public class BigcommerceOrder: NSObject {
         
         if let id = jsonDictionary["status_id"] as? NSNumber {
             statusId = id
+        }
+        
+        if let stringValue = jsonDictionary["staff_notes"] as? String {
+            staffNotes = stringValue
+        }
+        
+        if let stringValue = jsonDictionary["payment_method"] as? String {
+            paymentMethod = stringValue
+        }
+        
+        if let stringValue = jsonDictionary["payment_status"] as? String {
+            paymentStatus = stringValue
+        }
+        
+        if let numberValue = jsonDictionary["payment_provider_id"] as? NSNumber {
+            paymentProviderId = numberValue
         }
         
         if let stringValue = jsonDictionary["total_ex_tax"] as? String {
