@@ -102,9 +102,35 @@ public class BigcommerceApi: NSObject {
         getOrders(parameters, completion: completion)
     }
     
+    public func getOrdersMostRecent(page page:Int?, limit:Int?, completion: (orders:[BigcommerceOrder], error: NSError?) -> ()) {
+        
+        var parameters = ["sort" : "date_created:desc"]
+        if let pageNum = page {
+            parameters.updateValue(String(pageNum), forKey: "page")
+        }
+        if let limitNum = limit {
+            parameters.updateValue(String(limitNum), forKey: "limit")
+        }
+        getOrders(parameters, completion: completion)
+    }
+    
     public func getOrdersWithStatus(statusId:Int, completion: (orders:[BigcommerceOrder], error: NSError?) -> ()) {
         
         let parameters = ["sort" : "date_created:desc", "limit": "50", "status_id" : String(statusId)]
+        getOrders(parameters, completion: completion)
+    }
+    
+    public func getOrdersWithStatus(statusId:Int, page:Int?, limit:Int?, completion: (orders:[BigcommerceOrder], error: NSError?) -> ()) {
+        
+        var parameters = ["sort" : "date_created:desc", "status_id" : String(statusId)]
+        
+        if let pageNum = page {
+            parameters.updateValue(String(pageNum), forKey: "page")
+        }
+        if let limitNum = limit {
+            parameters.updateValue(String(limitNum), forKey: "limit")
+        }
+        
         getOrders(parameters, completion: completion)
     }
     
