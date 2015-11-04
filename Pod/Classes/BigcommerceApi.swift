@@ -247,6 +247,30 @@ public class BigcommerceApi: NSObject {
         }
     }
     
+    public func updateOrderCustomerMessage(orderId:String, customerMessage:String, completion: (error: NSError?) -> ()) {
+        
+        let parameters = ["customer_message" : customerMessage]
+        
+        alamofireManager.request(.PUT, apiStoreBaseUrl + "orders/\(orderId)", parameters:parameters, encoding:.JSON)
+            .authenticate(user: apiUsername, password: apiToken)
+            .responseJSON { (request, response, result) in
+                
+                if(result.isSuccess) {
+                    
+                    if let responseError = self.checkForErrorResponse(response, result: result) {
+                        completion(error: responseError)
+                    } else {
+                        completion(error: nil)
+                    }
+                    
+                    
+                } else {
+                    print(result.error)
+                    completion(error: result.error as? NSError)
+                }
+        }
+    }
+    
     public func getProductsForOrder(order:BigcommerceOrder, completion: (orderProducts:[BigcommerceOrderProduct], error: NSError?) -> ()) {
         //Use the resource specified in the order to fetch the products
         

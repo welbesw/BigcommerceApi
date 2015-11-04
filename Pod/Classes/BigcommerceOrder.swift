@@ -48,6 +48,7 @@ public class BigcommerceOrder: NSObject {
     
     public var orderId: NSNumber?
     public var staffNotes: String?
+    public var customerMessage: String?
     
     public var paymentMethod:String?
     public var paymentStatus:String?
@@ -84,6 +85,10 @@ public class BigcommerceOrder: NSObject {
         
         if let stringValue = jsonDictionary["staff_notes"] as? String {
             staffNotes = stringValue
+        }
+        
+        if let stringValue = jsonDictionary["customer_message"] as? String {
+            customerMessage = stringValue
         }
         
         if let stringValue = jsonDictionary["payment_method"] as? String {
