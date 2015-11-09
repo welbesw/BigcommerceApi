@@ -425,8 +425,8 @@ public class BigcommerceApi: NSObject {
                             
                             if(result2.isSuccess) {
                                 
-                                if let responseError = self.checkForErrorResponse(response2, result: result2) {
-                                    completion(orderStatuses: orderStatuses, error: responseError)
+                                if let response2Error = self.checkForErrorResponse(response2, result: result2) {
+                                    completion(orderStatuses: orderStatuses, error: response2Error)
                                 } else {
                                     
                                     if let orderStatusItemsArray = result.value as? NSArray {
@@ -438,8 +438,8 @@ public class BigcommerceApi: NSObject {
                                 
                                 
                             } else {
-                                print(result.error)
-                                completion(orderStatuses: orderStatuses, error: result.error as? NSError)
+                                print(result2.error)
+                                completion(orderStatuses: orderStatuses, error: result2.error as? NSError)
                             }
                     }
                 }
