@@ -705,4 +705,34 @@ public class BigcommerceApi: NSObject {
                 }
         }
     }
+    
+    public func getStore(completion: (store:BigcommerceStore?, error: NSError?) -> ()) {
+        
+        alamofireManager.request(.GET, apiStoreBaseUrl + "store", parameters:nil)
+            .authenticate(user: apiUsername, password: apiToken)
+            .responseJSON { (request, response, result) in
+                
+                if(result.isSuccess) {
+                    
+                    if let responseError = self.checkForErrorResponse(response, result: result) {
+                        completion(store: nil, error: responseError)
+                    } else {
+                        
+                        var store:BigcommerceStore?
+                        
+                        //Loop over the orders JSON object and create order objects for each one
+                        if let storeDict = result.value as? NSDictionary {
+                            store = BigcommerceStore(jsonDictionary: storeDict)
+                        }
+                        
+                        completion(store: store, error: nil)
+                    }
+                    
+                    
+                } else {
+                    print(result.error)
+                    completion(store: nil, error: result.error as? NSError)
+                }
+        }
+    }
 }

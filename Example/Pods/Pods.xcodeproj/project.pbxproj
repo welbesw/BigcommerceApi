@@ -32,6 +32,7 @@
 		ADEFBAC09ED45E567681D6B829207625 /* BigcommerceApi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CBB398F9E22A380A013A30024FA624A4 /* BigcommerceApi.bundle */; };
 		B57387D187DFC8013DC8422691777820 /* BigcommerceOrderStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D741A7E155C267272A130D3443DF5116 /* BigcommerceOrderStatus.swift */; };
 		B87F4AA5784F557E25649F94FC07A0E9 /* BigcommerceOrderShippingAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0112387D93188F2FDA12B47D706C4 /* BigcommerceOrderShippingAddress.swift */; };
+		BE657A3F1C0CED9E0056F21E /* BigcommerceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE657A3E1C0CED9E0056F21E /* BigcommerceStore.swift */; };
 		D275875971FF4F4D38F1BA4AE30E5561 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706C7AFFE37BA158C3553250F4B5FAED /* Alamofire.framework */; };
 		D39B20327B1DAF6D8753ED5685DDE6DC /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD68604A897951819965F3DB7B39E95 /* MultipartFormData.swift */; };
 		D8136D3B59D4753690000387A8082B54 /* Alamofire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A95E65C21F7767E2A7444314614728B /* Alamofire-dummy.m */; };
@@ -118,6 +119,7 @@
 		BC73B027B19BD226382A5F13E00CE332 /* Pods-BigcommerceApi_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-BigcommerceApi_Example.modulemap"; sourceTree = "<group>"; };
 		BCB9ECB2184FAB2BAE8AFA754F30C90B /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Alamofire.modulemap; sourceTree = "<group>"; };
 		BDB83D3E306E99E5EB51AF8E87F82C19 /* BigcommerceOrderMessage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderMessage.swift; sourceTree = "<group>"; };
+		BE657A3E1C0CED9E0056F21E /* BigcommerceStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigcommerceStore.swift; sourceTree = "<group>"; };
 		CBB398F9E22A380A013A30024FA624A4 /* BigcommerceApi.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigcommerceApi.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		D12C1B15E979D4E276C63D5004BAE3C0 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D47677089E19ECC79A428521D3E5D87D /* BigcommerceApi-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BigcommerceApi-prefix.pch"; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				D741A7E155C267272A130D3443DF5116 /* BigcommerceOrderStatus.swift */,
 				55FC6B4C1FEA0DE788F5267F855CC581 /* BigcommerceProduct.swift */,
 				A40073228B89B474C5203D492060272E /* BigcommerceProductImage.swift */,
+				BE657A3E1C0CED9E0056F21E /* BigcommerceStore.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CA5088890AC136BA888D2C663EF72F1 /* BigcommerceApi-dummy.m in Sources */,
+				BE657A3F1C0CED9E0056F21E /* BigcommerceStore.swift in Sources */,
 				83C7E81C8157845104E901D8E3D4874B /* BigcommerceApi.swift in Sources */,
 				9F98E7D051B3C8FD3EB5BECD23A2F745 /* BigcommerceCustomer.swift in Sources */,
 				ED794A1B8568779E399E7E430CBDC513 /* BigcommerceCustomerAddress.swift in Sources */,

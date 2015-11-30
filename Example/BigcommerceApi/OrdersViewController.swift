@@ -23,6 +23,15 @@ class OrdersViewController: UITableViewController {
         } else {
             //Set the API credentials
             BigcommerceApi.sharedInstance.setCredentials(defaultsManager.apiUsername!, token: defaultsManager.apiToken!, storeBaseUrl: defaultsManager.apiStoreBaseUrl!)
+            
+            //Fetch the Bigcommerce store
+            BigcommerceApi.sharedInstance.getStore({ (store, error) -> () in
+                if error == nil && store != nil {
+                    print("Loaded store: \(store!.name), logo: \(store!.logoUrl)")
+                } else {
+                    print("Error loading store: \(error?.localizedDescription)")
+                }
+            })
         }
     }
     
