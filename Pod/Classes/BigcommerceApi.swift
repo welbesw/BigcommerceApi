@@ -560,24 +560,28 @@ public class BigcommerceApi: NSObject {
         }
     }
     
-    public func updateProductPricing(productId:String, price:NSNumber?, costPrice:NSNumber?, retailPrice:NSNumber?, salePrice:NSNumber?, completion: (error: NSError?) -> ()) {
+    public func updateProductPricing(productId:String, price:NSNumber, costPrice:NSNumber?, retailPrice:NSNumber?, salePrice:NSNumber?, completion: (error: NSError?) -> ()) {
         
         var parameters:[String : AnyObject] = [String : AnyObject]()
         
-        if let newPrice = price {
-            parameters.updateValue(newPrice.stringValue, forKey: "price")
-        }
+        parameters.updateValue(price.stringValue, forKey: "price")
         
         if let newCostPrice = costPrice {
             parameters.updateValue(newCostPrice.stringValue, forKey: "cost_price")
+        } else {
+            parameters.updateValue("", forKey: "cost_price")
         }
         
         if let newRetailPrice = retailPrice {
             parameters.updateValue(newRetailPrice.stringValue, forKey: "retail_price")
+        } else {
+            parameters.updateValue("", forKey: "retail_price")
         }
         
         if let newSalePrice = salePrice {
             parameters.updateValue(newSalePrice.stringValue, forKey: "sale_price")
+        } else {
+            parameters.updateValue("", forKey: "sale_price")
         }
         
         if parameters.count > 0 {

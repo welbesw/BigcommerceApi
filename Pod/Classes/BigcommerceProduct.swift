@@ -19,9 +19,9 @@ public class BigcommerceProduct: NSObject {
     public var availabilityDescription:String = ""
     
     public var price:NSNumber = 0
-    public var costPrice:NSNumber = 0
-    public var retailPrice:NSNumber = 0
-    public var salePrice:NSNumber = 0
+    public var costPrice:NSNumber?
+    public var retailPrice:NSNumber?
+    public var salePrice:NSNumber?
     public var calculatedPrice:NSNumber = 0
     
     public var sortOrder:NSNumber = 0
