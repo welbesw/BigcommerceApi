@@ -560,6 +560,49 @@ public class BigcommerceApi: NSObject {
         }
     }
     
+    public func updateProductPricing(productId:String, price:NSNumber?, costPrice:NSNumber?, retailPrice:NSNumber?, salePrice:NSNumber?, completion: (error: NSError?) -> ()) {
+        
+        var parameters:[String : AnyObject] = [String : AnyObject]()
+        
+        if let newPrice = price {
+            parameters.updateValue(newPrice.stringValue, forKey: "price")
+        }
+        
+        if let newCostPrice = costPrice {
+            parameters.updateValue(newCostPrice.stringValue, forKey: "cost_price")
+        }
+        
+        if let newRetailPrice = retailPrice {
+            parameters.updateValue(newRetailPrice.stringValue, forKey: "retail_price")
+        }
+        
+        if let newSalePrice = salePrice {
+            parameters.updateValue(newSalePrice.stringValue, forKey: "sale_price")
+        }
+        
+        if parameters.count > 0 {
+        
+            alamofireManager.request(.PUT, apiStoreBaseUrl + "products/\(productId)", parameters:parameters, encoding:.JSON)
+                .authenticate(user: apiUsername, password: apiToken)
+                .responseJSON { (request, response, result) in
+                    
+                    if(result.isSuccess) {
+                        
+                        if let responseError = self.checkForErrorResponse(response, result: result) {
+                            completion(error: responseError)
+                        } else {
+                            completion(error: nil)
+                        }
+                        
+                        
+                    } else {
+                        print(result.error)
+                        completion(error: result.error as? NSError)
+                    }
+            }
+        }
+    }
+    
     public func getProductImages(productId:String, completion: (productImages:[BigcommerceProductImage], error: NSError?) -> ()) {
         
         alamofireManager.request(.GET, apiStoreBaseUrl + "products/\(productId)/images", parameters:nil, encoding:.JSON)
