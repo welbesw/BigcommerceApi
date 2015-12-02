@@ -91,19 +91,25 @@ public class BigcommerceProduct: NSObject {
         
         if let stringValue = jsonDictionary["cost_price"] as? String {
             if let numberValue = numberFormatter.numberFromString(stringValue) {
-                costPrice = numberValue
+                if numberValue.floatValue > 0.0 {
+                    costPrice = numberValue
+                }
             }
         }
         
         if let stringValue = jsonDictionary["retail_price"] as? String {
             if let numberValue = numberFormatter.numberFromString(stringValue) {
-                retailPrice = numberValue
+                if numberValue.floatValue > 0.0 {
+                    retailPrice = numberValue
+                }
             }
         }
         
         if let stringValue = jsonDictionary["sale_price"] as? String {
             if let numberValue = numberFormatter.numberFromString(stringValue) {
-                salePrice = numberValue
+                if numberValue.floatValue > 0.0 {
+                    salePrice = numberValue
+                }
             }
         }
         
