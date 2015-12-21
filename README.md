@@ -65,7 +65,7 @@ BigcommerceApi.sharedInstance.getOrderStatuses { (orderStatuses, error) -> () in
         if(error == nil) {
             print("Got \(orderStatuses.count) order statuses")
         } else {
-            print("Error loading order statuses")
+            print("Error loading order statuses: \(error!.localizedDescription)")
         }
         
     })
@@ -99,7 +99,7 @@ BigcommerceApi.sharedInstance.getOrder(orderId: orderId) { (order, error) -> () 
     //Check for error
     dispatch_async(dispatch_get_main_queue(), { () -> Void in
         if(error != nil || order == nil) {
-            print("order ID not found")
+            print("order ID not found: \(error!.localizedDescription)")
         } else {
             print("got order with ID \(orderId)")
         }
@@ -118,10 +118,10 @@ let newStatusId = 0
 BigcommerceApi.sharedInstance.updateOrderStatus(orderId, newStatusId: newStatusId, completion: { (error) -> () in
     //Check for error
     dispatch_async(dispatch_get_main_queue(), { () -> Void in
-        if(error != nil) {
-            print("Error updating order status")
-        } else {
+        if(error == nil) {
             print("Successfully update order status for order with ID \(orderId)")
+        } else {
+            print("Error updating order status: \(error!.localizedDescription)")
         }
     })
 })
@@ -138,13 +138,202 @@ BigcommerceApi.sharedInstance.updateOrderStaffNotes(orderId, staffNotes: notes, 
     dispatch_async(dispatch_get_main_queue(), { () -> Void in
         //Show an error or dismiss
         if(error == nil) {
-            print("Error updating staff notes.")
+			print("Successfully updated staff notes.")
         } else {
-            print("Successfully updated staff notes.")
+            print("Error updating staff notes: \(error!.localizedDescription)")
         }
     })
 })
 ```
+
+### Update order cutomer message
+
+Update the customer message of an order
+
+```swift
+let orderId = "an-order-id"
+let customerMessage = "message :)"
+BigcommerceApi.sharedInstance.updateOrderCustomerMessage(orderIdString, customerMessage: notes, completion: { (error) -> () in
+    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        //Show an error or dismiss
+        if(error == nil) {
+            print("Successfully updated staff notes.")
+        } else {
+            print("Error updating customer message: \(error!.localizedDescription)")
+        }
+    })
+})
+```
+
+### Get products for an order
+
+```swift
+BigcommerceApi.sharedInstance.getProductsForOrder(order, completion: { (orderProducts, error) -> () in
+    if(error == nil) {
+        print("Successfully loaded \(orderProducts.count) order products")
+    } else {
+        print("Error loading order products: \(error!.localizedDescription)")
+    }
+})
+```
+
+### Get shipping addresses for an order
+
+```swift
+BigcommerceApi.sharedInstance.getShippingAddressesForOrder(order, completion: { (orderShippingAddresses, error) -> () in
+    if(error == nil) {
+        print("loaded \(orderShippingAddresses.count) shipping addresses for order") 
+    } else {
+        print("Error loading order shipping addresses: \(error!.localizedDescription)")
+    }
+})
+```
+
+### Get shipments for an order
+
+```swift
+BigcommerceApi.sharedInstance.getShipmentsForOrder(order) { (orderShipments, error) -> () in
+    if(error == nil) {
+        print("loaded \(orderShipments.count) shipments for order.")
+    } else {
+        print("Error loading order shipments: \(error!.localizedDescription)")
+    }
+}
+```
+
+### Get Products
+
+```swift
+BigcommerceApi.sharedInstance.getProducts { (products, error) -> () in
+    //Check for error
+    dispatch_async(dispatch_get_main_queue(), { () -> Void in=
+        if(error == nil) {
+            print("loaded \(products.count) products")
+        } else {
+            print("Error getting products: \(error!.localizedDescription)")
+        }
+    })
+}
+```
+
+### Get products with a sku
+
+```swift
+BigcommerceApi.sharedInstance.getProductsWithSku(searchText, completion: { (products, error) -> () in
+    //Check for error
+    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        if(error == nil) {
+            print("loaded \(products.count) products")
+        } else {
+            print("Error getting products: \(error!.localizedDescription)")
+        }
+    })
+})
+```
+
+### Get products with a keyword
+
+```swift
+BigcommerceApi.sharedInstance.getProductsWithKeyword(searchText) { (products, error) -> () in
+    //Check for error
+    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        if(error == nil) {
+            print("loaded \(products.count) products")
+        } else {
+            print("Error getting products: \(error!.localizedDescription)")
+        }
+    })
+}
+```
+
+### Update product inventory
+
+```swift
+BigcommerceApi.sharedInstance.updateProductInventory(productId, trackInventory: trackInventoryType, newInventoryLevel: level, newLowLevel: lowLevel, completion: { (error) -> () in
+    //Handle error and dismiss view controller
+    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        if(error == nil) {
+            print("successfully updated product inventory")
+        } else {
+            print("Error updating product inventory: \(error!.localizedDescription)")
+        }
+    })
+})
+```
+
+### Update product pricing
+
+```swift
+BigcommerceApi.sharedInstance.updateProductPricing(productIdString, price: price, costPrice: cost, retailPrice: retailPrice, salePrice: salePrice, completion: { (error) -> () in
+    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        
+        if(error == nil) {
+            print("successfully updated product pricing")
+        } else {
+            print("Error updating product pricing: \(error!.localizedDescription)")
+        }
+    })
+})
+```
+
+### Get product images
+
+```swift
+BigcommerceApi.sharedInstance.getProductImages(productId, completion: { (productImages, error) -> () in
+    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        if(error == nil) {
+            print("Loaded \(productImages.count) images.")
+        } else {
+            print("Error loading product images: \(error!.localizedDescription)")
+        }
+    })
+})
+```
+
+### Get Customers
+
+```swift
+BigcommerceApi.sharedInstance.getCustomers { (customers, error) -> () in
+    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        if(error == nil) {
+            print("Loaded \(customers.count) customers.")
+        } else {
+            print("Error loading customers: \(error!.localizedDescription)")
+        }
+    })
+}
+```
+
+### Get customer addresses
+
+```swift
+BigcommerceApi.sharedInstance.getCustomerAddresses(customerId, completion: { (customerAddresses, error) -> () in
+    if(error == nil) {
+        print("Loaded \(customerAddresses.count) customer addresses.")
+    } else {
+    	print("Error loading customer addresses: \(error!.localizedDescription)")
+    }
+})
+```
+
+### Get order messages
+
+```swift
+BigcommerceApi.sharedInstance.getOrderMessages(orderIdString, completion: { (orderMessages, error) -> () in
+    if(error == nil) {
+    	print("Loaded \(orderMessages.count) order messages.")	
+    } else {
+        print("Error getting order messages: \(error!.localizedDescription)")
+    }
+})
+```
+
+### Get Store
+
+```swift
+BigcommerceApi.sharedInstance.getStore()
+```
+
 
 ## Author
 
