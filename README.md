@@ -146,7 +146,7 @@ BigcommerceApi.sharedInstance.updateOrderStaffNotes(orderId, staffNotes: notes, 
 })
 ```
 
-### Update order cutomer message
+### Update order customer message
 
 Update the customer message of an order
 
