@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'E82F7ACE6E97E14744AFC71C'
+               BlueprintIdentifier = 'E57B0A42127E4795E5DEE5C7'
                BlueprintName = 'BigcommerceApi'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'BigcommerceApi.framework'>

@@ -7,43 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		016303F666CAFD801A54D40C990C363D /* BigcommerceApi-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 06459B8E5B0447A762E26A38FE29895D /* BigcommerceApi-dummy.m */; };
+		0A71B683C5C26E8B759E110A3C0A8BD8 /* BigcommerceOrderShipment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD765EE006BFBD17D8A1B6B11761243 /* BigcommerceOrderShipment.swift */; };
+		0B46126DCBEF181B9F4747484B629356 /* BigcommerceOrderMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE253D61A37E65B5A6B9B47792CEE7DC /* BigcommerceOrderMessage.swift */; };
+		0DA2A4BA12175E11237BC132450CBA77 /* BigcommerceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC13D720D9CD16ADD995A37B1ACCBDE3 /* BigcommerceApi.swift */; };
 		0EFD1FF643346FF85C83679F659672CA /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F3FC5D877738CFD3367D01550D0C70 /* Stream.swift */; };
-		30766D964036562253C4D65A1590E517 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EFCE8A3DC08536A2B19894C1FF3E86D /* Foundation.framework */; };
 		30A8F35FCAB29F5FBFC9F3F7E25A3B6B /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3DBDB13B1826A8CCA8B3B00610C92 /* ServerTrustPolicy.swift */; };
-		3336636F644382010EFEBF3F0B19019A /* BigcommerceOrderMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB83D3E306E99E5EB51AF8E87F82C19 /* BigcommerceOrderMessage.swift */; };
+		33F73ECCC60752CE508ECFE5AD139383 /* BigcommerceCustomerAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2200ECD56F5622A732325C1232F24CF /* BigcommerceCustomerAddress.swift */; };
 		362B74F77B756B0AAC6486D12FD2D6F1 /* Pods-BigcommerceApi_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5418AD6A8B42D3297BBC3784E9688DD8 /* Pods-BigcommerceApi_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		396118F899042D0F4383DEB189F01AA2 /* BigcommerceOrderShipment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DCDA88652147080C6B963EA6EB9371 /* BigcommerceOrderShipment.swift */; };
-		3B6A2D9A3846FA88A1C4721C5C737C39 /* BigcommerceProductImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40073228B89B474C5203D492060272E /* BigcommerceProductImage.swift */; };
 		3E9392CB5BD9C0CC47B04EDB40639558 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8B4F3CA939DD62C57BB793308D6A26 /* Validation.swift */; };
-		4AAE5944D96C0D00BD4305B1FE447792 /* BigcommerceOrderProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6865B2BF2A8998CC49FA16DCBF3FBA8B /* BigcommerceOrderProduct.swift */; };
-		4CA5088890AC136BA888D2C663EF72F1 /* BigcommerceApi-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 06459B8E5B0447A762E26A38FE29895D /* BigcommerceApi-dummy.m */; };
+		49D10610A84D08157B2B1383AF314606 /* BigcommerceApi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CBB398F9E22A380A013A30024FA624A4 /* BigcommerceApi.bundle */; };
+		4A42652524298F6A5907F70D8B8B49FA /* BigcommerceOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE25C086B271C5F638DA05E260F68E2 /* BigcommerceOrder.swift */; };
 		549CD499166A967C307D2BE90A8CF704 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EFCE8A3DC08536A2B19894C1FF3E86D /* Foundation.framework */; };
-		5B38E984982060081FE2120E748B483B /* BigcommerceOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66B58ACDA0F474082389277C4398E58 /* BigcommerceOrder.swift */; };
 		61137E758A762DBADEAAE6454CB06EA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EFCE8A3DC08536A2B19894C1FF3E86D /* Foundation.framework */; };
 		69A447D12E60E5C3451DA30C6BB4BF7F /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A4953AA34CDFBD543E6429E112A97D /* Manager.swift */; };
-		71B1B265E676CA7A5F6C7A0A09B36B4B /* BigcommerceOrderShipmentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F972993CAA22AA8DC0752CBF0ACC790 /* BigcommerceOrderShipmentItem.swift */; };
-		83C7E81C8157845104E901D8E3D4874B /* BigcommerceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C8014864CC623485BCCC24B574EEFDD /* BigcommerceApi.swift */; };
+		767FA5C8DFBE55BE4A83063E228B45A3 /* BigcommerceOrderProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6A09A241744A8853BDBF415D751E1 /* BigcommerceOrderProduct.swift */; };
+		80F395CE8413FA9F872ADA0C2F4A8026 /* BigcommerceOrderShippingAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6283C2B6152FB1460B66658B9C83AD /* BigcommerceOrderShippingAddress.swift */; };
 		848CEFBFC69DEBAF0E18885F3269F439 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1208A1C12FA12061B6446436A44A9A4 /* ResponseSerialization.swift */; };
 		9077ECA2FA7B9C5D73365490A3D8898F /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596D37D65C2EC2AB28A8FC0FB1E0C653 /* Download.swift */; };
-		9F98E7D051B3C8FD3EB5BECD23A2F745 /* BigcommerceCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011F70C8576EBB74847A6A9873C4968F /* BigcommerceCustomer.swift */; };
 		9FDD2F7B6E153A05ACDDAE320A69307D /* Pods-BigcommerceApi_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 06110F874B2298C9D27BC809CE9E24F8 /* Pods-BigcommerceApi_Example-dummy.m */; };
+		A0E4BCF59AC57912545C4D25B84A272B /* BigcommerceOrderStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2B2F1A115306B3CC6BDF3A72638CE /* BigcommerceOrderStatus.swift */; };
 		A215FAB60CB15B6E5FA3A15E9E350D7D /* Alamofire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E1B44A3B10C3E7728FFD14F12A1CB4E /* Alamofire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A8B5EDB7371475F62767B297B1A10CDE /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1B2B7A117D61C0D1B7CD07C84BDEEC /* ParameterEncoding.swift */; };
-		ADEFBAC09ED45E567681D6B829207625 /* BigcommerceApi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CBB398F9E22A380A013A30024FA624A4 /* BigcommerceApi.bundle */; };
-		B57387D187DFC8013DC8422691777820 /* BigcommerceOrderStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D741A7E155C267272A130D3443DF5116 /* BigcommerceOrderStatus.swift */; };
-		B87F4AA5784F557E25649F94FC07A0E9 /* BigcommerceOrderShippingAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C0112387D93188F2FDA12B47D706C4 /* BigcommerceOrderShippingAddress.swift */; };
-		BE657A3F1C0CED9E0056F21E /* BigcommerceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE657A3E1C0CED9E0056F21E /* BigcommerceStore.swift */; };
-		D275875971FF4F4D38F1BA4AE30E5561 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706C7AFFE37BA158C3553250F4B5FAED /* Alamofire.framework */; };
+		BB1CA7A2BDE260E14EE6E6E09E1E8AB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EFCE8A3DC08536A2B19894C1FF3E86D /* Foundation.framework */; };
+		C1351ED0CB405B325B83C1AD6E896CA9 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706C7AFFE37BA158C3553250F4B5FAED /* Alamofire.framework */; };
+		C553C62D32CC52D7FC807565DDBED9A5 /* BigcommerceCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11528E059407F5E325FFD4EE0E70329C /* BigcommerceCustomer.swift */; };
+		C7C7C439C3590A28A45245D8475C83BB /* BigcommerceApi-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0711431DF514385F9E6AC1B870D9FB2F /* BigcommerceApi-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C84E6C6503D34E1444228ED8F5E9E834 /* BigcommerceOrderShipmentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742FE3B6C44385831A42EBDFED5CAF9B /* BigcommerceOrderShipmentItem.swift */; };
 		D39B20327B1DAF6D8753ED5685DDE6DC /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD68604A897951819965F3DB7B39E95 /* MultipartFormData.swift */; };
 		D8136D3B59D4753690000387A8082B54 /* Alamofire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A95E65C21F7767E2A7444314614728B /* Alamofire-dummy.m */; };
-		E6673E275947097FA44A0D2A1FC118B9 /* BigcommerceApi-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0711431DF514385F9E6AC1B870D9FB2F /* BigcommerceApi-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E6101B7FEA17DFC8A20155878B2ED6BB /* BigcommerceProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB739F523BB58C465BED54FE25AAB3CB /* BigcommerceProduct.swift */; };
 		E6D041ABFBB48D9F1D8AA96E7D4C6C34 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85391133F9FAEB0844D5DC13E9DA71F /* Result.swift */; };
 		E7B226D8BB16471AD63665A794036E44 /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F69A25685DA4AFC97A2DD87554383D /* Upload.swift */; };
 		E816509B4E3564E1A117CBDC0D845D69 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D7E2F0B75120E47EB1D807A4A0803 /* Alamofire.swift */; };
-		ED794A1B8568779E399E7E430CBDC513 /* BigcommerceCustomerAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940B955B1B41AE453F95ED82F9F3738C /* BigcommerceCustomerAddress.swift */; };
+		E85642719CD74BFC5BE71EEE459DC0E3 /* BigcommerceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B912438E88394513AADF5D5CF69DC276 /* BigcommerceStore.swift */; };
+		F07608DF72ADD0F653710139D331569D /* BigcommerceProductImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167CC8DD7E1B61990E56FCB64980BAA8 /* BigcommerceProductImage.swift */; };
 		F16FEF1CB9703FE1887C8A618B84B7C6 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC42ABD052DF209D0761A0BF74AAD24E /* Request.swift */; };
 		FE1F95F519342B9266EB69B23B4336CF /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7248DFDFE23A522CAB9148641C7E69A4 /* Error.swift */; };
-		FF4A87BC3C40FBAAA8EF18F04CC9C41A /* BigcommerceProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FC6B4C1FEA0DE788F5267F855CC581 /* BigcommerceProduct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,10 +51,17 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 0F80A73F8FF4F83660DA645A4D3513AD;
+			remoteGlobalIDString = 76D730E277DB3C411D6E21D42AA573C4;
 			remoteInfo = BigcommerceApi;
 		};
-		60C490F0A1EA1CC67BF1AAE41354963E /* PBXContainerItemProxy */ = {
+		655F3080369DEA208B22C3F8B4563406 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 294620CB8CD32B357B5C8D4F90272AA0;
+			remoteInfo = "BigcommerceApi-BigcommerceApi";
+		};
+		711582EA32481F921BE0894EB5BDDCB6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
@@ -68,27 +75,19 @@
 			remoteGlobalIDString = 4B2F30D90D85A544E9EFE2A49D392C25;
 			remoteInfo = Alamofire;
 		};
-		C9472B3829364E2AAA343FD8D6536977 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FF9031FC44F57005229AD3D87335963F;
-			remoteInfo = "BigcommerceApi-BigcommerceApi";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		011F70C8576EBB74847A6A9873C4968F /* BigcommerceCustomer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceCustomer.swift; sourceTree = "<group>"; };
 		03A2D6EDBB831DD85CA1B9CA77016728 /* Alamofire.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.xcconfig; sourceTree = "<group>"; };
 		06110F874B2298C9D27BC809CE9E24F8 /* Pods-BigcommerceApi_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BigcommerceApi_Example-dummy.m"; sourceTree = "<group>"; };
 		06459B8E5B0447A762E26A38FE29895D /* BigcommerceApi-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BigcommerceApi-dummy.m"; sourceTree = "<group>"; };
 		0711431DF514385F9E6AC1B870D9FB2F /* BigcommerceApi-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BigcommerceApi-umbrella.h"; sourceTree = "<group>"; };
 		081F8F392F84428C1C53CD5AFD0157D4 /* Pods_BigcommerceApi_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BigcommerceApi_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		10A025BE76D0DE7EB9D446B558037FC5 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1C8014864CC623485BCCC24B574EEFDD /* BigcommerceApi.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceApi.swift; sourceTree = "<group>"; };
+		11528E059407F5E325FFD4EE0E70329C /* BigcommerceCustomer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceCustomer.swift; sourceTree = "<group>"; };
+		167CC8DD7E1B61990E56FCB64980BAA8 /* BigcommerceProductImage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceProductImage.swift; sourceTree = "<group>"; };
 		1E1B2B7A117D61C0D1B7CD07C84BDEEC /* ParameterEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterEncoding.swift; path = Source/ParameterEncoding.swift; sourceTree = "<group>"; };
 		213A820876DC17932894231D3B18B79E /* Pods-BigcommerceApi_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BigcommerceApi_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		28C0112387D93188F2FDA12B47D706C4 /* BigcommerceOrderShippingAddress.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderShippingAddress.swift; sourceTree = "<group>"; };
 		2A1BA02EB30FF13F545978D4B23F6B68 /* Alamofire-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-prefix.pch"; sourceTree = "<group>"; };
 		2A95E65C21F7767E2A7444314614728B /* Alamofire-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Alamofire-dummy.m"; sourceTree = "<group>"; };
 		39F69A25685DA4AFC97A2DD87554383D /* Upload.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Upload.swift; path = Source/Upload.swift; sourceTree = "<group>"; };
@@ -96,41 +95,42 @@
 		4BD68604A897951819965F3DB7B39E95 /* MultipartFormData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartFormData.swift; path = Source/MultipartFormData.swift; sourceTree = "<group>"; };
 		5418AD6A8B42D3297BBC3784E9688DD8 /* Pods-BigcommerceApi_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-BigcommerceApi_Example-umbrella.h"; sourceTree = "<group>"; };
 		544D7E2F0B75120E47EB1D807A4A0803 /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
-		55FC6B4C1FEA0DE788F5267F855CC581 /* BigcommerceProduct.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceProduct.swift; sourceTree = "<group>"; };
 		596D37D65C2EC2AB28A8FC0FB1E0C653 /* Download.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Download.swift; path = Source/Download.swift; sourceTree = "<group>"; };
-		6865B2BF2A8998CC49FA16DCBF3FBA8B /* BigcommerceOrderProduct.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderProduct.swift; sourceTree = "<group>"; };
+		5DB2B2F1A115306B3CC6BDF3A72638CE /* BigcommerceOrderStatus.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderStatus.swift; sourceTree = "<group>"; };
 		6A57DF9C2871616F2808BBEA986D97F1 /* Pods-BigcommerceApi_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BigcommerceApi_Example-resources.sh"; sourceTree = "<group>"; };
+		6C6283C2B6152FB1460B66658B9C83AD /* BigcommerceOrderShippingAddress.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderShippingAddress.swift; sourceTree = "<group>"; };
 		6DE3DBDB13B1826A8CCA8B3B00610C92 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServerTrustPolicy.swift; path = Source/ServerTrustPolicy.swift; sourceTree = "<group>"; };
 		706C7AFFE37BA158C3553250F4B5FAED /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7248DFDFE23A522CAB9148641C7E69A4 /* Error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Error.swift; path = Source/Error.swift; sourceTree = "<group>"; };
-		8F972993CAA22AA8DC0752CBF0ACC790 /* BigcommerceOrderShipmentItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderShipmentItem.swift; sourceTree = "<group>"; };
-		940B955B1B41AE453F95ED82F9F3738C /* BigcommerceCustomerAddress.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceCustomerAddress.swift; sourceTree = "<group>"; };
+		742FE3B6C44385831A42EBDFED5CAF9B /* BigcommerceOrderShipmentItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderShipmentItem.swift; sourceTree = "<group>"; };
+		7BD6A09A241744A8853BDBF415D751E1 /* BigcommerceOrderProduct.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderProduct.swift; sourceTree = "<group>"; };
 		9D8B4F3CA939DD62C57BB793308D6A26 /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
 		9EFCE8A3DC08536A2B19894C1FF3E86D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		A1208A1C12FA12061B6446436A44A9A4 /* ResponseSerialization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResponseSerialization.swift; path = Source/ResponseSerialization.swift; sourceTree = "<group>"; };
 		A1C5B1E0AA2D605106766F000FA16E50 /* BigcommerceApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BigcommerceApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A40073228B89B474C5203D492060272E /* BigcommerceProductImage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceProductImage.swift; sourceTree = "<group>"; };
+		A2200ECD56F5622A732325C1232F24CF /* BigcommerceCustomerAddress.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceCustomerAddress.swift; sourceTree = "<group>"; };
 		AB67F2E3003D177F3476702288A23504 /* Pods-BigcommerceApi_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BigcommerceApi_Example-frameworks.sh"; sourceTree = "<group>"; };
-		B3DCDA88652147080C6B963EA6EB9371 /* BigcommerceOrderShipment.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderShipment.swift; sourceTree = "<group>"; };
 		B6A88F1173C6EFBA2F8A63CC6460FC94 /* Pods-BigcommerceApi_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BigcommerceApi_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		B7C519B2E262C3D993AACD33A2DE24C3 /* BigcommerceApi.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BigcommerceApi.xcconfig; sourceTree = "<group>"; };
+		B912438E88394513AADF5D5CF69DC276 /* BigcommerceStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceStore.swift; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BC42ABD052DF209D0761A0BF74AAD24E /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Source/Request.swift; sourceTree = "<group>"; };
 		BC73B027B19BD226382A5F13E00CE332 /* Pods-BigcommerceApi_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-BigcommerceApi_Example.modulemap"; sourceTree = "<group>"; };
 		BCB9ECB2184FAB2BAE8AFA754F30C90B /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Alamofire.modulemap; sourceTree = "<group>"; };
-		BDB83D3E306E99E5EB51AF8E87F82C19 /* BigcommerceOrderMessage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderMessage.swift; sourceTree = "<group>"; };
-		BE657A3E1C0CED9E0056F21E /* BigcommerceStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigcommerceStore.swift; sourceTree = "<group>"; };
+		BCD765EE006BFBD17D8A1B6B11761243 /* BigcommerceOrderShipment.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderShipment.swift; sourceTree = "<group>"; };
 		CBB398F9E22A380A013A30024FA624A4 /* BigcommerceApi.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigcommerceApi.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEE25C086B271C5F638DA05E260F68E2 /* BigcommerceOrder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrder.swift; sourceTree = "<group>"; };
 		D12C1B15E979D4E276C63D5004BAE3C0 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D47677089E19ECC79A428521D3E5D87D /* BigcommerceApi-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BigcommerceApi-prefix.pch"; sourceTree = "<group>"; };
-		D741A7E155C267272A130D3443DF5116 /* BigcommerceOrderStatus.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderStatus.swift; sourceTree = "<group>"; };
 		D768345FDC730D7A3C8A53F61B336FB0 /* Pods-BigcommerceApi_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BigcommerceApi_Example.release.xcconfig"; sourceTree = "<group>"; };
+		DB739F523BB58C465BED54FE25AAB3CB /* BigcommerceProduct.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceProduct.swift; sourceTree = "<group>"; };
 		E5F3FC5D877738CFD3367D01550D0C70 /* Stream.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Stream.swift; path = Source/Stream.swift; sourceTree = "<group>"; };
-		E66B58ACDA0F474082389277C4398E58 /* BigcommerceOrder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrder.swift; sourceTree = "<group>"; };
 		E709350D82D71894184467E5906EB810 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E85391133F9FAEB0844D5DC13E9DA71F /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Source/Result.swift; sourceTree = "<group>"; };
 		E9A4953AA34CDFBD543E6429E112A97D /* Manager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Manager.swift; path = Source/Manager.swift; sourceTree = "<group>"; };
 		EA5EF291AA218532F61CB581468F6582 /* Pods-BigcommerceApi_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BigcommerceApi_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		EC13D720D9CD16ADD995A37B1ACCBDE3 /* BigcommerceApi.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceApi.swift; sourceTree = "<group>"; };
+		EE253D61A37E65B5A6B9B47792CEE7DC /* BigcommerceOrderMessage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderMessage.swift; sourceTree = "<group>"; };
 		F5CEDE3B9ACAE90BEBD38738ABC6BF45 /* BigcommerceApi.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = BigcommerceApi.modulemap; sourceTree = "<group>"; };
 		F74C44B859AC5C59A1D41C8D64AD61E3 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,19 +144,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		176471E4B9CE14537F8537A5AB313414 /* Frameworks */ = {
+		1EDB7080369EBF3D1809E764E5ADD9F7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		879C0F127ED11EC2AE238EF3E18A9C6E /* Frameworks */ = {
+		62C073CDB26F19F47E6C6ACA432529ED /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D275875971FF4F4D38F1BA4AE30E5561 /* Alamofire.framework in Frameworks */,
-				30766D964036562253C4D65A1590E517 /* Foundation.framework in Frameworks */,
+				C1351ED0CB405B325B83C1AD6E896CA9 /* Alamofire.framework in Frameworks */,
+				BB1CA7A2BDE260E14EE6E6E09E1E8AB1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,26 +187,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		2F478889F6E90B97B58075F0F469550A /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				1C8014864CC623485BCCC24B574EEFDD /* BigcommerceApi.swift */,
-				011F70C8576EBB74847A6A9873C4968F /* BigcommerceCustomer.swift */,
-				940B955B1B41AE453F95ED82F9F3738C /* BigcommerceCustomerAddress.swift */,
-				E66B58ACDA0F474082389277C4398E58 /* BigcommerceOrder.swift */,
-				BDB83D3E306E99E5EB51AF8E87F82C19 /* BigcommerceOrderMessage.swift */,
-				6865B2BF2A8998CC49FA16DCBF3FBA8B /* BigcommerceOrderProduct.swift */,
-				B3DCDA88652147080C6B963EA6EB9371 /* BigcommerceOrderShipment.swift */,
-				8F972993CAA22AA8DC0752CBF0ACC790 /* BigcommerceOrderShipmentItem.swift */,
-				28C0112387D93188F2FDA12B47D706C4 /* BigcommerceOrderShippingAddress.swift */,
-				D741A7E155C267272A130D3443DF5116 /* BigcommerceOrderStatus.swift */,
-				55FC6B4C1FEA0DE788F5267F855CC581 /* BigcommerceProduct.swift */,
-				A40073228B89B474C5203D492060272E /* BigcommerceProductImage.swift */,
-				BE657A3E1C0CED9E0056F21E /* BigcommerceStore.swift */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
 		59B91F212518421F271EBA85D5530651 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,14 +194,6 @@
 				25308A143ED5AA82593A7E1D950849C4 /* iOS */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		5B7FB97D622353B36988219F1BC76CA9 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				2F478889F6E90B97B58075F0F469550A /* Classes */,
-			);
-			path = Pod;
 			sourceTree = "<group>";
 		};
 		67001837AB5FCABBE304708604BCC355 /* Alamofire */ = {
@@ -243,6 +215,26 @@
 				CA9B28A4AC1C278482C5D8EF337004F8 /* Support Files */,
 			);
 			path = Alamofire;
+			sourceTree = "<group>";
+		};
+		74D2B5D5DF0B814709E368988B46A442 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				EC13D720D9CD16ADD995A37B1ACCBDE3 /* BigcommerceApi.swift */,
+				11528E059407F5E325FFD4EE0E70329C /* BigcommerceCustomer.swift */,
+				A2200ECD56F5622A732325C1232F24CF /* BigcommerceCustomerAddress.swift */,
+				CEE25C086B271C5F638DA05E260F68E2 /* BigcommerceOrder.swift */,
+				EE253D61A37E65B5A6B9B47792CEE7DC /* BigcommerceOrderMessage.swift */,
+				7BD6A09A241744A8853BDBF415D751E1 /* BigcommerceOrderProduct.swift */,
+				BCD765EE006BFBD17D8A1B6B11761243 /* BigcommerceOrderShipment.swift */,
+				742FE3B6C44385831A42EBDFED5CAF9B /* BigcommerceOrderShipmentItem.swift */,
+				6C6283C2B6152FB1460B66658B9C83AD /* BigcommerceOrderShippingAddress.swift */,
+				5DB2B2F1A115306B3CC6BDF3A72638CE /* BigcommerceOrderStatus.swift */,
+				DB739F523BB58C465BED54FE25AAB3CB /* BigcommerceProduct.swift */,
+				167CC8DD7E1B61990E56FCB64980BAA8 /* BigcommerceProductImage.swift */,
+				B912438E88394513AADF5D5CF69DC276 /* BigcommerceStore.swift */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -314,7 +306,7 @@
 		D8456FFCB9ABCFA36290E7CB28D94160 /* BigcommerceApi */ = {
 			isa = PBXGroup;
 			children = (
-				5B7FB97D622353B36988219F1BC76CA9 /* Pod */,
+				EF9EDA5D1A87CB1E88ED539FCCD84281 /* Pod */,
 				BDE96CBE54F9B42543A258E61E6CC95E /* Support Files */,
 			);
 			name = BigcommerceApi;
@@ -327,6 +319,14 @@
 				963FDAE81F876CC6831B12F900E805A5 /* Pods-BigcommerceApi_Example */,
 			);
 			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		EF9EDA5D1A87CB1E88ED539FCCD84281 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				74D2B5D5DF0B814709E368988B46A442 /* Classes */,
+			);
+			path = Pod;
 			sourceTree = "<group>";
 		};
 		F697B058FE67E1A951A9DAD6A009488B /* Products */ = {
@@ -343,11 +343,11 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		63BB39F8603BB95A3FD6AFBFD73C8323 /* Headers */ = {
+		BCFD151B751E3196FF17D4393AA9F168 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6673E275947097FA44A0D2A1FC118B9 /* BigcommerceApi-umbrella.h in Headers */,
+				C7C7C439C3590A28A45245D8475C83BB /* BigcommerceApi-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,25 +370,22 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0F80A73F8FF4F83660DA645A4D3513AD /* BigcommerceApi */ = {
+		294620CB8CD32B357B5C8D4F90272AA0 /* BigcommerceApi-BigcommerceApi */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A8F40CC31E85E4AA2EEE80F50196E5BF /* Build configuration list for PBXNativeTarget "BigcommerceApi" */;
+			buildConfigurationList = 9A72B7577F21F02A02AF4ACBFBB0B0C5 /* Build configuration list for PBXNativeTarget "BigcommerceApi-BigcommerceApi" */;
 			buildPhases = (
-				FD4E39EE8F6D597D317C22F8CA5F5EF8 /* Sources */,
-				879C0F127ED11EC2AE238EF3E18A9C6E /* Frameworks */,
-				3CCAA4DB6097FD90424EEF6590142E61 /* Resources */,
-				63BB39F8603BB95A3FD6AFBFD73C8323 /* Headers */,
+				8CCD16405AFC7D4207F2E9EDC024A3C4 /* Sources */,
+				1EDB7080369EBF3D1809E764E5ADD9F7 /* Frameworks */,
+				66242D2DE1C3E85B450D8C268E3E132F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1E39414B5E31FA07A5359F063B5A55AB /* PBXTargetDependency */,
-				26EB6EDF742CD5E0C83390610878824A /* PBXTargetDependency */,
 			);
-			name = BigcommerceApi;
-			productName = BigcommerceApi;
-			productReference = A1C5B1E0AA2D605106766F000FA16E50 /* BigcommerceApi.framework */;
-			productType = "com.apple.product-type.framework";
+			name = "BigcommerceApi-BigcommerceApi";
+			productName = "BigcommerceApi-BigcommerceApi";
+			productReference = CBB398F9E22A380A013A30024FA624A4 /* BigcommerceApi.bundle */;
+			productType = "com.apple.product-type.bundle";
 		};
 		4B2F30D90D85A544E9EFE2A49D392C25 /* Alamofire */ = {
 			isa = PBXNativeTarget;
@@ -405,6 +402,26 @@
 			name = Alamofire;
 			productName = Alamofire;
 			productReference = D12C1B15E979D4E276C63D5004BAE3C0 /* Alamofire.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		76D730E277DB3C411D6E21D42AA573C4 /* BigcommerceApi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17349097EFA5030FE373923C0C1C8431 /* Build configuration list for PBXNativeTarget "BigcommerceApi" */;
+			buildPhases = (
+				92142117482AF8034B15882FCC26D1DD /* Sources */,
+				62C073CDB26F19F47E6C6ACA432529ED /* Frameworks */,
+				548CEC80D4E0E04625C8BCDDEE6442B1 /* Resources */,
+				BCFD151B751E3196FF17D4393AA9F168 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D50B77966F05A3E311CF2317F2F8CB38 /* PBXTargetDependency */,
+				0731136B9B434A801D2F10CF6F960CB3 /* PBXTargetDependency */,
+			);
+			name = BigcommerceApi;
+			productName = BigcommerceApi;
+			productReference = A1C5B1E0AA2D605106766F000FA16E50 /* BigcommerceApi.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		782E6D25D899781B70DD0D5DEBC45F65 /* Pods-BigcommerceApi_Example */ = {
@@ -425,23 +442,6 @@
 			productName = "Pods-BigcommerceApi_Example";
 			productReference = 081F8F392F84428C1C53CD5AFD0157D4 /* Pods_BigcommerceApi_Example.framework */;
 			productType = "com.apple.product-type.framework";
-		};
-		FF9031FC44F57005229AD3D87335963F /* BigcommerceApi-BigcommerceApi */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C27CA713D67023ADB539660D1CCD678D /* Build configuration list for PBXNativeTarget "BigcommerceApi-BigcommerceApi" */;
-			buildPhases = (
-				17CF509A8B681FF6305644CA93C7C403 /* Sources */,
-				176471E4B9CE14537F8537A5AB313414 /* Frameworks */,
-				D4F16F6A6EB564080A0982A52B861319 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "BigcommerceApi-BigcommerceApi";
-			productName = "BigcommerceApi-BigcommerceApi";
-			productReference = CBB398F9E22A380A013A30024FA624A4 /* BigcommerceApi.bundle */;
-			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -465,23 +465,23 @@
 			projectRoot = "";
 			targets = (
 				4B2F30D90D85A544E9EFE2A49D392C25 /* Alamofire */,
-				0F80A73F8FF4F83660DA645A4D3513AD /* BigcommerceApi */,
-				FF9031FC44F57005229AD3D87335963F /* BigcommerceApi-BigcommerceApi */,
+				76D730E277DB3C411D6E21D42AA573C4 /* BigcommerceApi */,
+				294620CB8CD32B357B5C8D4F90272AA0 /* BigcommerceApi-BigcommerceApi */,
 				782E6D25D899781B70DD0D5DEBC45F65 /* Pods-BigcommerceApi_Example */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3CCAA4DB6097FD90424EEF6590142E61 /* Resources */ = {
+		548CEC80D4E0E04625C8BCDDEE6442B1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADEFBAC09ED45E567681D6B829207625 /* BigcommerceApi.bundle in Resources */,
+				49D10610A84D08157B2B1383AF314606 /* BigcommerceApi.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D4F16F6A6EB564080A0982A52B861319 /* Resources */ = {
+		66242D2DE1C3E85B450D8C268E3E132F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -491,13 +491,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		17CF509A8B681FF6305644CA93C7C403 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		5FBF281000F4380394A2338B903D6017 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -519,6 +512,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8CCD16405AFC7D4207F2E9EDC024A3C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92142117482AF8034B15882FCC26D1DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				016303F666CAFD801A54D40C990C363D /* BigcommerceApi-dummy.m in Sources */,
+				0DA2A4BA12175E11237BC132450CBA77 /* BigcommerceApi.swift in Sources */,
+				C553C62D32CC52D7FC807565DDBED9A5 /* BigcommerceCustomer.swift in Sources */,
+				33F73ECCC60752CE508ECFE5AD139383 /* BigcommerceCustomerAddress.swift in Sources */,
+				4A42652524298F6A5907F70D8B8B49FA /* BigcommerceOrder.swift in Sources */,
+				0B46126DCBEF181B9F4747484B629356 /* BigcommerceOrderMessage.swift in Sources */,
+				767FA5C8DFBE55BE4A83063E228B45A3 /* BigcommerceOrderProduct.swift in Sources */,
+				0A71B683C5C26E8B759E110A3C0A8BD8 /* BigcommerceOrderShipment.swift in Sources */,
+				C84E6C6503D34E1444228ED8F5E9E834 /* BigcommerceOrderShipmentItem.swift in Sources */,
+				80F395CE8413FA9F872ADA0C2F4A8026 /* BigcommerceOrderShippingAddress.swift in Sources */,
+				A0E4BCF59AC57912545C4D25B84A272B /* BigcommerceOrderStatus.swift in Sources */,
+				E6101B7FEA17DFC8A20155878B2ED6BB /* BigcommerceProduct.swift in Sources */,
+				F07608DF72ADD0F653710139D331569D /* BigcommerceProductImage.swift in Sources */,
+				E85642719CD74BFC5BE71EEE459DC0E3 /* BigcommerceStore.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D97CA028A30897038478664C896C636B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -527,35 +548,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FD4E39EE8F6D597D317C22F8CA5F5EF8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4CA5088890AC136BA888D2C663EF72F1 /* BigcommerceApi-dummy.m in Sources */,
-				BE657A3F1C0CED9E0056F21E /* BigcommerceStore.swift in Sources */,
-				83C7E81C8157845104E901D8E3D4874B /* BigcommerceApi.swift in Sources */,
-				9F98E7D051B3C8FD3EB5BECD23A2F745 /* BigcommerceCustomer.swift in Sources */,
-				ED794A1B8568779E399E7E430CBDC513 /* BigcommerceCustomerAddress.swift in Sources */,
-				5B38E984982060081FE2120E748B483B /* BigcommerceOrder.swift in Sources */,
-				3336636F644382010EFEBF3F0B19019A /* BigcommerceOrderMessage.swift in Sources */,
-				4AAE5944D96C0D00BD4305B1FE447792 /* BigcommerceOrderProduct.swift in Sources */,
-				396118F899042D0F4383DEB189F01AA2 /* BigcommerceOrderShipment.swift in Sources */,
-				71B1B265E676CA7A5F6C7A0A09B36B4B /* BigcommerceOrderShipmentItem.swift in Sources */,
-				B87F4AA5784F557E25649F94FC07A0E9 /* BigcommerceOrderShippingAddress.swift in Sources */,
-				B57387D187DFC8013DC8422691777820 /* BigcommerceOrderStatus.swift in Sources */,
-				FF4A87BC3C40FBAAA8EF18F04CC9C41A /* BigcommerceProduct.swift in Sources */,
-				3B6A2D9A3846FA88A1C4721C5C737C39 /* BigcommerceProductImage.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1E39414B5E31FA07A5359F063B5A55AB /* PBXTargetDependency */ = {
+		0731136B9B434A801D2F10CF6F960CB3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = Alamofire;
-			target = 4B2F30D90D85A544E9EFE2A49D392C25 /* Alamofire */;
-			targetProxy = 60C490F0A1EA1CC67BF1AAE41354963E /* PBXContainerItemProxy */;
+			name = "BigcommerceApi-BigcommerceApi";
+			target = 294620CB8CD32B357B5C8D4F90272AA0 /* BigcommerceApi-BigcommerceApi */;
+			targetProxy = 655F3080369DEA208B22C3F8B4563406 /* PBXContainerItemProxy */;
 		};
 		21D42DA25DCC8A9AE010FDABA32E7443 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -563,17 +563,17 @@
 			target = 4B2F30D90D85A544E9EFE2A49D392C25 /* Alamofire */;
 			targetProxy = 8EF0EE952FAF401D4C555D7FD2038E31 /* PBXContainerItemProxy */;
 		};
-		26EB6EDF742CD5E0C83390610878824A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "BigcommerceApi-BigcommerceApi";
-			target = FF9031FC44F57005229AD3D87335963F /* BigcommerceApi-BigcommerceApi */;
-			targetProxy = C9472B3829364E2AAA343FD8D6536977 /* PBXContainerItemProxy */;
-		};
 		950AC1B0FB6771D41083857C64FE787D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = BigcommerceApi;
-			target = 0F80A73F8FF4F83660DA645A4D3513AD /* BigcommerceApi */;
+			target = 76D730E277DB3C411D6E21D42AA573C4 /* BigcommerceApi */;
 			targetProxy = 14225232BACB36653E668BFACAA3DAAC /* PBXContainerItemProxy */;
+		};
+		D50B77966F05A3E311CF2317F2F8CB38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Alamofire;
+			target = 4B2F30D90D85A544E9EFE2A49D392C25 /* Alamofire */;
+			targetProxy = 711582EA32481F921BE0894EB5BDDCB6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -612,18 +612,6 @@
 			};
 			name = Release;
 		};
-		2436E31083C564187C10AD0C1415FBC8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7C519B2E262C3D993AACD33A2DE24C3 /* BigcommerceApi.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				PRODUCT_NAME = BigcommerceApi;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
 		243C03A53556E7DD68157682396E716E /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 03A2D6EDBB831DD85CA1B9CA77016728 /* Alamofire.xcconfig */;
@@ -651,7 +639,35 @@
 			};
 			name = Release;
 		};
-		323C4F29A3E18F44250D27DD1395029D /* Release */ = {
+		2FCF92000F6452D669F7A1ECC3549D08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7C519B2E262C3D993AACD33A2DE24C3 /* BigcommerceApi.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/BigcommerceApi/BigcommerceApi-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BigcommerceApi/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/BigcommerceApi/BigcommerceApi.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = BigcommerceApi;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		306F99481D0EC44ED91F246852FEB1E2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B7C519B2E262C3D993AACD33A2DE24C3 /* BigcommerceApi.xcconfig */;
 			buildSettings = {
@@ -745,7 +761,7 @@
 			};
 			name = Debug;
 		};
-		B1C1FAC719FF5A32A7CE070E251FAF03 /* Release */ = {
+		896AD2E6A73FF058A5F322B1E75D7104 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B7C519B2E262C3D993AACD33A2DE24C3 /* BigcommerceApi.xcconfig */;
 			buildSettings = {
@@ -818,37 +834,30 @@
 			};
 			name = Release;
 		};
-		C3DEB6D22E714F22BF73094EBD26A8F1 /* Debug */ = {
+		FDB9C6A847D0EFAB9C98BE8982EBE3D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B7C519B2E262C3D993AACD33A2DE24C3 /* BigcommerceApi.xcconfig */;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/BigcommerceApi/BigcommerceApi-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BigcommerceApi/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BigcommerceApi/BigcommerceApi.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = BigcommerceApi;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
+				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		17349097EFA5030FE373923C0C1C8431 /* Build configuration list for PBXNativeTarget "BigcommerceApi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FCF92000F6452D669F7A1ECC3549D08 /* Debug */,
+				306F99481D0EC44ED91F246852FEB1E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		22D55F6F0FB812BB3F2C698C0DEA53F9 /* Build configuration list for PBXNativeTarget "Pods-BigcommerceApi_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -876,20 +885,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A8F40CC31E85E4AA2EEE80F50196E5BF /* Build configuration list for PBXNativeTarget "BigcommerceApi" */ = {
+		9A72B7577F21F02A02AF4ACBFBB0B0C5 /* Build configuration list for PBXNativeTarget "BigcommerceApi-BigcommerceApi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C3DEB6D22E714F22BF73094EBD26A8F1 /* Debug */,
-				323C4F29A3E18F44250D27DD1395029D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C27CA713D67023ADB539660D1CCD678D /* Build configuration list for PBXNativeTarget "BigcommerceApi-BigcommerceApi" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2436E31083C564187C10AD0C1415FBC8 /* Debug */,
-				B1C1FAC719FF5A32A7CE070E251FAF03 /* Release */,
+				FDB9C6A847D0EFAB9C98BE8982EBE3D7 /* Debug */,
+				896AD2E6A73FF058A5F322B1E75D7104 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

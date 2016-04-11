@@ -51,6 +51,7 @@ public class BigcommerceOrderShippingAddress: NSObject {
         
         //Float values are returned as quote enclosed strings in the JSON from the API
         let numberFormatter = NSNumberFormatter()
+        numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
         
         if let id = jsonDictionary["id"] as? NSNumber {
             self.id = id
