@@ -68,13 +68,17 @@ public class BigcommerceOrderProduct: NSObject {
     public var wrappingMessage: String = ""
     public var wrappingName: String = ""
     
-    
-    public init(jsonDictionary:NSDictionary) {
+    //Pass in the currency code from the order
+    public init(jsonDictionary:NSDictionary, currencyCode:String) {
         //Load the JSON dictionary into the order object
         
         //Float values are returned as quote enclosed strings in the JSON from the API
         let numberFormatter = NSNumberFormatter()
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        
+        let localeIdentifier = NSLocale.localeIdentifierFromComponents([NSLocaleCurrencyCode : currencyCode])
+        let localeForCurrency = NSLocale(localeIdentifier: localeIdentifier);
+        numberFormatter.locale = localeForCurrency
         
         if let id = jsonDictionary["id"] as? NSNumber {
             self.id = id

@@ -21,6 +21,8 @@ public class BigcommerceApi: NSObject {
     var apiToken = ""               //Pass in via setCredentials
     var apiStoreBaseUrl = ""        //Pass in via setCredentials
     
+    public var currencyCode = "USD"        //Default to US dollars - retrieve via getStore method
+    
     var alamofireManager: Alamofire.Manager!
     
     //Define a shared instance method to return a singleton of the API manager
@@ -292,7 +294,7 @@ public class BigcommerceApi: NSObject {
                             if let orderProductsArray = result.value as? NSArray {
                                 for orderProductElement in orderProductsArray {
                                     if let productDict = orderProductElement as? NSDictionary {
-                                        let orderProduct = BigcommerceOrderProduct(jsonDictionary: productDict)
+                                        let orderProduct = BigcommerceOrderProduct(jsonDictionary: productDict, currencyCode: order.currencyCode)
                                         orderProducts.append(orderProduct)
                                     }
                                 }
@@ -334,7 +336,7 @@ public class BigcommerceApi: NSObject {
                             if let orderShippingAddressesArray = result.value as? NSArray {
                                 for orderShippingAddressElement in orderShippingAddressesArray {
                                     if let shippingAddressDict = orderShippingAddressElement as? NSDictionary {
-                                        let orderShippingAddress = BigcommerceOrderShippingAddress(jsonDictionary: shippingAddressDict)
+                                        let orderShippingAddress = BigcommerceOrderShippingAddress(jsonDictionary: shippingAddressDict, currencyCode: order.currencyCode)
                                         orderShippingAddresses.append(orderShippingAddress)
                                     }
                                 }
@@ -511,7 +513,7 @@ public class BigcommerceApi: NSObject {
                         if let productsArray = result.value as? NSArray {
                             for productElement in productsArray {
                                 if let productDict = productElement as? NSDictionary {
-                                    let product = BigcommerceProduct(jsonDictionary: productDict)
+                                    let product = BigcommerceProduct(jsonDictionary: productDict, currencyCode: self.currencyCode)
                                     products.append(product)
                                 }
                             }
@@ -767,7 +769,7 @@ public class BigcommerceApi: NSObject {
                         
                         var store:BigcommerceStore?
                         
-                        //Loop over the orders JSON object and create order objects for each one
+                        //Create the store object
                         if let storeDict = result.value as? NSDictionary {
                             store = BigcommerceStore(jsonDictionary: storeDict)
                         }

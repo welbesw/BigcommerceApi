@@ -47,9 +47,27 @@ class CredentialsViewController: UITableViewController {
         //Set the credentials on the BigcommerceApi instance
         if(defaultsManager.apiCredentialsAreSet) {
             BigcommerceApi.sharedInstance.setCredentials(defaultsManager.apiUsername!, token: defaultsManager.apiToken!, storeBaseUrl: defaultsManager.apiStoreBaseUrl!)
+            
+            //Attempt to get the store
+            BigcommerceApi.sharedInstance.getStore({ (store, error) in
+                dispatch_async(dispatch_get_main_queue(), { 
+                    if(error == nil) {
+                        //TODO - set currency code for the store
+                        if store != nil && store!.currency.characters.count > 0 {
+                            BigcommerceApi.sharedInstance.currencyCode = store!.currency
+                        }
+                        
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    } else {
+                        let alert = UIAlertController(title: "Error Getting Store", message: error!.localizedDescription, preferredStyle: .Alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    }
+                })
+            })
         }
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        
     }
     
     @IBAction func didTapCancelButton() {

@@ -63,12 +63,23 @@ public class BigcommerceOrder: NSObject {
     public var couponsResource = ""
     public var couponsUrl = ""
     
+    public var currencyCode = "USD" //Assume USD
+    
     public init(jsonDictionary:NSDictionary) {
         //Load the JSON dictionary into the order object
         
         //Float values are returned as quote enclosed strings in the JSON from the API
         let numberFormatter = NSNumberFormatter()
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        
+        if let stringValue = jsonDictionary["currency_code"] as? String {
+            currencyCode = stringValue
+        }
+        
+        let localeIdentifier = NSLocale.localeIdentifierFromComponents([NSLocaleCurrencyCode : currencyCode])
+        let localeForCurrency = NSLocale(localeIdentifier: localeIdentifier);
+        numberFormatter.locale = localeForCurrency
+        
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "EEE, d MMM yyyy HH:mm:ss zzz"
         
