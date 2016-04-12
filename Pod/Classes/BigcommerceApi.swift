@@ -22,6 +22,7 @@ public class BigcommerceApi: NSObject {
     var apiStoreBaseUrl = ""        //Pass in via setCredentials
     
     public var currencyCode = "USD"        //Default to US dollars - retrieve via getStore method
+    public var currencyLocale:NSLocale?
     
     var alamofireManager: Alamofire.Manager!
     
@@ -66,6 +67,13 @@ public class BigcommerceApi: NSObject {
         self.apiUsername = username
         self.apiToken = token
         self.apiStoreBaseUrl = storeBaseUrl
+    }
+    
+    public func updateCurrencyLocale(code:String) {
+        currencyCode = code
+        
+        let localeIdentifier = NSLocale.localeIdentifierFromComponents([NSLocaleCurrencyCode : currencyCode])
+        currencyLocale = NSLocale(localeIdentifier: localeIdentifier);
     }
     
     func checkForErrorResponse(response:Response<AnyObject, NSError>) -> NSError? {
