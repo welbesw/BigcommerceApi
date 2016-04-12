@@ -64,6 +64,7 @@ public class BigcommerceOrder: NSObject {
     public var couponsUrl = ""
     
     public var currencyCode = "USD" //Assume USD
+    public var currencyLocale:NSLocale?
     
     public init(jsonDictionary:NSDictionary) {
         //Load the JSON dictionary into the order object
@@ -77,8 +78,9 @@ public class BigcommerceOrder: NSObject {
         }
         
         let localeIdentifier = NSLocale.localeIdentifierFromComponents([NSLocaleCurrencyCode : currencyCode])
-        let localeForCurrency = NSLocale(localeIdentifier: localeIdentifier);
-        numberFormatter.locale = localeForCurrency
+        currencyLocale = NSLocale(localeIdentifier: localeIdentifier);
+        
+        numberFormatter.locale = currencyLocale
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "EEE, d MMM yyyy HH:mm:ss zzz"
