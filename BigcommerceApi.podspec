@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "BigcommerceApi"
-  s.version          = "0.5.2"
+  s.version          = "0.6.0"
   s.summary          = "A simple Swift library to access the Bigcommerce Stores API."
   s.description      = <<-DESC
                        A simple Swift library for the Bigcommerce Stores API
@@ -34,5 +34,5 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'Foundation'
-  s.dependency 'Alamofire', '~> 2.0'
+  s.dependency 'Alamofire', '~> 3.0'
 end

@@ -1,7 +1,7 @@
 PODS:
-  - Alamofire (2.0.2)
-  - BigcommerceApi (0.5.1):
-    - Alamofire (~> 2.0)
+  - Alamofire (3.3.1)
+  - BigcommerceApi (0.5.2):
+    - Alamofire (~> 3.0)
 
 DEPENDENCIES:
   - BigcommerceApi (from `../`)
@@ -11,7 +11,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  Alamofire: 8edbab00802a752bb5240cc2abe70e7e881488ad
-  BigcommerceApi: 424dfcfd79d69f9b0f02963acf24deadf05482a5
+  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
+  BigcommerceApi: cca6af3e280c08701141a7e72fab199dc246aee6
 
 COCOAPODS: 0.39.0
