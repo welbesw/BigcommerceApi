@@ -53,7 +53,11 @@ public class BigcommerceOrderShippingAddress: NSObject {
         let numberFormatter = NSNumberFormatter()
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
         
-        let localeIdentifier = NSLocale.localeIdentifierFromComponents([NSLocaleCurrencyCode : currencyCode])
+        var components = [NSLocaleCurrencyCode : currencyCode]
+        if let language = NSLocale.preferredLanguages().first {
+            components.updateValue(NSLocaleLanguageCode, forKey: language)
+        }
+        let localeIdentifier = NSLocale.localeIdentifierFromComponents(components)
         let localeForCurrency = NSLocale(localeIdentifier: localeIdentifier);
         numberFormatter.locale = localeForCurrency
         

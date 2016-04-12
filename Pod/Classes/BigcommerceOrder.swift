@@ -77,7 +77,11 @@ public class BigcommerceOrder: NSObject {
             currencyCode = stringValue
         }
         
-        let localeIdentifier = NSLocale.localeIdentifierFromComponents([NSLocaleCurrencyCode : currencyCode])
+        var components = [NSLocaleCurrencyCode : currencyCode]
+        if let language = NSLocale.preferredLanguages().first {
+            components.updateValue(NSLocaleLanguageCode, forKey: language)
+        }
+        let localeIdentifier = NSLocale.localeIdentifierFromComponents(components)
         currencyLocale = NSLocale(localeIdentifier: localeIdentifier);
         
         numberFormatter.locale = currencyLocale

@@ -36,8 +36,11 @@ public class BigcommerceCustomer: NSObject {
         let numberFormatter = NSNumberFormatter()
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
         
-        let currencyCode = "USD" //Assume USD
-        let localeIdentifier = NSLocale.localeIdentifierFromComponents([NSLocaleCurrencyCode : currencyCode])
+        var components = [NSLocaleCurrencyCode : "USD"] //Assume USD
+        if let language = NSLocale.preferredLanguages().first {
+            components.updateValue(NSLocaleLanguageCode, forKey: language)
+        }
+        let localeIdentifier = NSLocale.localeIdentifierFromComponents(components)
         let localeForCurrency = NSLocale(localeIdentifier: localeIdentifier);
         numberFormatter.locale = localeForCurrency
         
