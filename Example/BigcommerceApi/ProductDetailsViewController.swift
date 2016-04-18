@@ -21,6 +21,7 @@ class ProductDetailsViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         loadProductImages()
+        loadProductSkus()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -60,6 +61,18 @@ class ProductDetailsViewController: UIViewController {
                     }
                 }
             }
+        }
+    }
+    
+    func loadProductSkus() {
+        if let productId = product.productId?.stringValue {
+            BigcommerceApi.sharedInstance.getProductSkus(productId, completion: { (productSkus, error) in
+                if(error == nil) {
+                    for productSku in productSkus {
+                        print("Loaded product sku: \(productSku.productSkuId?.stringValue)")
+                    }
+                }
+            })
         }
     }
 

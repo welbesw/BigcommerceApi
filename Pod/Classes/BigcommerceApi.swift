@@ -656,6 +656,70 @@ public class BigcommerceApi: NSObject {
         }
     }
     
+    public func getProductSkus(productId:String, completion: (productSkus:[BigcommerceProductSku], error: NSError?) -> ()) {
+        
+        alamofireManager.request(.GET, apiStoreBaseUrl + "products/\(productId)/skus", parameters:nil, encoding:.JSON)
+            .authenticate(user: apiUsername, password: apiToken)
+            .responseJSON { response in
+                
+                if(response.result.isSuccess) {
+                    
+                    if let responseError = self.checkForErrorResponse(response) {
+                        completion(productSkus: [], error: responseError)
+                    } else {
+                        
+                        var productSkus: [BigcommerceProductSku] = []
+                        
+                        //Loop over the orders JSON object and create order objects for each one
+                        if let productSkusArray = response.result.value as? NSArray {
+                            for productSkuElement in productSkusArray {
+                                if let productSkuDict = productSkuElement as? NSDictionary {
+                                    let productSku = BigcommerceProductSku(jsonDictionary: productSkuDict)
+                                    productSkus.append(productSku)
+                                }
+                            }
+                        }
+                        
+                        completion(productSkus: productSkus, error: nil)
+                    }
+                    
+                    
+                } else {
+                    print(response.result.error)
+                    completion(productSkus: [], error: response.result.error)
+                }
+        }
+    }
+    
+    public func updateProductSkuInventory(productId:String, productSkuId:String, newInventoryLevel:Int, newLowLevel:Int?, completion: (error: NSError?) -> ()) {
+        
+        var parameters:[String : AnyObject] = ["inventory_level" : newInventoryLevel]
+
+        
+        if let lowLevel = newLowLevel {
+            parameters.updateValue(lowLevel, forKey: "inventory_warning_level")
+        }
+        
+        alamofireManager.request(.PUT, apiStoreBaseUrl + "products/\(productId)/skus/\(productSkuId)", parameters:parameters, encoding:.JSON)
+            .authenticate(user: apiUsername, password: apiToken)
+            .responseJSON { response in
+                
+                if(response.result.isSuccess) {
+                    
+                    if let responseError = self.checkForErrorResponse(response) {
+                        completion(error: responseError)
+                    } else {
+                        completion(error: nil)
+                    }
+                    
+                    
+                } else {
+                    print(response.result.error)
+                    completion(error: response.result.error)
+                }
+        }
+    }
+    
     public func getCustomers(completion: (customers:[BigcommerceCustomer], error: NSError?) -> ()) {
         //let parameters = ["sort" : "date_created:desc", "limit": "50"]
         getCustomers(nil, completion: completion)
