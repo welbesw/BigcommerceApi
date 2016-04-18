@@ -25,7 +25,7 @@ class CustomersViewController: UITableViewController {
     }
 
     func loadCustomers() {
-        BigcommerceApi.sharedInstance.getCustomers { (customers, error) -> () in
+        BigcommerceApi.sharedInstance.getCustomers(page:1, limit: 50) { (customers, error) in
             //Load the cusotmers
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 //Check for error
@@ -37,6 +37,19 @@ class CustomersViewController: UITableViewController {
                 }
             })
         }
+        /*
+        BigcommerceApi.sharedInstance.getCustomers { (customers, error) -> () in
+            //Load the cusotmers
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                //Check for error
+                if(error == nil) {
+                    self.customers = customers
+                    self.tableView.reloadData()
+                } else {
+                    print("Error getting customers: \(error!.localizedDescription)")
+                }
+            })
+        }*/
     }
     
     // MARK: - Table view data source

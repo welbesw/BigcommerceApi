@@ -725,6 +725,11 @@ public class BigcommerceApi: NSObject {
         getCustomers(nil, completion: completion)
     }
     
+    public func getCustomers(page page:Int, limit:Int, completion: (customers:[BigcommerceCustomer], error: NSError?) -> ()) {
+        let parameters = ["sort" : "date_created:desc", "limit": String(limit), "page" : String(page)]
+        getCustomers(parameters, completion: completion)
+    }
+    
     //Retrieve an array of Bigcommerce customer objects
     public func getCustomers(parameters:[String : String]?, completion: (customers:[BigcommerceCustomer], error: NSError?) -> ()) {
         
