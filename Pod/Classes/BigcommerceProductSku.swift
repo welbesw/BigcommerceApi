@@ -23,7 +23,7 @@ public class BigcommerceProductSku: NSObject {
     public var costPrice:NSNumber?
     public var imageFile:String?
     public var adjustedPrice:NSNumber?
-    public var adjustedWeifht:NSNumber?
+    public var adjustedWeight:NSNumber?
     public var inventoryLevel:NSNumber?
     public var binPickingNumber:String?
     public var isPurchasingDisabled:Bool = false
@@ -33,8 +33,20 @@ public class BigcommerceProductSku: NSObject {
     public var dateCreated:NSDate?
     public var dateModified:NSDate?
     
-    public init(jsonDictionary:NSDictionary) {
+    public init(jsonDictionary:NSDictionary, currencyCode:String) {
         //Load the JSON dictionary into the object
+        
+        //Float values are returned as quote enclosed strings in the JSON from the API
+        let numberFormatter = NSNumberFormatter()
+        numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        
+        var components = [NSLocaleCurrencyCode : currencyCode]
+        if let language = NSLocale.preferredLanguages().first {
+            components.updateValue(NSLocaleLanguageCode, forKey: language)
+        }
+        let localeIdentifier = NSLocale.localeIdentifierFromComponents(components)
+        let localeForCurrency = NSLocale(localeIdentifier: localeIdentifier);
+        numberFormatter.locale = localeForCurrency
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "EEE, d MMM yyyy HH:mm:ss zzz"
@@ -47,6 +59,64 @@ public class BigcommerceProductSku: NSObject {
             self.productId = id
         }
         
+        if let stringValue = jsonDictionary["sku"] as? String {
+            self.sku = stringValue
+        }
+        
+        if let stringValue = jsonDictionary["price"] as? String {
+            if let numberValue = numberFormatter.numberFromString(stringValue) {
+                price = numberValue
+            }
+        }
+        
+        if let stringValue = jsonDictionary["cost_price"] as? String {
+            if let numberValue = numberFormatter.numberFromString(stringValue) {
+                if numberValue.floatValue > 0.0 {
+                    costPrice = numberValue
+                }
+            }
+        }
+        
+        if let stringValue = jsonDictionary["adjusted_price"] as? String {
+            if let numberValue = numberFormatter.numberFromString(stringValue) {
+                if numberValue.floatValue > 0.0 {
+                    adjustedPrice = numberValue
+                }
+            }
+        }
+        
+        if let stringValue = jsonDictionary["adjusted_weight"] as? String {
+            let formatter = NSNumberFormatter()
+            if let numberValue = formatter.numberFromString(stringValue) {
+                if numberValue.floatValue > 0.0 {
+                    adjustedWeight = numberValue
+                }
+            }
+        }
+        
+        if let stringValue = jsonDictionary["image_file"] as? String {
+            self.imageFile = stringValue
+        }
+        
+        if let stringValue = jsonDictionary["bin_picking_number"] as? String {
+            self.binPickingNumber = stringValue
+        }
+        
+        if let numberValue = jsonDictionary["inventory_level"] as? NSNumber {
+            self.inventoryLevel = numberValue
+        }
+        
+        if let numberValue = jsonDictionary["inventory_warning_level"] as? NSNumber {
+            self.inventoryWarningLevel = numberValue
+        }
+        
+        if let boolValue = (jsonDictionary["is_purchasing_disabled"] as? NSNumber)?.boolValue {
+            self.isPurchasingDisabled = boolValue
+        }
+        
+        if let stringValue = jsonDictionary["purchasing_disabled_message"] as? String {
+            self.purchasingDisabledMessage = stringValue
+        }
         
         
         if let dateString = jsonDictionary["date_created"] as? String {

@@ -674,7 +674,7 @@ public class BigcommerceApi: NSObject {
                         if let productSkusArray = response.result.value as? NSArray {
                             for productSkuElement in productSkusArray {
                                 if let productSkuDict = productSkuElement as? NSDictionary {
-                                    let productSku = BigcommerceProductSku(jsonDictionary: productSkuDict)
+                                    let productSku = BigcommerceProductSku(jsonDictionary: productSkuDict, currencyCode: self.currencyCode)
                                     productSkus.append(productSku)
                                 }
                             }
