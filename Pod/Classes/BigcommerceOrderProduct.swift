@@ -68,6 +68,8 @@ public class BigcommerceOrderProduct: NSObject {
     public var wrappingMessage: String = ""
     public var wrappingName: String = ""
     
+    public var productOptions:[BigcommerceOrderProductOption] = []
+    
     //Pass in the currency code from the order
     public init(jsonDictionary:NSDictionary, currencyCode:String) {
         //Load the JSON dictionary into the order object
@@ -266,6 +268,15 @@ public class BigcommerceOrderProduct: NSObject {
         
         if let stringValue = jsonDictionary["wrapping_name"] as? String {
             wrappingName = stringValue
+        }
+        
+        if let optionArray = jsonDictionary["product_options"] as? NSArray {
+            for optionElement in optionArray {
+                if let optionDict = optionElement as? NSDictionary {
+                    let productOption = BigcommerceOrderProductOption(jsonDictionary: optionDict)
+                    productOptions.append(productOption)
+                }
+            }
         }
     }
 }

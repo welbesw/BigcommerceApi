@@ -74,6 +74,9 @@ public class OrderDetailsViewController: UIViewController {
             if(error == nil) {
                 for orderProduct in orderProducts {
                     print("Order Product: \(orderProduct.name) - (\(orderProduct.quantity))")
+                    for productOption in orderProduct.productOptions {
+                        print("Order Product Option: \(productOption.displayName) : \(productOption.displayValue)")
+                    }
                 }
             } else {
                 print("Error getting order products: \(error!.localizedDescription)")
