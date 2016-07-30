@@ -412,7 +412,7 @@ public class BigcommerceApi: NSObject {
     //Create an order shipment for an order.
     public func createShipmentForOrder(orderShipmentRequest:BigcommerceOrderShipmentRequest, completion: (orderShipment:BigcommerceOrderShipment?, error: NSError?) -> ()) {
         
-        var parameters:[String : AnyObject] = orderShipmentRequest.jsonDictionary()
+        let parameters:[String : AnyObject] = orderShipmentRequest.jsonDictionary()
         
         
         alamofireManager.request(.POST, apiStoreBaseUrl + "orders/\(orderShipmentRequest.orderId)/shipments/", parameters:parameters, encoding:.JSON)
