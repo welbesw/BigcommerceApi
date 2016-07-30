@@ -37,6 +37,7 @@
 		AE4CF87C02C042DF13ED5B21C4FDC1E0 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9039D48B1E893EF8AD87645A4FF820F /* Stream.swift */; };
 		BB1CA7A2BDE260E14EE6E6E09E1E8AB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EFCE8A3DC08536A2B19894C1FF3E86D /* Foundation.framework */; };
 		BE41196F6A3903E59C3306FE3F8B43FE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E32C97D15B18BFEB591B4A8B5C8477 /* Notifications.swift */; };
+		BE79AC9F1D4D3CBB00B57945 /* BigcommerceOrderShipmentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE79AC9E1D4D3CBB00B57945 /* BigcommerceOrderShipmentRequest.swift */; };
 		BEEE00D61CC5391E00B7535F /* BigcommerceProductSku.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE00D51CC5391E00B7535F /* BigcommerceProductSku.swift */; };
 		BEEE00DE1CC6C0CA00B7535F /* BigcommerceOrderProductOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE00DD1CC6C0CA00B7535F /* BigcommerceOrderProductOption.swift */; };
 		C0DB70AB368765DC64BFB5FEA75E0696 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB714D2EF499EE0EF3E1957151533A5D /* ParameterEncoding.swift */; };
@@ -129,6 +130,7 @@
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BC73B027B19BD226382A5F13E00CE332 /* Pods-BigcommerceApi_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-BigcommerceApi_Example.modulemap"; sourceTree = "<group>"; };
 		BCD765EE006BFBD17D8A1B6B11761243 /* BigcommerceOrderShipment.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderShipment.swift; sourceTree = "<group>"; };
+		BE79AC9E1D4D3CBB00B57945 /* BigcommerceOrderShipmentRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderShipmentRequest.swift; sourceTree = "<group>"; };
 		BEEE00D51CC5391E00B7535F /* BigcommerceProductSku.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigcommerceProductSku.swift; sourceTree = "<group>"; };
 		BEEE00DD1CC6C0CA00B7535F /* BigcommerceOrderProductOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderProductOption.swift; sourceTree = "<group>"; };
 		CBB398F9E22A380A013A30024FA624A4 /* BigcommerceApi.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BigcommerceApi.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -259,6 +261,7 @@
 				BEEE00DD1CC6C0CA00B7535F /* BigcommerceOrderProductOption.swift */,
 				BCD765EE006BFBD17D8A1B6B11761243 /* BigcommerceOrderShipment.swift */,
 				742FE3B6C44385831A42EBDFED5CAF9B /* BigcommerceOrderShipmentItem.swift */,
+				BE79AC9E1D4D3CBB00B57945 /* BigcommerceOrderShipmentRequest.swift */,
 				6C6283C2B6152FB1460B66658B9C83AD /* BigcommerceOrderShippingAddress.swift */,
 				5DB2B2F1A115306B3CC6BDF3A72638CE /* BigcommerceOrderStatus.swift */,
 				DB739F523BB58C465BED54FE25AAB3CB /* BigcommerceProduct.swift */,
@@ -535,6 +538,7 @@
 				A0E4BCF59AC57912545C4D25B84A272B /* BigcommerceOrderStatus.swift in Sources */,
 				E6101B7FEA17DFC8A20155878B2ED6BB /* BigcommerceProduct.swift in Sources */,
 				F07608DF72ADD0F653710139D331569D /* BigcommerceProductImage.swift in Sources */,
+				BE79AC9F1D4D3CBB00B57945 /* BigcommerceOrderShipmentRequest.swift in Sources */,
 				E85642719CD74BFC5BE71EEE459DC0E3 /* BigcommerceStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -409,6 +409,40 @@ public class BigcommerceApi: NSObject {
         }
     }
     
+    //Create an order shipment for an order.
+    public func createShipmentForOrder(orderShipmentRequest:BigcommerceOrderShipmentRequest, completion: (orderShipment:BigcommerceOrderShipment?, error: NSError?) -> ()) {
+        
+        var parameters:[String : AnyObject] = orderShipmentRequest.jsonDictionary()
+        
+        
+        alamofireManager.request(.POST, apiStoreBaseUrl + "orders/\(orderShipmentRequest.orderId)/shipments/", parameters:parameters, encoding:.JSON)
+            .authenticate(user: apiUsername, password: apiToken)
+            .responseJSON { response in
+                
+                if(response.result.isSuccess) {
+                    
+                    if let responseError = self.checkForErrorResponse(response) {
+                        completion(orderShipment:nil, error: responseError)
+                    } else {
+                        
+                        //Parse out the order shipment in the response
+                        var orderShipment:BigcommerceOrderShipment?
+                        if let shipmentDict = response.result.value as? NSDictionary {
+                            orderShipment = BigcommerceOrderShipment(jsonDictionary: shipmentDict)
+                        }
+                        
+                        completion(orderShipment:orderShipment, error: nil)
+                    }
+                    
+                    
+                } else {
+                    print(response.result.error)
+                    completion(orderShipment:nil, error: response.result.error)
+                }
+        }
+    }
+
+    
     public func getOrderStatuses(completion: (orderStatuses:[BigcommerceOrderStatus], error: NSError?) -> ()) {
         alamofireManager.request(.GET, apiStoreBaseUrl + "order_statuses", parameters:nil)
             .authenticate(user: apiUsername, password: apiToken)
