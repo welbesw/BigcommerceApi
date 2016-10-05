@@ -14,6 +14,10 @@ The use of the Bigcommerce API requires that you have access to the Bigcommerce 
 
 [Please see the Bigcommerce developer website for details on setting up access.](https://developer.bigcommerce.com/api/legacy/basic-auth)
 
+- iOS 9.0+
+- Xcode 8.0+
+- Swift 3.0+
+
 ## Installation
 
 BigcommerceApi is available through [CocoaPods](http://cocoapods.org). To install
