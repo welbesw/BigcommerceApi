@@ -50,18 +50,18 @@ class CredentialsViewController: UITableViewController {
             
             //Attempt to get the store
             BigcommerceApi.sharedInstance.getStore({ (store, error) in
-                dispatch_async(dispatch_get_main_queue(), { 
+                DispatchQueue.main.async(execute: { 
                     if(error == nil) {
                         //TODO - set currency code for the store
                         if store != nil && store!.currency.characters.count > 0 {
                             BigcommerceApi.sharedInstance.currencyCode = store!.currency
                         }
                         
-                        self.dismissViewControllerAnimated(true, completion: nil)
+                        self.dismiss(animated: true, completion: nil)
                     } else {
-                        let alert = UIAlertController(title: "Error Getting Store", message: error!.localizedDescription, preferredStyle: .Alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-                        self.presentViewController(alert, animated: true, completion: nil)
+                        let alert = UIAlertController(title: "Error Getting Store", message: error!.localizedDescription, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
                     }
                 })
             })
@@ -75,7 +75,7 @@ class CredentialsViewController: UITableViewController {
         dismissKeyboard()
         
         //Close the view controller
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
     func dismissKeyboard() {

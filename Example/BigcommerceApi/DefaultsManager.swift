@@ -8,15 +8,18 @@
 
 import UIKit
 
-public class DefaultsManager: NSObject {
+open class DefaultsManager: NSObject {
    
-    let userDefaults = NSUserDefaults.standardUserDefaults()
+    //Define a shared instance method to return a singleton of the manager
+    static let sharedInstance = DefaultsManager()
+    
+    let userDefaults = UserDefaults.standard
     
     var orderStatusIdFilter: Int? = nil //Allows the user to filter based on a specific order status
     
     var apiUsername: String? {
         get {
-            return userDefaults.stringForKey("ApiUsername")
+            return userDefaults.string(forKey: "ApiUsername")
         }
         set(newValue) {
             userDefaults.setValue(newValue, forKey: "ApiUsername")
@@ -25,7 +28,7 @@ public class DefaultsManager: NSObject {
     
     var apiToken: String? {
         get {
-            return userDefaults.stringForKey("ApiToken")
+            return userDefaults.string(forKey: "ApiToken")
         }
         set(newValue) {
             userDefaults.setValue(newValue, forKey: "ApiToken")
@@ -34,7 +37,7 @@ public class DefaultsManager: NSObject {
     
     var apiStoreBaseUrl: String? {
         get {
-            return userDefaults.stringForKey("ApiStoreBaseUrl")
+            return userDefaults.string(forKey: "ApiStoreBaseUrl")
         }
         set(newValue) {
             userDefaults.setValue(newValue, forKey: "ApiStoreBaseUrl")
@@ -45,17 +48,5 @@ public class DefaultsManager: NSObject {
         get {
             return self.apiUsername != nil && self.apiToken != nil && self.apiStoreBaseUrl != nil
         }
-    }
-    
-    //Define a shared instance method to return a singleton of the manager
-    public class var sharedInstance : DefaultsManager {
-        struct Static {
-            static var onceToken : dispatch_once_t = 0
-            static var instance : DefaultsManager? = nil
-        }
-        dispatch_once(&Static.onceToken) {
-            Static.instance = DefaultsManager()
-        }
-        return Static.instance!
     }
 }

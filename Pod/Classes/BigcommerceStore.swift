@@ -8,28 +8,28 @@
 
 import Foundation
 
-public class BigcommerceStore: NSObject {
-    public var id: String = ""
-    public var name: String = ""
-    public var domain: String = ""
-    public var address: String = ""
-    public var phone: String = ""
-    public var adminEmail:String = ""
-    public var orderEmail:String = ""
-    public var language:String = ""
-    public var currency:String = ""
-    public var currencySymbol:String = ""
-    public var decimalSeparator:String = "."
-    public var thousandsSeparator:String = ","
-    public var decimalPlaces:Int = 2
-    public var currencySymbolLocation:String = "left"
-    public var weightUnits:String = "LBS"
-    public var dimensionUnits:String = "Inches"
-    public var dimensionDecimalPlaces:Int = 2
-    public var dimensionDecimalToken:String = "."
-    public var dimensionThousandsToken:String = ","
-    public var planName:String = ""
-    public var logoUrl:String?
+open class BigcommerceStore: NSObject {
+    open var id: String = ""
+    open var name: String = ""
+    open var domain: String = ""
+    open var address: String = ""
+    open var phone: String = ""
+    open var adminEmail:String = ""
+    open var orderEmail:String = ""
+    open var language:String = ""
+    open var currency:String = ""
+    open var currencySymbol:String = ""
+    open var decimalSeparator:String = "."
+    open var thousandsSeparator:String = ","
+    open var decimalPlaces:Int = 2
+    open var currencySymbolLocation:String = "left"
+    open var weightUnits:String = "LBS"
+    open var dimensionUnits:String = "Inches"
+    open var dimensionDecimalPlaces:Int = 2
+    open var dimensionDecimalToken:String = "."
+    open var dimensionThousandsToken:String = ","
+    open var planName:String = ""
+    open var logoUrl:String?
     
     public init(jsonDictionary:NSDictionary) {
         //Load the JSON dictionary into the order object

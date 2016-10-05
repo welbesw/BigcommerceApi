@@ -8,26 +8,26 @@
 
 import Foundation
 
-public class BigcommerceOrderMessage: NSObject {
-    public var orderMessageId:NSNumber?
-    public var orderId: NSNumber?
-    public var staffId:NSNumber?
-    public var customerId:NSNumber?
+open class BigcommerceOrderMessage: NSObject {
+    open var orderMessageId:NSNumber?
+    open var orderId: NSNumber?
+    open var staffId:NSNumber?
+    open var customerId:NSNumber?
     
-    public var type:String?
+    open var type:String?
     
-    public var subject:String = ""
-    public var message:String = ""
+    open var subject:String = ""
+    open var message:String = ""
     
-    public var status:String?
-    public var isFlagged:Bool = false
+    open var status:String?
+    open var isFlagged:Bool = false
     
-    public var dateCreated:NSDate?
+    open var dateCreated:Date?
     
     public init(jsonDictionary:NSDictionary) {
         //Load the JSON dictionary into the order object
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, d MMM yyyy HH:mm:ss zzz"
         
         if let id = jsonDictionary["id"] as? NSNumber {
@@ -68,14 +68,14 @@ public class BigcommerceOrderMessage: NSObject {
 
         
         if let dateString = jsonDictionary["date_created"] as? String {
-            if let date = dateFormatter.dateFromString(dateString) {
+            if let date = dateFormatter.date(from: dateString) {
                 dateCreated = date
             }
         }
         
     }
     
-    public override var description: String {
+    open override var description: String {
         
         let shipmentIdString = self.orderMessageId != nil ? self.orderMessageId!.stringValue : ""
         

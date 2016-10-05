@@ -8,47 +8,47 @@
 
 import Foundation
 
-public class BigcommerceProductSku: NSObject {
+open class BigcommerceProductSku: NSObject {
     
-    public var productSkuId:NSNumber?
-    public var productId:NSNumber?
+    open var productSkuId:NSNumber?
+    open var productId:NSNumber?
     
-    public var sku:String = ""
-    public var upc:String = ""
-    public var price:NSNumber?
-    public var weight:NSNumber?
+    open var sku:String = ""
+    open var upc:String = ""
+    open var price:NSNumber?
+    open var weight:NSNumber?
     
     //TODO: product options
     
-    public var costPrice:NSNumber?
-    public var imageFile:String?
-    public var adjustedPrice:NSNumber?
-    public var adjustedWeight:NSNumber?
-    public var inventoryLevel:NSNumber?
-    public var binPickingNumber:String?
-    public var isPurchasingDisabled:Bool = false
-    public var inventoryWarningLevel:NSNumber?
-    public var purchasingDisabledMessage:String?
+    open var costPrice:NSNumber?
+    open var imageFile:String?
+    open var adjustedPrice:NSNumber?
+    open var adjustedWeight:NSNumber?
+    open var inventoryLevel:NSNumber?
+    open var binPickingNumber:String?
+    open var isPurchasingDisabled:Bool = false
+    open var inventoryWarningLevel:NSNumber?
+    open var purchasingDisabledMessage:String?
     
-    public var dateCreated:NSDate?
-    public var dateModified:NSDate?
+    open var dateCreated:Date?
+    open var dateModified:Date?
     
     public init(jsonDictionary:NSDictionary, currencyCode:String) {
         //Load the JSON dictionary into the object
         
         //Float values are returned as quote enclosed strings in the JSON from the API
-        let numberFormatter = NSNumberFormatter()
-        numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = NumberFormatter.Style.decimal
         
-        var components = [NSLocaleCurrencyCode : currencyCode]
-        if let language = NSLocale.preferredLanguages().first {
-            components.updateValue(NSLocaleLanguageCode, forKey: language)
+        var components:[String : String] = [NSLocale.Key.currencyCode.rawValue : currencyCode]
+        if let language = Locale.preferredLanguages.first {
+            components.updateValue(language, forKey: NSLocale.Key.languageCode.rawValue)
         }
-        let localeIdentifier = NSLocale.localeIdentifierFromComponents(components)
-        let localeForCurrency = NSLocale(localeIdentifier: localeIdentifier);
+        let localeIdentifier = Locale.identifier(fromComponents: components)
+        let localeForCurrency = Locale(identifier: localeIdentifier);
         numberFormatter.locale = localeForCurrency
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, d MMM yyyy HH:mm:ss zzz"
         
         if let id = jsonDictionary["id"] as? NSNumber {
@@ -64,13 +64,13 @@ public class BigcommerceProductSku: NSObject {
         }
         
         if let stringValue = jsonDictionary["price"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 price = numberValue
             }
         }
         
         if let stringValue = jsonDictionary["cost_price"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 if numberValue.floatValue > 0.0 {
                     costPrice = numberValue
                 }
@@ -78,7 +78,7 @@ public class BigcommerceProductSku: NSObject {
         }
         
         if let stringValue = jsonDictionary["adjusted_price"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 if numberValue.floatValue > 0.0 {
                     adjustedPrice = numberValue
                 }
@@ -86,8 +86,8 @@ public class BigcommerceProductSku: NSObject {
         }
         
         if let stringValue = jsonDictionary["adjusted_weight"] as? String {
-            let formatter = NSNumberFormatter()
-            if let numberValue = formatter.numberFromString(stringValue) {
+            let formatter = NumberFormatter()
+            if let numberValue = formatter.number(from: stringValue) {
                 if numberValue.floatValue > 0.0 {
                     adjustedWeight = numberValue
                 }
@@ -120,13 +120,13 @@ public class BigcommerceProductSku: NSObject {
         
         
         if let dateString = jsonDictionary["date_created"] as? String {
-            if let date = dateFormatter.dateFromString(dateString) {
+            if let date = dateFormatter.date(from: dateString) {
                 dateCreated = date
             }
         }
         
         if let dateString = jsonDictionary["date_modified"] as? String {
-            if let date = dateFormatter.dateFromString(dateString) {
+            if let date = dateFormatter.date(from: dateString) {
                 dateModified = date
             }
         }

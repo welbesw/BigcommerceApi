@@ -21,7 +21,7 @@ public enum BigcommerceShippingProvider:String {
     case ShipperHQ = "shipperhq"
 }
 
-public class BigcommerceOrderShipmentRequestItem : NSObject {
+open class BigcommerceOrderShipmentRequestItem : NSObject {
     
     var orderProductId:Int = 0
     var quantity:Int = 0
@@ -29,14 +29,14 @@ public class BigcommerceOrderShipmentRequestItem : NSObject {
     func jsonDictionary() -> [String : AnyObject] {
         var dictionary:[String : AnyObject] = [:]
         
-        dictionary.updateValue(orderProductId, forKey: "order_product_id")
-        dictionary.updateValue(quantity, forKey: "quantity")
+        dictionary.updateValue(orderProductId as AnyObject, forKey: "order_product_id")
+        dictionary.updateValue(quantity as AnyObject, forKey: "quantity")
         
         return dictionary
     }
 }
 
-public class BigcommerceOrderShipmentRequest: NSObject {
+open class BigcommerceOrderShipmentRequest: NSObject {
     
     var orderId:Int = 0
     var items:[BigcommerceOrderShipmentRequestItem] = []
@@ -53,20 +53,20 @@ public class BigcommerceOrderShipmentRequest: NSObject {
             let itemDict = item.jsonDictionary()
             itemDictArray.append(itemDict)
         }
-        dictionary.updateValue(itemDictArray, forKey: "items")
+        dictionary.updateValue(itemDictArray as AnyObject, forKey: "items")
         
         if let commentsText = self.comments {
-            dictionary.updateValue(commentsText, forKey: "comments")
+            dictionary.updateValue(commentsText as AnyObject, forKey: "comments")
         }
         
         if let tracking = self.trackingNumber {
-            dictionary.updateValue(tracking, forKey: "tracking_number")
+            dictionary.updateValue(tracking as AnyObject, forKey: "tracking_number")
         }
         
-        dictionary.updateValue(orderAddressId, forKey: "order_address_id")
+        dictionary.updateValue(orderAddressId as AnyObject, forKey: "order_address_id")
         
         if let provider = self.shippingProvider {
-            dictionary.updateValue(provider.rawValue, forKey: "shipping_provider")
+            dictionary.updateValue(provider.rawValue as AnyObject, forKey: "shipping_provider")
         }
         
         return dictionary

@@ -8,24 +8,24 @@
 
 import Foundation
 
-public class BigcommerceOrderShipment: NSObject {
-    public var orderId: NSNumber?
-    public var shipmentId:NSNumber?
-    public var customerId:NSNumber?
+open class BigcommerceOrderShipment: NSObject {
+    open var orderId: NSNumber?
+    open var shipmentId:NSNumber?
+    open var customerId:NSNumber?
     
-    public var trackingNumber:String = ""
-    public var shippingMethod:String = ""
-    public var comments:String = ""
+    open var trackingNumber:String = ""
+    open var shippingMethod:String = ""
+    open var comments:String = ""
     
-    public var shipmentItems:[BigcommerceOrderShipmentItem] = []
+    open var shipmentItems:[BigcommerceOrderShipmentItem] = []
     
-    public var dateCreated:NSDate?
-    public var dateModified:NSDate?
+    open var dateCreated:Date?
+    open var dateModified:Date?
     
     public init(jsonDictionary:NSDictionary) {
         //Load the JSON dictionary into the order object
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, d MMM yyyy HH:mm:ss zzz"
         
         if let id = jsonDictionary["id"] as? NSNumber {
@@ -56,20 +56,20 @@ public class BigcommerceOrderShipment: NSObject {
         }
         
         if let dateString = jsonDictionary["date_created"] as? String {
-            if let date = dateFormatter.dateFromString(dateString) {
+            if let date = dateFormatter.date(from: dateString) {
                 dateCreated = date
             }
         }
         
         if let dateString = jsonDictionary["date_modified"] as? String {
-            if let date = dateFormatter.dateFromString(dateString) {
+            if let date = dateFormatter.date(from: dateString) {
                 dateModified = date
             }
         }
         
     }
     
-    public override var description: String {
+    open override var description: String {
         
         let shipmentIdString = self.shipmentId != nil ? self.shipmentId!.stringValue : ""
         

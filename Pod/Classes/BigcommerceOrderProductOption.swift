@@ -8,19 +8,19 @@
 
 import Foundation
 
-public class BigcommerceOrderProductOption: NSObject {
+open class BigcommerceOrderProductOption: NSObject {
     
-    public var id : NSNumber?
+    open var id : NSNumber?
     
-    public var displayValue:String = ""
-    public var orderProductId:NSNumber?
-    public var optionId:NSNumber?
-    public var name:String = ""
-    public var type:String?
-    public var value:String = ""
-    public var productOptionId:NSNumber?
-    public var displayName:String = ""
-    public var displayStyle:String?
+    open var displayValue:String = ""
+    open var orderProductId:NSNumber?
+    open var optionId:NSNumber?
+    open var name:String = ""
+    open var type:String?
+    open var value:String = ""
+    open var productOptionId:NSNumber?
+    open var displayName:String = ""
+    open var displayStyle:String?
     
     public init(jsonDictionary:NSDictionary) {
         //Load the JSON dictionary into the order object

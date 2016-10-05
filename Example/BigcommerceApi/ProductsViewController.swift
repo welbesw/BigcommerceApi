@@ -39,7 +39,7 @@ class ProductsViewController: UITableViewController {
         
         BigcommerceApi.sharedInstance.getProductsWithKeyword("sample") { (products, error) -> () in
             //Check for error
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 if(error == nil) {
                     self.products = products
                     self.tableView.reloadData()
@@ -57,19 +57,19 @@ class ProductsViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // return the number of rows
         return self.products.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("productCell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "productCell", for: indexPath)
 
         // Configure the cell...
         let product = self.products[indexPath.row]
@@ -82,14 +82,14 @@ class ProductsViewController: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if(segue.identifier == "ProductDetailsSegue") {
             if let selectedIndex = self.tableView.indexPathForSelectedRow {
                 let product = self.products[selectedIndex.row]
                 
-                if let productDetailsViewController = segue.destinationViewController as? ProductDetailsViewController {
+                if let productDetailsViewController = segue.destination as? ProductDetailsViewController {
                     productDetailsViewController.product = product
                 }
             }

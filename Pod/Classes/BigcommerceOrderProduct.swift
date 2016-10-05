@@ -8,82 +8,82 @@
 
 import Foundation
 
-public class BigcommerceOrderProduct: NSObject {
+open class BigcommerceOrderProduct: NSObject {
 
-    public var id : NSNumber?
+    open var id : NSNumber?
     
-    public var name : String = ""
+    open var name : String = ""
     
-    public var baseCostPrice: NSNumber = 0.0
-    public var basePrice: NSNumber = 0.0
-    public var baseTotal: NSNumber = 0.0
-    public var baseWrappingCost: NSNumber = 0.0
+    open var baseCostPrice: NSNumber = 0.0
+    open var basePrice: NSNumber = 0.0
+    open var baseTotal: NSNumber = 0.0
+    open var baseWrappingCost: NSNumber = 0.0
     
-    public var binPickingNumber: String = ""
+    open var binPickingNumber: String = ""
     
-    public var costPriceExludingTax: NSNumber = 0.0
-    public var costPriceIncludingTax: NSNumber = 0.0
-    public var costPriceTax: NSNumber = 0.0
+    open var costPriceExludingTax: NSNumber = 0.0
+    open var costPriceIncludingTax: NSNumber = 0.0
+    open var costPriceTax: NSNumber = 0.0
     
-    public var ebayItemId: String = ""
-    public var ebayTransactionId: String = ""
+    open var ebayItemId: String = ""
+    open var ebayTransactionId: String = ""
     
-    public var eventDate: String = ""
-    public var eventName: String = ""
+    open var eventDate: String = ""
+    open var eventName: String = ""
     
-    public var fixedShippingCost: NSNumber = 0.0
+    open var fixedShippingCost: NSNumber = 0.0
     
-    public var isBundledProduct: NSNumber = false
-    public var isRefunded: NSNumber = false
+    open var isBundledProduct: NSNumber = false
+    open var isRefunded: NSNumber = false
     
-    public var optionSetId: String = ""
-    public var orderAddressId: NSNumber?
+    open var optionSetId: String = ""
+    open var orderAddressId: NSNumber?
     
-    public var orderId: NSNumber?
-    public var parentOrderProductId: NSNumber?
+    open var orderId: NSNumber?
+    open var parentOrderProductId: NSNumber?
     
-    public var priceExcludingTax: NSNumber = 0.0
-    public var priceIncludingTax: NSNumber = 0.0
-    public var priceTax: NSNumber = 0.0
+    open var priceExcludingTax: NSNumber = 0.0
+    open var priceIncludingTax: NSNumber = 0.0
+    open var priceTax: NSNumber = 0.0
     
-    public var productId: NSNumber?
-    public var quantity: NSNumber?
-    public var quantityShipped: NSNumber?
+    open var productId: NSNumber?
+    open var quantity: NSNumber?
+    open var quantityShipped: NSNumber?
 
-    public var refundAmount: NSNumber = 0.0
-    public var returnId: NSNumber?
+    open var refundAmount: NSNumber = 0.0
+    open var returnId: NSNumber?
     
-    public var sku: String = ""
+    open var sku: String = ""
     
-    public var totalExcludingTax: NSNumber = 0.0
-    public var totalIncludingTax: NSNumber = 0.0
-    public var totalTax: NSNumber = 0.0
+    open var totalExcludingTax: NSNumber = 0.0
+    open var totalIncludingTax: NSNumber = 0.0
+    open var totalTax: NSNumber = 0.0
 
-    public var type: String?
+    open var type: String?
     
-    public var weight: NSNumber = 0.0
-    public var wrappingCostExcludingTax: NSNumber = 0.0
-    public var wrappingCostIncludingTax: NSNumber = 0.0
-    public var wrappingCostTax: NSNumber = 0.0
-    public var wrappingMessage: String = ""
-    public var wrappingName: String = ""
+    open var weight: NSNumber = 0.0
+    open var wrappingCostExcludingTax: NSNumber = 0.0
+    open var wrappingCostIncludingTax: NSNumber = 0.0
+    open var wrappingCostTax: NSNumber = 0.0
+    open var wrappingMessage: String = ""
+    open var wrappingName: String = ""
     
-    public var productOptions:[BigcommerceOrderProductOption] = []
+    open var productOptions:[BigcommerceOrderProductOption] = []
     
     //Pass in the currency code from the order
     public init(jsonDictionary:NSDictionary, currencyCode:String) {
         //Load the JSON dictionary into the order object
         
         //Float values are returned as quote enclosed strings in the JSON from the API
-        let numberFormatter = NSNumberFormatter()
-        numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = NumberFormatter.Style.decimal
         
-        var components = [NSLocaleCurrencyCode : currencyCode]
-        if let language = NSLocale.preferredLanguages().first {
-            components.updateValue(NSLocaleLanguageCode, forKey: language)
+        var components:[String : String] = [NSLocale.Key.currencyCode.rawValue : currencyCode]
+        if let language = Locale.preferredLanguages.first {
+            components.updateValue(language, forKey: NSLocale.Key.languageCode.rawValue)
         }
-        let localeIdentifier = NSLocale.localeIdentifierFromComponents(components)
-        let localeForCurrency = NSLocale(localeIdentifier: localeIdentifier);
+        let localeIdentifier = Locale.identifier(fromComponents: components)
+        let localeForCurrency = Locale(identifier: localeIdentifier);
         numberFormatter.locale = localeForCurrency
         
         if let id = jsonDictionary["id"] as? NSNumber {
@@ -95,25 +95,25 @@ public class BigcommerceOrderProduct: NSObject {
         }
         
         if let stringValue = jsonDictionary["base_cost_price"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 baseCostPrice = numberValue
             }
         }
         
         if let stringValue = jsonDictionary["base_price"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 basePrice = numberValue
             }
         }
         
         if let stringValue = jsonDictionary["base_total"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 baseTotal = numberValue
             }
         }
 
         if let stringValue = jsonDictionary["base_wrapping_cost"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 baseWrappingCost = numberValue
             }
         }
@@ -123,19 +123,19 @@ public class BigcommerceOrderProduct: NSObject {
         }
         
         if let stringValue = jsonDictionary["cost_price_ex_tax"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 costPriceExludingTax = numberValue
             }
         }
         
         if let stringValue = jsonDictionary["cost_price_inc_tax"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 costPriceIncludingTax = numberValue
             }
         }
         
         if let stringValue = jsonDictionary["cost_price_tax"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 costPriceTax = numberValue
             }
         }
@@ -155,7 +155,7 @@ public class BigcommerceOrderProduct: NSObject {
         }
         
         if let stringValue = jsonDictionary["fixed_shipping_cost"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 fixedShippingCost = numberValue
             }
         }
@@ -182,17 +182,17 @@ public class BigcommerceOrderProduct: NSObject {
         }
         
         if let stringValue = jsonDictionary["price_ex_tax"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 priceExcludingTax = numberValue
             }
         }
         if let stringValue = jsonDictionary["price_inc_tax"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 priceIncludingTax = numberValue
             }
         }
         if let stringValue = jsonDictionary["price_tax"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 priceTax = numberValue
             }
         }
@@ -208,7 +208,7 @@ public class BigcommerceOrderProduct: NSObject {
         }
         
         if let stringValue = jsonDictionary["refund_amount"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 refundAmount = numberValue
             }
         }
@@ -221,17 +221,17 @@ public class BigcommerceOrderProduct: NSObject {
         }
         
         if let stringValue = jsonDictionary["total_ex_tax"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 totalExcludingTax = numberValue
             }
         }
         if let stringValue = jsonDictionary["total_inc_tax"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 totalIncludingTax = numberValue
             }
         }
         if let stringValue = jsonDictionary["total_tax"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 totalTax = numberValue
             }
         }
@@ -241,23 +241,23 @@ public class BigcommerceOrderProduct: NSObject {
         }
         
         if let stringValue = jsonDictionary["weight"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 weight = numberValue
             }
         }
         
         if let stringValue = jsonDictionary["wrapping_cost_ex_tax"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 wrappingCostExcludingTax = numberValue
             }
         }
         if let stringValue = jsonDictionary["wrapping_cost_inc_tax"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 wrappingCostIncludingTax = numberValue
             }
         }
         if let stringValue = jsonDictionary["wrapping_cost_tax"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 wrappingCostTax = numberValue
             }
         }

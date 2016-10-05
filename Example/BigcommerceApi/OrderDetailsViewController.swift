@@ -9,13 +9,13 @@
 import UIKit
 import BigcommerceApi
 
-public class OrderDetailsViewController: UIViewController {
+open class OrderDetailsViewController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
     
-    public var order:BigcommerceOrder!
+    open var order:BigcommerceOrder!
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -31,7 +31,7 @@ public class OrderDetailsViewController: UIViewController {
         loadOrderMessages()
     }
 
-    public override func didReceiveMemoryWarning() {
+    open override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -39,7 +39,7 @@ public class OrderDetailsViewController: UIViewController {
     func loadOrderDetails() {
         if let orderId = order.orderId?.stringValue {
             BigcommerceApi.sharedInstance.getOrder(orderId: orderId, completion: { (order, error) -> () in
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                DispatchQueue.main.async(execute: { () -> Void in
                     if(error == nil && order != nil) {
                         print("Got order: \(order!.orderId)")
                     } else {
@@ -55,7 +55,7 @@ public class OrderDetailsViewController: UIViewController {
     func loadOrderMessages() {
         if let orderId = order.orderId?.stringValue {
             BigcommerceApi.sharedInstance.getOrderMessages(orderId) { (orderMessages, error) -> () in
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                DispatchQueue.main.async(execute: { () -> Void in
                     if(error == nil) {
                         for orderMessage in orderMessages {
                             print("Order Message: \(orderMessage.subject) - (\(orderMessage.message))")
@@ -112,11 +112,11 @@ public class OrderDetailsViewController: UIViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override open func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if(segue.identifier == "EditStatusSegue") {
-            if let navController = segue.destinationViewController as? UINavigationController {
+            if let navController = segue.destination as? UINavigationController {
                 if let updateStatusViewController = navController.topViewController as? UpdateStatusViewController {
                     updateStatusViewController.orderId = self.order.orderId!.stringValue
                 }

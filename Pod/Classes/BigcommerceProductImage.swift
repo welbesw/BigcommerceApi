@@ -8,28 +8,28 @@
 
 import Foundation
 
-public class BigcommerceProductImage: NSObject {
-    public var productImageId:NSNumber?
-    public var productId:NSNumber?
+open class BigcommerceProductImage: NSObject {
+    open var productImageId:NSNumber?
+    open var productId:NSNumber?
     
-    public var imageFile:String?
-    public var zoomUrl:String?
-    public var thumbnailUrl:String?
-    public var standardUrl:String?
-    public var tinyUrl:String?
+    open var imageFile:String?
+    open var zoomUrl:String?
+    open var thumbnailUrl:String?
+    open var standardUrl:String?
+    open var tinyUrl:String?
     
-    public var isThumbnail:Bool = false
+    open var isThumbnail:Bool = false
     
-    public var sortOrder:NSNumber = 0
-    public var imageDescription:String?
+    open var sortOrder:NSNumber = 0
+    open var imageDescription:String?
     
-    public var dateCreated:NSDate?
-    public var dateModified:NSDate?
+    open var dateCreated:Date?
+    open var dateModified:Date?
     
     public init(jsonDictionary:NSDictionary) {
         //Load the JSON dictionary into the object
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, d MMM yyyy HH:mm:ss zzz"
         
         if let id = jsonDictionary["id"] as? NSNumber {
@@ -61,7 +61,7 @@ public class BigcommerceProductImage: NSObject {
         }
         
         if let numberValue = jsonDictionary["sort_order"] as? NSNumber {
-            self.sortOrder = numberValue.boolValue
+            self.sortOrder = numberValue.boolValue as NSNumber
         }
         
         if let stringValue = jsonDictionary["description"] as? String {
@@ -69,13 +69,13 @@ public class BigcommerceProductImage: NSObject {
         }
         
         if let dateString = jsonDictionary["date_created"] as? String {
-            if let date = dateFormatter.dateFromString(dateString) {
+            if let date = dateFormatter.date(from: dateString) {
                 dateCreated = date
             }
         }
         
         if let dateString = jsonDictionary["date_modified"] as? String {
-            if let date = dateFormatter.dateFromString(dateString) {
+            if let date = dateFormatter.date(from: dateString) {
                 dateModified = date
             }
         }

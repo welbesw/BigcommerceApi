@@ -19,7 +19,7 @@ class OrdersViewController: UITableViewController {
         //Check if the API credentials have been set and present the view controller if they have note been set
         let defaultsManager = DefaultsManager.sharedInstance
         if !defaultsManager.apiCredentialsAreSet {
-            self.performSegueWithIdentifier("ModalCredentialsSegue", sender: nil)
+            self.performSegue(withIdentifier: "ModalCredentialsSegue", sender: nil)
         } else {
             //Set the API credentials
             BigcommerceApi.sharedInstance.setCredentials(defaultsManager.apiUsername!, token: defaultsManager.apiToken!, storeBaseUrl: defaultsManager.apiStoreBaseUrl!)
@@ -35,7 +35,7 @@ class OrdersViewController: UITableViewController {
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         reloadOrders()
@@ -51,10 +51,10 @@ class OrdersViewController: UITableViewController {
             BigcommerceApi.sharedInstance.getOrdersWithStatus(orderStatusId, completion: { (orders, error) -> () in
                 //Check for an error and load the orders
                 if(error == nil) {
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    DispatchQueue.main.async {
                         self.orders = orders
                         self.tableView.reloadData()
-                    })
+                    }
                 } else {
                     print("Error loading orders: \(error!.localizedDescription)")
                 }
@@ -65,10 +65,10 @@ class OrdersViewController: UITableViewController {
             BigcommerceApi.sharedInstance.getOrdersMostRecent({ (orders, error) -> () in
                 //Check for an error and load the orders
                 if(error == nil) {
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    DispatchQueue.main.async {
                         self.orders = orders
                         self.tableView.reloadData()
-                    })
+                    }
                 } else {
                     print("Error loading orders: \(error!.localizedDescription)")
                 }
@@ -78,19 +78,19 @@ class OrdersViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // Return the number of sections.
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
         return orders.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("orderCell", forIndexPath: indexPath) 
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "orderCell", for: indexPath) 
 
         // Configure the cell...
         let order = orders[indexPath.row]
@@ -107,12 +107,12 @@ class OrdersViewController: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
         
         if segue.identifier == "OrderDetailsSegue" {
-            if let orderDetailsViewController = segue.destinationViewController as? OrderDetailsViewController {
+            if let orderDetailsViewController = segue.destination as? OrderDetailsViewController {
                 //get the selected row
                 if let selectedIndex = self.tableView.indexPathForSelectedRow {
                     let order = self.orders[selectedIndex.row]

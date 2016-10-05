@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "BigcommerceApi"
-  s.version          = "0.6.8"
+  s.version          = "1.0.0"
   s.summary          = "A simple Swift library to access the Bigcommerce Stores API."
   s.description      = <<-DESC
                        A simple Swift library for the Bigcommerce Stores API
@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/welbesw/BigcommerceApi.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/welbes'
 
-  s.platform     = :ios, '8.0'
+  s.platform     = :ios, '9.0'
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
@@ -34,5 +34,5 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'Foundation'
-  s.dependency 'Alamofire', '~> 3.0'
+  s.dependency 'Alamofire', '~> 4.0'
 end

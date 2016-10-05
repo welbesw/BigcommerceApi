@@ -8,65 +8,65 @@
 
 import Foundation
 
-public class BigcommerceProduct: NSObject {
-    public var productId: NSNumber?
+open class BigcommerceProduct: NSObject {
+    open var productId: NSNumber?
 
-    public var name:String = ""
-    public var type:String = ""
-    public var sku:String = ""
-    public var productDescription:String = ""
+    open var name:String = ""
+    open var type:String = ""
+    open var sku:String = ""
+    open var productDescription:String = ""
     
-    public var availabilityDescription:String = ""
+    open var availabilityDescription:String = ""
     
-    public var price:NSNumber = 0
-    public var costPrice:NSNumber?
-    public var retailPrice:NSNumber?
-    public var salePrice:NSNumber?
-    public var calculatedPrice:NSNumber = 0
+    open var price:NSNumber = 0
+    open var costPrice:NSNumber?
+    open var retailPrice:NSNumber?
+    open var salePrice:NSNumber?
+    open var calculatedPrice:NSNumber = 0
     
-    public var sortOrder:NSNumber = 0
+    open var sortOrder:NSNumber = 0
     
-    public var isVisiable:NSNumber?
-    public var isFeatured:NSNumber?
+    open var isVisiable:NSNumber?
+    open var isFeatured:NSNumber?
     
-    public var inventoryLevel:NSNumber?
-    public var inventoryWarningLevel:NSNumber?
+    open var inventoryLevel:NSNumber?
+    open var inventoryWarningLevel:NSNumber?
     
-    public var weight:NSNumber?
-    public var width:NSNumber?
-    public var height:NSNumber?
-    public var depth:NSNumber?
+    open var weight:NSNumber?
+    open var width:NSNumber?
+    open var height:NSNumber?
+    open var depth:NSNumber?
     
-    public var fixedCostShippingPrice:NSNumber = 0
-    public var isFreeShipping:NSNumber = false
+    open var fixedCostShippingPrice:NSNumber = 0
+    open var isFreeShipping:NSNumber = false
     
-    public var inventoryTracking:String = ""
-    public var totalSold:NSNumber?
+    open var inventoryTracking:String = ""
+    open var totalSold:NSNumber?
     
-    public var dateCreated:NSDate?
-    public var dateModified:NSDate?
+    open var dateCreated:Date?
+    open var dateModified:Date?
     
-    public var condition:String = ""
+    open var condition:String = ""
     
-    public var imageThumbnailUrl:String?
-    public var availability:String = ""
+    open var imageThumbnailUrl:String?
+    open var availability:String = ""
     
     public init(jsonDictionary:NSDictionary, currencyCode:String) {
         //Load the JSON dictionary into the order object
         
         //Float values are returned as quote enclosed strings in the JSON from the API
-        let numberFormatter = NSNumberFormatter()
-        numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = NumberFormatter.Style.decimal
         
-        var components = [NSLocaleCurrencyCode : currencyCode]
-        if let language = NSLocale.preferredLanguages().first {
-            components.updateValue(NSLocaleLanguageCode, forKey: language)
+        var components:[String : String] = [NSLocale.Key.currencyCode.rawValue : currencyCode]
+        if let language = Locale.preferredLanguages.first {
+            components.updateValue(language, forKey: NSLocale.Key.languageCode.rawValue)
         }
-        let localeIdentifier = NSLocale.localeIdentifierFromComponents(components)
-        let localeForCurrency = NSLocale(localeIdentifier: localeIdentifier);
+        let localeIdentifier = Locale.identifier(fromComponents: components)
+        let localeForCurrency = Locale(identifier: localeIdentifier);
         numberFormatter.locale = localeForCurrency
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, d MMM yyyy HH:mm:ss zzz"
         
         if let id = jsonDictionary["id"] as? NSNumber {
@@ -94,13 +94,13 @@ public class BigcommerceProduct: NSObject {
         }
         
         if let stringValue = jsonDictionary["price"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 price = numberValue
             }
         }
         
         if let stringValue = jsonDictionary["cost_price"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 if numberValue.floatValue > 0.0 {
                     costPrice = numberValue
                 }
@@ -108,7 +108,7 @@ public class BigcommerceProduct: NSObject {
         }
         
         if let stringValue = jsonDictionary["retail_price"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 if numberValue.floatValue > 0.0 {
                     retailPrice = numberValue
                 }
@@ -116,7 +116,7 @@ public class BigcommerceProduct: NSObject {
         }
         
         if let stringValue = jsonDictionary["sale_price"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 if numberValue.floatValue > 0.0 {
                     salePrice = numberValue
                 }
@@ -124,7 +124,7 @@ public class BigcommerceProduct: NSObject {
         }
         
         if let stringValue = jsonDictionary["calculated_price"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 calculatedPrice = numberValue
             }
         }
@@ -166,7 +166,7 @@ public class BigcommerceProduct: NSObject {
         }
 
         if let stringValue = jsonDictionary["fixed_cost_shipping_price"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 fixedCostShippingPrice = numberValue
             }
         }
@@ -184,13 +184,13 @@ public class BigcommerceProduct: NSObject {
         }
         
         if let dateString = jsonDictionary["date_created"] as? String {
-            if let date = dateFormatter.dateFromString(dateString) {
+            if let date = dateFormatter.date(from: dateString) {
                 dateCreated = date
             }
         }
         
         if let dateString = jsonDictionary["date_modified"] as? String {
-            if let date = dateFormatter.dateFromString(dateString) {
+            if let date = dateFormatter.date(from: dateString) {
                 dateModified = date
             }
         }
@@ -210,7 +210,7 @@ public class BigcommerceProduct: NSObject {
         }
     }
     
-    public override var description: String {
+    open override var description: String {
         //let mirror = Mirror(reflecting: self)
         
         let productIdString = self.productId != nil ? self.productId!.stringValue : ""

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3BC7E263A063B6EA84482DCE /* Pods_BigcommerceApi_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF26A935BEE949BE4B1FA8CF /* Pods_BigcommerceApi_Example.framework */; };
+		3A9A7DD8A758C9253DEA990F /* Pods_BigcommerceApi_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 997D8D9BA50468334363465A /* Pods_BigcommerceApi_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
@@ -26,7 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5188EA807D6BDF832CA7D721 /* Pods-BigcommerceApi_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigcommerceApi_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigcommerceApi_Tests/Pods-BigcommerceApi_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		19D1BC2BD201C73F8669052A /* Pods-BigcommerceApi_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigcommerceApi_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-BigcommerceApi_Example/Pods-BigcommerceApi_Example.release.xcconfig"; sourceTree = "<group>"; };
+		2A88BAB366C50BC13FC0F532 /* Pods-BigcommerceApi_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigcommerceApi_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigcommerceApi_Example/Pods-BigcommerceApi_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* BigcommerceApi_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigcommerceApi_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -35,8 +36,7 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		64D7DD681AAF761B87D53003 /* BigcommerceApi.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = BigcommerceApi.podspec; path = ../BigcommerceApi.podspec; sourceTree = "<group>"; };
 		6EAF3FE36A784E8D2F1F67E4 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		752185D8273C27F64E4F7599 /* Pods-BigcommerceApi_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigcommerceApi_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-BigcommerceApi_Example/Pods-BigcommerceApi_Example.release.xcconfig"; sourceTree = "<group>"; };
-		A7457ADC3E457DF754ABF4AF /* Pods-BigcommerceApi_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigcommerceApi_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BigcommerceApi_Tests/Pods-BigcommerceApi_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		997D8D9BA50468334363465A /* Pods_BigcommerceApi_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BigcommerceApi_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1D74E11B7AA02A008509BE /* OrderStatusesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderStatusesViewController.swift; sourceTree = "<group>"; };
 		BE297D311B4C74B1007A7E0E /* CredentialsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialsViewController.swift; sourceTree = "<group>"; };
 		BE75BA4E1BBC4956004B9EC7 /* UpdateStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateStatusViewController.swift; sourceTree = "<group>"; };
@@ -48,10 +48,7 @@
 		BEE7DFD11B4DC0F000FAEAAE /* OrderDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailsViewController.swift; sourceTree = "<group>"; };
 		BEF002A31B4C86E700975E0C /* DefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsManager.swift; sourceTree = "<group>"; };
 		BEF002A51B4C88EB00975E0C /* OrdersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
-		CF26A935BEE949BE4B1FA8CF /* Pods_BigcommerceApi_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BigcommerceApi_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D7FA8445AC4482388B8EFE0B /* Pods-BigcommerceApi_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BigcommerceApi_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BigcommerceApi_Example/Pods-BigcommerceApi_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		E0829B7781E39AD781A6AF7B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		EF0ADA600A26321B133688DF /* Pods_BigcommerceApi_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BigcommerceApi_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,30 +56,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3BC7E263A063B6EA84482DCE /* Pods_BigcommerceApi_Example.framework in Frameworks */,
+				3A9A7DD8A758C9253DEA990F /* Pods_BigcommerceApi_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4A592DF0FC5E954D4D2E72BF /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				CF26A935BEE949BE4B1FA8CF /* Pods_BigcommerceApi_Example.framework */,
-				EF0ADA600A26321B133688DF /* Pods_BigcommerceApi_Tests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for BigcommerceApi */,
 				607FACD11AFB9204008FA782 /* Products */,
-				96EF24A76A324936447AFC74 /* Pods */,
-				4A592DF0FC5E954D4D2E72BF /* Frameworks */,
+				A3481F92F679EE826089FEAB /* Pods */,
+				80897228CA5A43EB1F55C4DF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,13 +124,19 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		96EF24A76A324936447AFC74 /* Pods */ = {
+		80897228CA5A43EB1F55C4DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D7FA8445AC4482388B8EFE0B /* Pods-BigcommerceApi_Example.debug.xcconfig */,
-				752185D8273C27F64E4F7599 /* Pods-BigcommerceApi_Example.release.xcconfig */,
-				5188EA807D6BDF832CA7D721 /* Pods-BigcommerceApi_Tests.debug.xcconfig */,
-				A7457ADC3E457DF754ABF4AF /* Pods-BigcommerceApi_Tests.release.xcconfig */,
+				997D8D9BA50468334363465A /* Pods_BigcommerceApi_Example.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A3481F92F679EE826089FEAB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2A88BAB366C50BC13FC0F532 /* Pods-BigcommerceApi_Example.debug.xcconfig */,
+				19D1BC2BD201C73F8669052A /* Pods-BigcommerceApi_Example.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -154,12 +148,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "BigcommerceApi_Example" */;
 			buildPhases = (
-				64BCD90BB7F01895548035A8 /* Check Pods Manifest.lock */,
+				70DE55277DEA66A5A7AC0CB4 /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				66552A56B04C09F310F54C1F /* Embed Pods Frameworks */,
-				47A53E2CC33B0E77DB0E98C1 /* Copy Pods Resources */,
+				D079358C41A69ED7472826DE /* [CP] Embed Pods Frameworks */,
+				796E4B648FBE477E2DC75793 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -178,11 +172,12 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -218,14 +213,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		47A53E2CC33B0E77DB0E98C1 /* Copy Pods Resources */ = {
+		70DE55277DEA66A5A7AC0CB4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		796E4B648FBE477E2DC75793 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,29 +243,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BigcommerceApi_Example/Pods-BigcommerceApi_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		64BCD90BB7F01895548035A8 /* Check Pods Manifest.lock */ = {
+		D079358C41A69ED7472826DE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		66552A56B04C09F310F54C1F /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,8 +315,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -344,7 +341,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -365,8 +362,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -382,36 +381,41 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D7FA8445AC4482388B8EFE0B /* Pods-BigcommerceApi_Example.debug.xcconfig */;
+			baseConfigurationReference = 2A88BAB366C50BC13FC0F532 /* Pods-BigcommerceApi_Example.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BigcommerceApi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 752185D8273C27F64E4F7599 /* Pods-BigcommerceApi_Example.release.xcconfig */;
+			baseConfigurationReference = 19D1BC2BD201C73F8669052A /* Pods-BigcommerceApi_Example.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = BigcommerceApi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

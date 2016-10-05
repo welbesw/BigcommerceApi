@@ -8,28 +8,28 @@
 
 import Foundation
 
-public class BigcommerceCustomerAddress: NSObject {
-    public var customerAddressId: NSNumber?
-    public var customerId:NSNumber?
+open class BigcommerceCustomerAddress: NSObject {
+    open var customerAddressId: NSNumber?
+    open var customerId:NSNumber?
     
-    public var firstName:String = ""
-    public var lastName:String = ""
-    public var company:String = ""
+    open var firstName:String = ""
+    open var lastName:String = ""
+    open var company:String = ""
     
-    public var street1: String = ""
-    public var street2: String = ""
-    public var city: String = ""
-    public var state: String = ""
-    public var zip: String = ""
-    public var country: String = ""
-    public var countryISO2: String = ""
+    open var street1: String = ""
+    open var street2: String = ""
+    open var city: String = ""
+    open var state: String = ""
+    open var zip: String = ""
+    open var country: String = ""
+    open var countryISO2: String = ""
     
-    public var phone:String = ""
+    open var phone:String = ""
     
     public init(jsonDictionary:NSDictionary) {
         //Load the JSON dictionary into the order object
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, d MMM yyyy HH:mm:ss zzz"
         
         if let id = jsonDictionary["id"] as? NSNumber {
@@ -85,7 +85,7 @@ public class BigcommerceCustomerAddress: NSObject {
         }
     }
     
-    public override var description: String {
+    open override var description: String {
         //let mirror = Mirror(reflecting: self)
         
         let customerAddressIdString = self.customerAddressId != nil ? self.customerAddressId!.stringValue : ""

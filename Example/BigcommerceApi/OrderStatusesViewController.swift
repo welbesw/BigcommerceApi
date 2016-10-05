@@ -19,13 +19,15 @@ class OrderStatusesViewController: UITableViewController {
         //Load the order statuses from the API
         BigcommerceApi.sharedInstance.getOrderStatuses { (orderStatuses, error) -> () in
             if(error == nil) {
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                DispatchQueue.main.async {
                     self.orderStatuses = orderStatuses
                     self.tableView.reloadData()
-                })
+                }
             } else {
-                let alert = UIAlertView(title: "Error", message: "Error loading statuses: \(error!.localizedDescription)", delegate: nil, cancelButtonTitle: "Ok")
-                alert.show()
+                
+                let alertController = UIAlertController(title: "Error", message: "Error loading statuses: \(error!.localizedDescription)", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
             }
         }
     }
@@ -35,28 +37,28 @@ class OrderStatusesViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func didTapDoneButton(sender: AnyObject?) {
+    @IBAction func didTapDoneButton(_ sender: AnyObject?) {
         
         DefaultsManager.sharedInstance.orderStatusIdFilter = nil
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // Return the number of sections.
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
         return self.orderStatuses.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("orderStatusCell", forIndexPath: indexPath) 
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "orderStatusCell", for: indexPath) 
 
         // Configure the cell...
         let orderStatus = self.orderStatuses[indexPath.row]
@@ -66,15 +68,15 @@ class OrderStatusesViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //Use the selected row as the status filter
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         let orderStatus = self.orderStatuses[indexPath.row]
         
         DefaultsManager.sharedInstance.orderStatusIdFilter = orderStatus.id
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
     /*

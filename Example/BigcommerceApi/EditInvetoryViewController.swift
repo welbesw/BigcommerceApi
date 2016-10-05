@@ -39,11 +39,11 @@ class EditInvetoryViewController: UIViewController {
                 if let productIdString = self.product.productId?.stringValue {
                     if let inventoryTrackingType = InventoryTrackingType(rawValue: self.product.inventoryTracking) {
                         BigcommerceApi.sharedInstance.updateProductInventory(productIdString, trackInventory: inventoryTrackingType, newInventoryLevel: newLevel, newLowLevel: nil, completion: { (error) -> () in
-                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            DispatchQueue.main.async(execute: { () -> Void in
                                 //Handle error
                                 if(error == nil) {
-                                    self.product.inventoryLevel = NSNumber(integer: newLevel)
-                                    self.dismissViewControllerAnimated(true, completion: nil)
+                                    self.product.inventoryLevel = NSNumber(value: newLevel)
+                                    self.dismiss(animated: true, completion: nil)
                                 } else {
                                     print("Error updating inventory level: \(error!.localizedDescription)")
                                 }
@@ -58,7 +58,7 @@ class EditInvetoryViewController: UIViewController {
     }
     
     @IBAction func didTapCancelButton() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
     /*

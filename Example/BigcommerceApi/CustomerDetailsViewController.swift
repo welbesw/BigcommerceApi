@@ -9,25 +9,25 @@
 import UIKit
 import BigcommerceApi
 
-public class CustomerDetailsViewController: UIViewController {
+open class CustomerDetailsViewController: UIViewController {
 
     @IBOutlet weak var textView:UITextView!
     
-    public var customer:BigcommerceCustomer!
+    open var customer:BigcommerceCustomer!
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         loadCustomerAddresses()
     }
 
-    override public func didReceiveMemoryWarning() {
+    override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    public override func viewWillAppear(animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.textView.text = customer.description
@@ -37,7 +37,7 @@ public class CustomerDetailsViewController: UIViewController {
         if let customerId = self.customer.customerId {
             BigcommerceApi.sharedInstance.getCustomerAddresses(customerId.stringValue, completion: { (customerAddresses, error) -> () in
                 //Added the addresses into the description
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                DispatchQueue.main.async(execute: { () -> Void in
                     for address in customerAddresses {
                         self.textView.text = self.textView.text + "\n" + address.description
                     }

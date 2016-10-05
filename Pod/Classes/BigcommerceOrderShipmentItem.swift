@@ -8,10 +8,10 @@
 
 import Foundation
 
-public class BigcommerceOrderShipmentItem: NSObject {
-    public var orderProductId: NSNumber?
-    public var productId:NSNumber?
-    public var quantity:NSNumber?
+open class BigcommerceOrderShipmentItem: NSObject {
+    open var orderProductId: NSNumber?
+    open var productId:NSNumber?
+    open var quantity:NSNumber?
     
     
     public init(jsonDictionary:NSDictionary) {

@@ -8,43 +8,43 @@
 
 import Foundation
 
-public class BigcommerceCustomer: NSObject {
-    public var customerId: NSNumber?
+open class BigcommerceCustomer: NSObject {
+    open var customerId: NSNumber?
     
-    public var company:String = ""
-    public var firstName:String = ""
-    public var lastName:String = ""
-    public var email:String = ""
-    public var phone:String = ""
+    open var company:String = ""
+    open var firstName:String = ""
+    open var lastName:String = ""
+    open var email:String = ""
+    open var phone:String = ""
     
-    public var storeCredit:NSNumber = 0.0
-    public var registrationIpAddress:String = ""
-    public var customerGroupId:NSNumber?
+    open var storeCredit:NSNumber = 0.0
+    open var registrationIpAddress:String = ""
+    open var customerGroupId:NSNumber?
     
-    public var notes = ""
-    public var taxExemptCategory = ""
+    open var notes = ""
+    open var taxExemptCategory = ""
     
-    public var dateCreated:NSDate?
-    public var dateModified:NSDate?
+    open var dateCreated:Date?
+    open var dateModified:Date?
     
-    public var addresses:[BigcommerceCustomerAddress] = []
+    open var addresses:[BigcommerceCustomerAddress] = []
     
     public init(jsonDictionary:NSDictionary) {
         //Load the JSON dictionary into the order object
         
         //Float values are returned as quote enclosed strings in the JSON from the API
-        let numberFormatter = NSNumberFormatter()
-        numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = NumberFormatter.Style.decimal
         
-        var components = [NSLocaleCurrencyCode : "USD"] //Assume USD
-        if let language = NSLocale.preferredLanguages().first {
-            components.updateValue(NSLocaleLanguageCode, forKey: language)
+        var components:[String : String] = [NSLocale.Key.currencyCode.rawValue : "USD"] //Assume USD
+        if let language = Locale.preferredLanguages.first {
+            components.updateValue(language, forKey: NSLocale.Key.languageCode.rawValue)
         }
-        let localeIdentifier = NSLocale.localeIdentifierFromComponents(components)
-        let localeForCurrency = NSLocale(localeIdentifier: localeIdentifier);
+        let localeIdentifier = Locale.identifier(fromComponents: components)
+        let localeForCurrency = Locale(identifier: localeIdentifier);
         numberFormatter.locale = localeForCurrency
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, d MMM yyyy HH:mm:ss zzz"
         
         if let id = jsonDictionary["id"] as? NSNumber {
@@ -68,7 +68,7 @@ public class BigcommerceCustomer: NSObject {
         }
         
         if let stringValue = jsonDictionary["store_credit"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 storeCredit = numberValue
             }
         }
@@ -90,19 +90,19 @@ public class BigcommerceCustomer: NSObject {
         }
         
         if let dateString = jsonDictionary["date_created"] as? String {
-            if let date = dateFormatter.dateFromString(dateString) {
+            if let date = dateFormatter.date(from: dateString) {
                 dateCreated = date
             }
         }
         
         if let dateString = jsonDictionary["date_modified"] as? String {
-            if let date = dateFormatter.dateFromString(dateString) {
+            if let date = dateFormatter.date(from: dateString) {
                 dateModified = date
             }
         }
     }
     
-    public override var description: String {
+    open override var description: String {
         //let mirror = Mirror(reflecting: self)
         
         let customerIdString = self.customerId != nil ? self.customerId!.stringValue : ""

@@ -15,28 +15,23 @@ public enum InventoryTrackingType:String {
     case Sku = "sku"
 }
 
-public class BigcommerceApi: NSObject {
+open class BigcommerceApi: NSObject {
+    
+    //Define a shared instance method to return a singleton of the API manager
+    public static var sharedInstance = BigcommerceApi()
     
     var apiUsername = ""            //Pass in via setCredentials
     var apiToken = ""               //Pass in via setCredentials
     var apiStoreBaseUrl = ""        //Pass in via setCredentials
     
-    public var currencyCode = "USD"        //Default to US dollars - retrieve via getStore method
-    public var currencyLocale:NSLocale?
+    open var currencyCode = "USD"        //Default to US dollars - retrieve via getStore method
+    open var currencyLocale:Locale?
     
-    var alamofireManager: Alamofire.Manager!
+    let headers: HTTPHeaders = [
+        "Accept": "application/json"
+    ]
     
-    //Define a shared instance method to return a singleton of the API manager
-    public class var sharedInstance : BigcommerceApi {
-        struct Static {
-            static var onceToken : dispatch_once_t = 0
-            static var instance : BigcommerceApi? = nil
-        }
-        dispatch_once(&Static.onceToken) {
-            Static.instance = BigcommerceApi()
-        }
-        return Static.instance!
-    }
+    var alamofireManager: Alamofire.SessionManager!
     
     override init() {
         super.init()
@@ -53,40 +48,41 @@ public class BigcommerceApi: NSObject {
     }
     
     func initializeAlamofire() {
-        var defaultHeaders = Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders ?? [:]
-        defaultHeaders["Accept"] = "application/json"
         
-        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-        configuration.HTTPAdditionalHeaders = defaultHeaders
+        //var defaultHeaders = Alamofire.SessionManager.default.defaultHeaders
+        //defaultHeaders["Accept"] = "application/json"
         
-        self.alamofireManager = Alamofire.Manager(configuration: configuration)
+        //let configuration = URLSessionConfiguration.default
+        //configuration.httpAdditionalHeaders = defaultHeaders
+        
+        self.alamofireManager = Alamofire.SessionManager.default
     }
     
     //Set the credentials to use with the API
-    public func setCredentials(username: String, token: String, storeBaseUrl: String) {
+    open func setCredentials(_ username: String, token: String, storeBaseUrl: String) {
         self.apiUsername = username
         self.apiToken = token
         self.apiStoreBaseUrl = storeBaseUrl
     }
     
-    public func updateCurrencyLocale(code:String) {
+    open func updateCurrencyLocale(_ code:String) {
         currencyCode = code
         
-        var components = [NSLocaleCurrencyCode : currencyCode]
-        if let language = NSLocale.preferredLanguages().first {
-            components.updateValue(NSLocaleLanguageCode, forKey: language)
+        var components:[String : String] = [NSLocale.Key.currencyCode.rawValue : currencyCode]
+        if let language = Locale.preferredLanguages.first {
+            components.updateValue(language, forKey:NSLocale.Key.languageCode.rawValue)
         }
-        let localeIdentifier = NSLocale.localeIdentifierFromComponents(components)
-        currencyLocale = NSLocale(localeIdentifier: localeIdentifier);
+        let localeIdentifier = Locale.identifier(fromComponents: components)
+        currencyLocale = Locale(identifier: localeIdentifier)
     }
     
-    func checkForErrorResponse(response:Response<AnyObject, NSError>) -> NSError? {
+    func checkForErrorResponse(_ response:DataResponse<Any>) -> NSError? {
         var error:NSError?
         if let theResponse = response.response {
             if(theResponse.statusCode >= 400) {
                 print("Server returned an error status code of: \(theResponse.statusCode)")
                 
-                var userInfo:[String : AnyObject] = [NSLocalizedDescriptionKey : "Error code \(theResponse.statusCode) from the web service."]
+                var userInfo:[String : Any] = [NSLocalizedDescriptionKey : "Error code \(theResponse.statusCode) from the web service."]
                 
                 if let resultArray = response.result.value as? NSArray {
                     if(resultArray.count > 0) {
@@ -104,19 +100,19 @@ public class BigcommerceApi: NSObject {
         return error
     }
     
-    public func getOrdersForCustomer(customerId:String, completion: (orders:[BigcommerceOrder], error: NSError?) -> ()) {
+    open func getOrdersForCustomer(_ customerId:String, completion: @escaping (_ orders:[BigcommerceOrder], _ error: NSError?) -> ()) {
         
         let parameters = ["sort" : "date_created:desc", "limit": "50", "customer_id" : customerId]
         getOrders(parameters, completion: completion)
     }
     
-    public func getOrdersMostRecent(completion: (orders:[BigcommerceOrder], error: NSError?) -> ()) {
+    open func getOrdersMostRecent(_ completion: @escaping (_ orders:[BigcommerceOrder], _ error: NSError?) -> ()) {
         
         let parameters = ["sort" : "date_created:desc", "limit": "50"]
         getOrders(parameters, completion: completion)
     }
     
-    public func getOrdersMostRecent(page page:Int?, limit:Int?, completion: (orders:[BigcommerceOrder], error: NSError?) -> ()) {
+    open func getOrdersMostRecent(page:Int?, limit:Int?, completion: @escaping (_ orders:[BigcommerceOrder], _ error: NSError?) -> ()) {
         
         var parameters = ["sort" : "date_created:desc"]
         if let pageNum = page {
@@ -128,13 +124,13 @@ public class BigcommerceApi: NSObject {
         getOrders(parameters, completion: completion)
     }
     
-    public func getOrdersWithStatus(statusId:Int, completion: (orders:[BigcommerceOrder], error: NSError?) -> ()) {
+    open func getOrdersWithStatus(_ statusId:Int, completion: @escaping (_ orders:[BigcommerceOrder], _ error: NSError?) -> ()) {
         
         let parameters = ["sort" : "date_created:desc", "limit": "50", "status_id" : String(statusId)]
         getOrders(parameters, completion: completion)
     }
     
-    public func getOrdersWithStatus(statusId:Int, page:Int?, limit:Int?, completion: (orders:[BigcommerceOrder], error: NSError?) -> ()) {
+    open func getOrdersWithStatus(_ statusId:Int, page:Int?, limit:Int?, completion: @escaping (_ orders:[BigcommerceOrder], _ error: NSError?) -> ()) {
         
         var parameters = ["sort" : "date_created:desc", "status_id" : String(statusId)]
         
@@ -149,16 +145,16 @@ public class BigcommerceApi: NSObject {
     }
     
     //Retrieve an array of Bigcommerce order objects
-    public func getOrders(parameters:[String : String], completion: (orders:[BigcommerceOrder], error: NSError?) -> ()) {
+    open func getOrders(_ parameters:[String : String], completion: @escaping (_ orders:[BigcommerceOrder], _ error: NSError?) -> ()) {
         
-        alamofireManager.request(.GET, apiStoreBaseUrl + "orders", parameters:parameters)
+        alamofireManager.request(apiStoreBaseUrl + "orders", method: .get, parameters:parameters, headers:headers)
             .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
                     
                     if let responseError = self.checkForErrorResponse(response) {
-                        completion(orders: [], error: responseError)
+                        completion([], responseError)
                     } else {
                     
                         var orders: [BigcommerceOrder] = []
@@ -173,27 +169,27 @@ public class BigcommerceApi: NSObject {
                             }
                         }
                         
-                        completion(orders: orders, error: nil)
+                        completion(orders, nil)
                     }
                     
                     
                 } else {
                     print(response.result.error)
-                    completion(orders: [], error: response.result.error)
+                    completion([], response.result.error as NSError?)
                 }
         }
     }
     
-    public func getOrder(orderId orderId: String, completion: (order:BigcommerceOrder?, error: NSError?) -> ()) {
+    open func getOrder(orderId: String, completion: @escaping (_ order:BigcommerceOrder?, _ error: NSError?) -> ()) {
         
-        alamofireManager.request(.GET, apiStoreBaseUrl + "orders/\(orderId)", parameters:nil)
+        alamofireManager.request(apiStoreBaseUrl + "orders/\(orderId)", method: .get, headers:headers)
             .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
                     
                     if let responseError = self.checkForErrorResponse(response) {
-                        completion(order: nil, error: responseError)
+                        completion(nil, responseError)
                     } else {
                     
                         var order:BigcommerceOrder? = nil
@@ -202,102 +198,102 @@ public class BigcommerceApi: NSObject {
                             order = BigcommerceOrder(jsonDictionary: orderDict)
                         }
                         
-                        completion(order: order, error: nil)
+                        completion(order, nil)
                     }
                     
                     
                 } else {
                     print(response.result.error)
-                    completion(order: nil, error: response.result.error)
+                    completion(nil, response.result.error as NSError?)
                 }
         }
     }
     
-    public func updateOrderStatus(orderId:String, newStatusId:Int, completion: (error: NSError?) -> ()) {
+    open func updateOrderStatus(_ orderId:String, newStatusId:Int, completion: @escaping (_ error: NSError?) -> ()) {
         
         let parameters = ["status_id" : newStatusId]
         
-        alamofireManager.request(.PUT, apiStoreBaseUrl + "orders/\(orderId)", parameters:parameters, encoding:.JSON)
+        alamofireManager.request(apiStoreBaseUrl + "orders/\(orderId)", method: .put, parameters: parameters, encoding: JSONEncoding.default, headers:headers)
             .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
                     
                     if let responseError = self.checkForErrorResponse(response) {
-                        completion(error: responseError)
+                        completion(responseError)
                     } else {
-                        completion(error: nil)
+                        completion(nil)
                     }
                     
                     
                 } else {
                     print(response.result.error)
-                    completion(error: response.result.error)
+                    completion(response.result.error as NSError?)
                 }
         }
     }
     
-    public func updateOrderStaffNotes(orderId:String, staffNotes:String, completion: (error: NSError?) -> ()) {
+    open func updateOrderStaffNotes(_ orderId:String, staffNotes:String, completion: @escaping (_ error: NSError?) -> ()) {
         
         let parameters = ["staff_notes" : staffNotes]
         
-        alamofireManager.request(.PUT, apiStoreBaseUrl + "orders/\(orderId)", parameters:parameters, encoding:.JSON)
+        alamofireManager.request(apiStoreBaseUrl + "orders/\(orderId)", method: .put, parameters: parameters, encoding: JSONEncoding.default, headers:headers)
             .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
                     
                     if let responseError = self.checkForErrorResponse(response) {
-                        completion(error: responseError)
+                        completion(responseError)
                     } else {
-                        completion(error: nil)
+                        completion(nil)
                     }
                     
                     
                 } else {
                     print(response.result.error)
-                    completion(error: response.result.error)
+                    completion(response.result.error as NSError?)
                 }
         }
     }
     
-    public func updateOrderCustomerMessage(orderId:String, customerMessage:String, completion: (error: NSError?) -> ()) {
+    open func updateOrderCustomerMessage(_ orderId:String, customerMessage:String, completion: @escaping (_ error: NSError?) -> ()) {
         
         let parameters = ["customer_message" : customerMessage]
         
-        alamofireManager.request(.PUT, apiStoreBaseUrl + "orders/\(orderId)", parameters:parameters, encoding:.JSON)
+        alamofireManager.request(apiStoreBaseUrl + "orders/\(orderId)", method:.put, parameters:parameters, encoding:JSONEncoding.default, headers:headers)
             .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
                     
                     if let responseError = self.checkForErrorResponse(response) {
-                        completion(error: responseError)
+                        completion(responseError)
                     } else {
-                        completion(error: nil)
+                        completion(nil)
                     }
                     
                     
                 } else {
                     print(response.result.error)
-                    completion(error: response.result.error)
+                    completion(response.result.error as NSError?)
                 }
         }
     }
     
-    public func getProductsForOrder(order:BigcommerceOrder, completion: (orderProducts:[BigcommerceOrderProduct], error: NSError?) -> ()) {
+    open func getProductsForOrder(_ order:BigcommerceOrder, completion: @escaping (_ orderProducts:[BigcommerceOrderProduct], _ error: NSError?) -> ()) {
         //Use the resource specified in the order to fetch the products
         
         if order.productsUrl.characters.count > 0 {
         
-            alamofireManager.request(.GET, order.productsUrl, parameters:nil)
+            alamofireManager.request(order.productsUrl, method: .get, headers:headers)
                 .authenticate(user: apiUsername, password: apiToken)
                 .responseJSON { response in
                     
                     if(response.result.isSuccess) {
                         
                         if let responseError = self.checkForErrorResponse(response) {
-                            completion(orderProducts: [], error: responseError)
+                            completion([], responseError)
                         } else {
                         
                             var orderProducts: [BigcommerceOrderProduct] = []
@@ -312,34 +308,34 @@ public class BigcommerceApi: NSObject {
                                 }
                             }
                             
-                            completion(orderProducts: orderProducts, error: nil)
+                            completion(orderProducts, nil)
                         }
                         
                         
                     } else {
                         print(response.result.error)
-                        completion(orderProducts: [], error: response.result.error)
+                        completion([], response.result.error as NSError?)
                     }
             }
         } else {
             let error = NSError(domain: "com.technomagination.BigcommerceApi", code: 1, userInfo: nil)
-            completion(orderProducts: [], error: error)
+            completion([], error)
         }
     }
     
-    public func getShippingAddressesForOrder(order:BigcommerceOrder, completion: (orderShippingAddresses:[BigcommerceOrderShippingAddress], error: NSError?) -> ()) {
+    open func getShippingAddressesForOrder(_ order:BigcommerceOrder, completion: @escaping (_ orderShippingAddresses:[BigcommerceOrderShippingAddress], _ error: NSError?) -> ()) {
         //Use the resource specified in the order to fetch the products
         
         if order.shippingAddressesUrl.characters.count > 0 {
             
-            alamofireManager.request(.GET, order.shippingAddressesUrl, parameters:nil)
+            alamofireManager.request(order.shippingAddressesUrl, method: .get, headers:headers)
                 .authenticate(user: apiUsername, password: apiToken)
                 .responseJSON { response in
                     
                     if(response.result.isSuccess) {
                         
                         if let responseError = self.checkForErrorResponse(response) {
-                            completion(orderShippingAddresses: [], error: responseError)
+                            completion([], responseError)
                         } else {
                         
                             var orderShippingAddresses: [BigcommerceOrderShippingAddress] = []
@@ -354,32 +350,32 @@ public class BigcommerceApi: NSObject {
                                 }
                             }
                             
-                            completion(orderShippingAddresses: orderShippingAddresses, error: nil)
+                            completion(orderShippingAddresses, nil)
                         }
                         
                         
                     } else {
                         print(response.result.error)
-                        completion(orderShippingAddresses: [], error: response.result.error)
+                        completion([], response.result.error as NSError?)
                     }
             }
         } else {
             let error = NSError(domain: "com.technomagination.BigcommerceApi", code: 2, userInfo: nil)
-            completion(orderShippingAddresses: [], error: error)
+            completion([], error)
         }
     }
     
-    public func getShipmentsForOrder(order:BigcommerceOrder, completion: (orderShipments:[BigcommerceOrderShipment], error: NSError?) -> ()) {
+    open func getShipmentsForOrder(_ order:BigcommerceOrder, completion: @escaping (_ orderShipments:[BigcommerceOrderShipment], _ error: NSError?) -> ()) {
         
         if let orderId = order.orderId {
-            alamofireManager.request(.GET, apiStoreBaseUrl + "orders/\(orderId.stringValue)/shipments", parameters:nil)
+            alamofireManager.request(apiStoreBaseUrl + "orders/\(orderId.stringValue)/shipments", method: .get, headers:headers)
                 .authenticate(user: apiUsername, password: apiToken)
                 .responseJSON { response in
                     
                     if(response.result.isSuccess) {
                         
                         if let responseError = self.checkForErrorResponse(response) {
-                            completion(orderShipments: [], error: responseError)
+                            completion([], responseError)
                         } else {
                             
                             var orderShipments: [BigcommerceOrderShipment] = []
@@ -394,35 +390,35 @@ public class BigcommerceApi: NSObject {
                                 }
                             }
                             
-                            completion(orderShipments: orderShipments, error: nil)
+                            completion(orderShipments, nil)
                         }
                         
                         
                     } else {
                         print(response.result.error)
-                        completion(orderShipments: [], error: response.result.error)
+                        completion([], response.result.error as NSError?)
                     }
             }
         } else {
             let error = NSError(domain: "com.technomagination.BigcommerceApi", code: 3, userInfo: nil)
-            completion(orderShipments: [], error: error)
+            completion([], error)
         }
     }
     
     //Create an order shipment for an order.
-    public func createShipmentForOrder(orderShipmentRequest:BigcommerceOrderShipmentRequest, completion: (orderShipment:BigcommerceOrderShipment?, error: NSError?) -> ()) {
+    open func createShipmentForOrder(_ orderShipmentRequest:BigcommerceOrderShipmentRequest, completion: @escaping (_ orderShipment:BigcommerceOrderShipment?, _ error: NSError?) -> ()) {
         
         let parameters:[String : AnyObject] = orderShipmentRequest.jsonDictionary()
         
         
-        alamofireManager.request(.POST, apiStoreBaseUrl + "orders/\(orderShipmentRequest.orderId)/shipments/", parameters:parameters, encoding:.JSON)
+        alamofireManager.request(apiStoreBaseUrl + "orders/\(orderShipmentRequest.orderId)/shipments/", method: .post, parameters:parameters, encoding:JSONEncoding.default, headers:headers)
             .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
                     
                     if let responseError = self.checkForErrorResponse(response) {
-                        completion(orderShipment:nil, error: responseError)
+                        completion(nil, responseError)
                     } else {
                         
                         //Parse out the order shipment in the response
@@ -431,20 +427,20 @@ public class BigcommerceApi: NSObject {
                             orderShipment = BigcommerceOrderShipment(jsonDictionary: shipmentDict)
                         }
                         
-                        completion(orderShipment:orderShipment, error: nil)
+                        completion(orderShipment, nil)
                     }
                     
                     
                 } else {
                     print(response.result.error)
-                    completion(orderShipment:nil, error: response.result.error)
+                    completion(nil, response.result.error as NSError?)
                 }
         }
     }
 
     
-    public func getOrderStatuses(completion: (orderStatuses:[BigcommerceOrderStatus], error: NSError?) -> ()) {
-        alamofireManager.request(.GET, apiStoreBaseUrl + "order_statuses", parameters:nil)
+    open func getOrderStatuses(_ completion: @escaping (_ orderStatuses:[BigcommerceOrderStatus], _ error: NSError?) -> ()) {
+        alamofireManager.request(apiStoreBaseUrl + "order_statuses", method:.get, headers:headers)
             .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
@@ -453,48 +449,48 @@ public class BigcommerceApi: NSObject {
                 if(response.result.isSuccess) {
                     
                     if let responseError = self.checkForErrorResponse(response) {
-                        completion(orderStatuses: orderStatuses, error: responseError)
+                        completion(orderStatuses, responseError)
                     } else {
                     
                         if let orderStatusArray = response.result.value as? NSArray {
                             orderStatuses = self.processOrderStatusesResult(orderStatusArray)
                         }
                         
-                        completion(orderStatuses: orderStatuses, error: nil)
+                        completion(orderStatuses, nil)
                     }
                     
                     
                 } else {
                     print(response.result.error)
                     
-                    self.alamofireManager.request(.GET, self.apiStoreBaseUrl + "orderstatuses", parameters:nil)
+                    self.alamofireManager.request(self.apiStoreBaseUrl + "orderstatuses", method:.get, headers:self.headers)
                         .authenticate(user: self.apiUsername, password: self.apiToken)
                         .responseJSON { response2 in
                             
                             if(response2.result.isSuccess) {
                                 
                                 if let response2Error = self.checkForErrorResponse(response2) {
-                                    completion(orderStatuses: orderStatuses, error: response2Error)
+                                    completion(orderStatuses, response2Error)
                                 } else {
                                     
                                     if let orderStatusItemsArray = response2.result.value as? NSArray {
                                         orderStatuses = self.processOrderStatusesResult(orderStatusItemsArray)
                                     }
                                     
-                                    completion(orderStatuses: orderStatuses, error: nil)
+                                    completion(orderStatuses, nil)
                                 }
                                 
                                 
                             } else {
                                 print(response2.result.error)
-                                completion(orderStatuses: orderStatuses, error: response2.result.error)
+                                completion(orderStatuses, response2.result.error as NSError?)
                             }
                     }
                 }
         }
     }
     
-    func processOrderStatusesResult(orderStatusArray:NSArray) -> [BigcommerceOrderStatus] {
+    func processOrderStatusesResult(_ orderStatusArray:NSArray) -> [BigcommerceOrderStatus] {
         //Loop over the orders JSON object and create order objects for each one
          var orderStatuses:[BigcommerceOrderStatus] = []
         
@@ -505,31 +501,31 @@ public class BigcommerceApi: NSObject {
             }
         }
         
-        orderStatuses.sortInPlace({ $0.id < $1.id })
+        orderStatuses.sort(by: { $0.id < $1.id })
         return orderStatuses
     }
     
-    public func getProducts(completion: (products:[BigcommerceProduct], error: NSError?) -> ()) {
+    open func getProducts(_ completion: @escaping (_ products:[BigcommerceProduct], _ error: NSError?) -> ()) {
         //let parameters = ["sort" : "date_created:desc", "limit": "50"]
         getProducts(nil, completion: completion)
     }
     
-    public func getProductsWithName(name:String, completion: (products:[BigcommerceProduct], error: NSError?) -> ()) {
+    open func getProductsWithName(_ name:String, completion: @escaping (_ products:[BigcommerceProduct], _ error: NSError?) -> ()) {
         let parameters = ["name" : name]
         getProducts(parameters, page:-1, limit:50, completion: completion)
     }
     
-    public func getProductsWithSku(sku:String, completion: (products:[BigcommerceProduct], error: NSError?) -> ()) {
+    open func getProductsWithSku(_ sku:String, completion: @escaping (_ products:[BigcommerceProduct], _ error: NSError?) -> ()) {
         let parameters = ["sku" : sku]
         getProducts(parameters, page:-1, limit:50, completion: completion)
     }
     
-    public func getProductsWithKeyword(keyword:String, completion: (products:[BigcommerceProduct], error: NSError?) -> ()) {
+    open func getProductsWithKeyword(_ keyword:String, completion: @escaping (_ products:[BigcommerceProduct], _ error: NSError?) -> ()) {
         let parameters = ["keyword_filter" : keyword]
         getProducts(parameters, page:-1, limit:50, completion: completion)
     }
     
-    public func getProducts(parameters:[String : String]?, page:Int, limit:Int, completion: (products:[BigcommerceProduct], error: NSError?) -> ()) {
+    open func getProducts(_ parameters:[String : String]?, page:Int, limit:Int, completion: @escaping (_ products:[BigcommerceProduct], _ error: NSError?) -> ()) {
         var params = parameters
         if(params == nil) {
             params = [String : String]()
@@ -542,15 +538,15 @@ public class BigcommerceApi: NSObject {
         getProducts(params, completion: completion)
     }
     
-    public func getProducts(parameters:[String : String]?, completion: (products:[BigcommerceProduct], error: NSError?) -> ())  {
-        alamofireManager.request(.GET, apiStoreBaseUrl + "products", parameters:parameters)
+    open func getProducts(_ parameters:[String : String]?, completion: @escaping (_ products:[BigcommerceProduct], _ error: NSError?) -> ())  {
+        alamofireManager.request(apiStoreBaseUrl + "products", method:.get, parameters:parameters, headers:headers)
             .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
                     
                     if let responseError = self.checkForErrorResponse(response) {
-                        completion(products: [], error: responseError)
+                        completion([], responseError)
                     } else {
                     
                         var products: [BigcommerceProduct] = []
@@ -565,106 +561,106 @@ public class BigcommerceApi: NSObject {
                             }
                         }
                         
-                        completion(products: products, error: nil)
+                        completion(products, nil)
                     }
                     
                     
                 } else {
                     print(response.result.error)
-                    completion(products: [], error: response.result.error)
+                    completion([], response.result.error as NSError?)
                 }
         }
     }
     
-    public func updateProductInventory(productId:String, trackInventory:InventoryTrackingType?, newInventoryLevel:Int, newLowLevel:Int?, completion: (error: NSError?) -> ()) {
+    open func updateProductInventory(_ productId:String, trackInventory:InventoryTrackingType?, newInventoryLevel:Int, newLowLevel:Int?, completion: @escaping (_ error: NSError?) -> ()) {
         
-        var parameters:[String : AnyObject] = ["inventory_level" : newInventoryLevel]
+        var parameters:[String : AnyObject] = ["inventory_level" : newInventoryLevel as AnyObject]
         
-        if(trackInventory == .None || trackInventory == .Simple) {
-            parameters.updateValue(trackInventory!.rawValue, forKey: "inventory_tracking")
+        if(trackInventory == .none || trackInventory == .Simple) {
+            parameters.updateValue(trackInventory!.rawValue as AnyObject, forKey: "inventory_tracking")
         }
     
         if let lowLevel = newLowLevel {
-            parameters.updateValue(lowLevel, forKey: "inventory_warning_level")
+            parameters.updateValue(lowLevel as AnyObject, forKey: "inventory_warning_level")
         }
         
-        alamofireManager.request(.PUT, apiStoreBaseUrl + "products/\(productId)", parameters:parameters, encoding:.JSON)
+        alamofireManager.request(apiStoreBaseUrl + "products/\(productId)", method:.put, parameters:parameters, encoding:JSONEncoding.default, headers:headers)
             .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
                     
                     if let responseError = self.checkForErrorResponse(response) {
-                        completion(error: responseError)
+                        completion(responseError)
                     } else {
-                        completion(error: nil)
+                        completion(nil)
                     }
                     
                     
                 } else {
                     print(response.result.error)
-                    completion(error: response.result.error)
+                    completion(response.result.error as NSError?)
                 }
         }
     }
     
-    public func updateProductPricing(productId:String, price:NSNumber, costPrice:NSNumber?, retailPrice:NSNumber?, salePrice:NSNumber?, completion: (error: NSError?) -> ()) {
+    open func updateProductPricing(_ productId:String, price:NSNumber, costPrice:NSNumber?, retailPrice:NSNumber?, salePrice:NSNumber?, completion: @escaping (_ error: NSError?) -> ()) {
         
         var parameters:[String : AnyObject] = [String : AnyObject]()
         
-        parameters.updateValue(price.stringValue, forKey: "price")
+        parameters.updateValue(price.stringValue as AnyObject, forKey: "price")
         
         if let newCostPrice = costPrice {
-            parameters.updateValue(newCostPrice.stringValue, forKey: "cost_price")
+            parameters.updateValue(newCostPrice.stringValue as AnyObject, forKey: "cost_price")
         } else {
-            parameters.updateValue("", forKey: "cost_price")
+            parameters.updateValue("" as AnyObject, forKey: "cost_price")
         }
         
         if let newRetailPrice = retailPrice {
-            parameters.updateValue(newRetailPrice.stringValue, forKey: "retail_price")
+            parameters.updateValue(newRetailPrice.stringValue as AnyObject, forKey: "retail_price")
         } else {
-            parameters.updateValue("", forKey: "retail_price")
+            parameters.updateValue("" as AnyObject, forKey: "retail_price")
         }
         
         if let newSalePrice = salePrice {
-            parameters.updateValue(newSalePrice.stringValue, forKey: "sale_price")
+            parameters.updateValue(newSalePrice.stringValue as AnyObject, forKey: "sale_price")
         } else {
-            parameters.updateValue("", forKey: "sale_price")
+            parameters.updateValue("" as AnyObject, forKey: "sale_price")
         }
         
         if parameters.count > 0 {
         
-            alamofireManager.request(.PUT, apiStoreBaseUrl + "products/\(productId)", parameters:parameters, encoding:.JSON)
+            alamofireManager.request(apiStoreBaseUrl + "products/\(productId)", method:.put, parameters:parameters, encoding:JSONEncoding.default, headers:headers)
                 .authenticate(user: apiUsername, password: apiToken)
                 .responseJSON { response in
                     
                     if(response.result.isSuccess) {
                         
                         if let responseError = self.checkForErrorResponse(response) {
-                            completion(error: responseError)
+                            completion(responseError)
                         } else {
-                            completion(error: nil)
+                            completion(nil)
                         }
                         
                         
                     } else {
                         print(response.result.error)
-                        completion(error: response.result.error)
+                        completion(response.result.error as NSError?)
                     }
             }
         }
     }
     
-    public func getProductImages(productId:String, completion: (productImages:[BigcommerceProductImage], error: NSError?) -> ()) {
+    open func getProductImages(_ productId:String, completion: @escaping (_ productImages:[BigcommerceProductImage], _ error: NSError?) -> ()) {
         
-        alamofireManager.request(.GET, apiStoreBaseUrl + "products/\(productId)/images", parameters:nil, encoding:.JSON)
+        alamofireManager.request(apiStoreBaseUrl + "products/\(productId)/images", method:.get, encoding:JSONEncoding.default, headers:headers)
             .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
                     
                     if let responseError = self.checkForErrorResponse(response) {
-                        completion(productImages: [], error: responseError)
+                        completion([], responseError)
                     } else {
                         
                         var productImages: [BigcommerceProductImage] = []
@@ -679,27 +675,27 @@ public class BigcommerceApi: NSObject {
                             }
                         }
                         
-                        completion(productImages: productImages, error: nil)
+                        completion(productImages, nil)
                     }
                     
                     
                 } else {
                     print(response.result.error)
-                    completion(productImages: [], error: response.result.error)
+                    completion([], response.result.error as NSError?)
                 }
         }
     }
     
-    public func getProductSkus(productId:String, completion: (productSkus:[BigcommerceProductSku], error: NSError?) -> ()) {
+    open func getProductSkus(_ productId:String, completion: @escaping (_ productSkus:[BigcommerceProductSku], _ error: NSError?) -> ()) {
         
-        alamofireManager.request(.GET, apiStoreBaseUrl + "products/\(productId)/skus", parameters:nil, encoding:.JSON)
+        alamofireManager.request(apiStoreBaseUrl + "products/\(productId)/skus", method:.get, encoding:JSONEncoding.default, headers:headers)
             .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
                     
                     if let responseError = self.checkForErrorResponse(response) {
-                        completion(productSkus: [], error: responseError)
+                        completion([], responseError)
                     } else {
                         
                         var productSkus: [BigcommerceProductSku] = []
@@ -714,67 +710,67 @@ public class BigcommerceApi: NSObject {
                             }
                         }
                         
-                        completion(productSkus: productSkus, error: nil)
+                        completion(productSkus, nil)
                     }
                     
                     
                 } else {
                     print(response.result.error)
-                    completion(productSkus: [], error: response.result.error)
+                    completion([], response.result.error as NSError?)
                 }
         }
     }
     
-    public func updateProductSkuInventory(productId:String, productSkuId:String, newInventoryLevel:Int, newLowLevel:Int?, completion: (error: NSError?) -> ()) {
+    open func updateProductSkuInventory(_ productId:String, productSkuId:String, newInventoryLevel:Int, newLowLevel:Int?, completion: @escaping (_ error: NSError?) -> ()) {
         
-        var parameters:[String : AnyObject] = ["inventory_level" : newInventoryLevel]
+        var parameters:[String : AnyObject] = ["inventory_level" : newInventoryLevel as AnyObject]
 
         
         if let lowLevel = newLowLevel {
-            parameters.updateValue(lowLevel, forKey: "inventory_warning_level")
+            parameters.updateValue(lowLevel as AnyObject, forKey: "inventory_warning_level")
         }
         
-        alamofireManager.request(.PUT, apiStoreBaseUrl + "products/\(productId)/skus/\(productSkuId)", parameters:parameters, encoding:.JSON)
+        alamofireManager.request(apiStoreBaseUrl + "products/\(productId)/skus/\(productSkuId)", method:.put, parameters:parameters, encoding:JSONEncoding.default, headers:headers)
             .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
                     
                     if let responseError = self.checkForErrorResponse(response) {
-                        completion(error: responseError)
+                        completion(responseError)
                     } else {
-                        completion(error: nil)
+                        completion(nil)
                     }
                     
                     
                 } else {
                     print(response.result.error)
-                    completion(error: response.result.error)
+                    completion(response.result.error as NSError?)
                 }
         }
     }
     
-    public func getCustomers(completion: (customers:[BigcommerceCustomer], error: NSError?) -> ()) {
+    open func getCustomers(_ completion: @escaping (_ customers:[BigcommerceCustomer], _ error: NSError?) -> ()) {
         //let parameters = ["sort" : "date_created:desc", "limit": "50"]
         getCustomers(nil, completion: completion)
     }
     
-    public func getCustomers(page page:Int, limit:Int, completion: (customers:[BigcommerceCustomer], error: NSError?) -> ()) {
+    open func getCustomers(page:Int, limit:Int, completion: @escaping (_ customers:[BigcommerceCustomer], _ error: NSError?) -> ()) {
         let parameters = ["sort" : "date_created:desc", "limit": String(limit), "page" : String(page)]
         getCustomers(parameters, completion: completion)
     }
     
     //Retrieve an array of Bigcommerce customer objects
-    public func getCustomers(parameters:[String : String]?, completion: (customers:[BigcommerceCustomer], error: NSError?) -> ()) {
+    open func getCustomers(_ parameters:[String : String]?, completion: @escaping (_ customers:[BigcommerceCustomer], _ error: NSError?) -> ()) {
         
-        alamofireManager.request(.GET, apiStoreBaseUrl + "customers", parameters:parameters)
+        alamofireManager.request(apiStoreBaseUrl + "customers", method:.get, parameters:parameters, headers:headers)
             .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
                     
                     if let responseError = self.checkForErrorResponse(response) {
-                        completion(customers: [], error: responseError)
+                        completion([], responseError)
                     } else {
                         
                         var customers: [BigcommerceCustomer] = []
@@ -789,27 +785,27 @@ public class BigcommerceApi: NSObject {
                             }
                         }
                         
-                        completion(customers: customers, error: nil)
+                        completion(customers, nil)
                     }
                     
                     
                 } else {
                     print(response.result.error)
-                    completion(customers: [], error: response.result.error)
+                    completion([], response.result.error as NSError?)
                 }
         }
     }
     
-    public func getCustomerAddresses(customerId:String, completion: (customerAddresses:[BigcommerceCustomerAddress], error: NSError?) -> ()) {
+    open func getCustomerAddresses(_ customerId:String, completion: @escaping (_ customerAddresses:[BigcommerceCustomerAddress], _ error: NSError?) -> ()) {
         
-        alamofireManager.request(.GET, apiStoreBaseUrl + "customers/\(customerId)/addresses", parameters:nil)
+        alamofireManager.request(apiStoreBaseUrl + "customers/\(customerId)/addresses", method:.get, headers:headers)
             .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
                     
                     if let responseError = self.checkForErrorResponse(response) {
-                        completion(customerAddresses: [], error: responseError)
+                        completion([], responseError)
                     } else {
                         
                         var customerAddresses: [BigcommerceCustomerAddress] = []
@@ -824,27 +820,27 @@ public class BigcommerceApi: NSObject {
                             }
                         }
                         
-                        completion(customerAddresses: customerAddresses, error: nil)
+                        completion(customerAddresses, nil)
                     }
                     
                     
                 } else {
                     print(response.result.error)
-                    completion(customerAddresses: [], error: response.result.error)
+                    completion([], response.result.error as NSError?)
                 }
         }
     }
     
-    public func getOrderMessages(orderId:String, completion: (orderMessages:[BigcommerceOrderMessage], error: NSError?) -> ()) {
+    open func getOrderMessages(_ orderId:String, completion: @escaping (_ orderMessages:[BigcommerceOrderMessage], _ error: NSError?) -> ()) {
         
-        alamofireManager.request(.GET, apiStoreBaseUrl + "orders/\(orderId)/messages", parameters:nil)
+        alamofireManager.request(apiStoreBaseUrl + "orders/\(orderId)/messages", method:.get, headers:headers)
             .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
                     
                     if let responseError = self.checkForErrorResponse(response) {
-                        completion(orderMessages: [], error: responseError)
+                        completion([], responseError)
                     } else {
                         
                         var orderMessages: [BigcommerceOrderMessage] = []
@@ -859,27 +855,27 @@ public class BigcommerceApi: NSObject {
                             }
                         }
                         
-                        completion(orderMessages: orderMessages, error: nil)
+                        completion(orderMessages, nil)
                     }
                     
                     
                 } else {
                     print(response.result.error)
-                    completion(orderMessages: [], error: response.result.error)
+                    completion([], response.result.error as NSError?)
                 }
         }
     }
     
-    public func getStore(completion: (store:BigcommerceStore?, error: NSError?) -> ()) {
+    open func getStore(_ completion: @escaping (_ store:BigcommerceStore?, _ error: NSError?) -> ()) {
         
-        alamofireManager.request(.GET, apiStoreBaseUrl + "store", parameters:nil)
+        alamofireManager.request(apiStoreBaseUrl + "store", method:.get, headers:headers)
             .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
                     
                     if let responseError = self.checkForErrorResponse(response) {
-                        completion(store: nil, error: responseError)
+                        completion(nil, responseError)
                     } else {
                         
                         var store:BigcommerceStore?
@@ -889,13 +885,13 @@ public class BigcommerceApi: NSObject {
                             store = BigcommerceStore(jsonDictionary: storeDict)
                         }
                         
-                        completion(store: store, error: nil)
+                        completion(store, nil)
                     }
                     
                     
                 } else {
                     print(response.result.error)
-                    completion(store: nil, error: response.result.error)
+                    completion(nil, response.result.error as NSError?)
                 }
         }
     }

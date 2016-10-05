@@ -24,7 +24,7 @@ class ProductDetailsViewController: UIViewController {
         loadProductSkus()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.textView.text = product.description
@@ -39,12 +39,12 @@ class ProductDetailsViewController: UIViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
         if segue.identifier == "ModalEditInventorySegue" {
-            if let navController = segue.destinationViewController as? UINavigationController {
+            if let navController = segue.destination as? UINavigationController {
                 if let editInventoryViewController = navController.topViewController as? EditInvetoryViewController {
                     editInventoryViewController.product = product
                 }

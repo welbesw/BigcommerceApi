@@ -8,57 +8,57 @@
 
 import Foundation
 
-public class BigcommerceOrderShippingAddress: NSObject {
+open class BigcommerceOrderShippingAddress: NSObject {
     
-    public var id: NSNumber?
-    public var orderId: NSNumber?
+    open var id: NSNumber?
+    open var orderId: NSNumber?
     
-    public var firstName: String = ""
-    public var lastName: String = ""
-    public var company: String = ""
+    open var firstName: String = ""
+    open var lastName: String = ""
+    open var company: String = ""
 
-    public var street1: String = ""
-    public var street2: String = ""
-    public var city: String = ""
-    public var zip: String = ""
-    public var country: String = ""
-    public var countryISO2: String = ""
-    public var state: String = ""
-    public var email: String = ""
-    public var phone: String = ""
+    open var street1: String = ""
+    open var street2: String = ""
+    open var city: String = ""
+    open var zip: String = ""
+    open var country: String = ""
+    open var countryISO2: String = ""
+    open var state: String = ""
+    open var email: String = ""
+    open var phone: String = ""
     
-    public var itemsTotal: NSNumber = 0
-    public var itemsShipped: NSNumber = 0
-    public var shippingMethod: String = ""
+    open var itemsTotal: NSNumber = 0
+    open var itemsShipped: NSNumber = 0
+    open var shippingMethod: String = ""
 
-    public var baseCost: NSNumber = 0
-    public var costExcludingTax: NSNumber = 0
-    public var costIncludingTax: NSNumber = 0
-    public var costTax: NSNumber = 0
-    public var costTaxClassId: NSNumber?
+    open var baseCost: NSNumber = 0
+    open var costExcludingTax: NSNumber = 0
+    open var costIncludingTax: NSNumber = 0
+    open var costTax: NSNumber = 0
+    open var costTaxClassId: NSNumber?
 
-    public var baseHandlingCost: NSNumber = 0
-    public var handlingCostExcludingTax: NSNumber = 0
-    public var handlingCostIncludingTax: NSNumber = 0
-    public var handlingCostTax: NSNumber = 0
-    public var handlingCostTaxClassId: NSNumber?
+    open var baseHandlingCost: NSNumber = 0
+    open var handlingCostExcludingTax: NSNumber = 0
+    open var handlingCostIncludingTax: NSNumber = 0
+    open var handlingCostTax: NSNumber = 0
+    open var handlingCostTaxClassId: NSNumber?
     
-    public var shippingZoneId: NSNumber?
-    public var shippingZoneName: String = ""
+    open var shippingZoneId: NSNumber?
+    open var shippingZoneName: String = ""
     
     public init(jsonDictionary:NSDictionary, currencyCode:String) {
         //Load the JSON dictionary into the shipping address object
         
         //Float values are returned as quote enclosed strings in the JSON from the API
-        let numberFormatter = NSNumberFormatter()
-        numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = NumberFormatter.Style.decimal
         
-        var components = [NSLocaleCurrencyCode : currencyCode]
-        if let language = NSLocale.preferredLanguages().first {
-            components.updateValue(NSLocaleLanguageCode, forKey: language)
+        var components:[String : String] = [NSLocale.Key.currencyCode.rawValue : currencyCode]
+        if let language = Locale.preferredLanguages.first {
+            components.updateValue(language, forKey: NSLocale.Key.languageCode.rawValue)
         }
-        let localeIdentifier = NSLocale.localeIdentifierFromComponents(components)
-        let localeForCurrency = NSLocale(localeIdentifier: localeIdentifier);
+        let localeIdentifier = Locale.identifier(fromComponents: components)
+        let localeForCurrency = Locale(identifier: localeIdentifier);
         numberFormatter.locale = localeForCurrency
         
         if let id = jsonDictionary["id"] as? NSNumber {
@@ -130,25 +130,25 @@ public class BigcommerceOrderShippingAddress: NSObject {
         }
 
         if let stringValue = jsonDictionary["base_cost"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 self.baseCost = numberValue
             }
         }
         
         if let stringValue = jsonDictionary["cost_ex_tax"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 self.costExcludingTax = numberValue
             }
         }
         
         if let stringValue = jsonDictionary["cost_inc_tax"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 self.costIncludingTax = numberValue
             }
         }
         
         if let stringValue = jsonDictionary["cost_tax"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 self.costTax = numberValue
             }
         }
@@ -158,19 +158,19 @@ public class BigcommerceOrderShippingAddress: NSObject {
         }
         
         if let stringValue = jsonDictionary["handling_cost_ex_tax"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 self.handlingCostExcludingTax = numberValue
             }
         }
         
         if let stringValue = jsonDictionary["handling_cost_inc_tax"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 self.handlingCostIncludingTax = numberValue
             }
         }
         
         if let stringValue = jsonDictionary["handling_cost_tax"] as? String {
-            if let numberValue = numberFormatter.numberFromString(stringValue) {
+            if let numberValue = numberFormatter.number(from: stringValue) {
                 self.handlingCostTax = numberValue
             }
         }

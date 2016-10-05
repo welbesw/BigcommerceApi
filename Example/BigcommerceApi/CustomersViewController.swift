@@ -27,7 +27,7 @@ class CustomersViewController: UITableViewController {
     func loadCustomers() {
         BigcommerceApi.sharedInstance.getCustomers(page:1, limit: 50) { (customers, error) in
             //Load the cusotmers
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 //Check for error
                 if(error == nil) {
                     self.customers = customers
@@ -54,18 +54,18 @@ class CustomersViewController: UITableViewController {
     
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // return the number of rows
         return customers.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("customerCell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customerCell", for: indexPath)
 
         // Configure the cell...
         let customer = self.customers[indexPath.row]
@@ -80,12 +80,12 @@ class CustomersViewController: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
         if(segue.identifier == "PushCustomerDetailsSegue") {
-            if let customerDetailsViewController = segue.destinationViewController as? CustomerDetailsViewController {
+            if let customerDetailsViewController = segue.destination as? CustomerDetailsViewController {
                     
                 if let selectedIndex = self.tableView.indexPathForSelectedRow {
                     let customer = self.customers[selectedIndex.row]

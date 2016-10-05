@@ -30,7 +30,7 @@ class UpdateStatusViewController: UIViewController, UIPickerViewDataSource, UIPi
     
     func loadStatuses() {
         BigcommerceApi.sharedInstance.getOrderStatuses { (orderStatuses, error) -> () in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 if(error == nil) {
                     self.orderStatuses = orderStatuses
                     self.statusPickerView.reloadAllComponents()
@@ -41,43 +41,43 @@ class UpdateStatusViewController: UIViewController, UIPickerViewDataSource, UIPi
         }
     }
     
-    @IBAction func didTapCancelButton(sender:AnyObject?) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func didTapCancelButton(_ sender:AnyObject?) {
+        self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func didTapSaveButton(sender:AnyObject?) {
+    @IBAction func didTapSaveButton(_ sender:AnyObject?) {
         
         if let orderId = self.orderId {
             
             //Get the selected status
-            let selectedRow = self.statusPickerView.selectedRowInComponent(0)
+            let selectedRow = self.statusPickerView.selectedRow(inComponent: 0)
             let orderStatus = self.orderStatuses[selectedRow]
             
             //Call save on the API
             BigcommerceApi.sharedInstance.updateOrderStatus(orderId, newStatusId: orderStatus.id, completion: { (error) -> () in
                 //Check for error
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                DispatchQueue.main.async(execute: { () -> Void in
                     if(error != nil) {
                         print("Error updating status: \(error!.localizedDescription)")
                     } else {
                         print("Updated status.")
-                        self.dismissViewControllerAnimated(true, completion: nil)
+                        self.dismiss(animated: true, completion: nil)
                     }
                 })
             })
         }
     }
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
         
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return self.orderStatuses.count
     }
     
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let orderStatus = self.orderStatuses[row]
         
         return orderStatus.name
