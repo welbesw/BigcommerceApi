@@ -20,6 +20,8 @@ open class BigcommerceOrderStatus: NSObject {
             if let id = Int(idString) {
                 self.id = id
             }
+        } else if let id = jsonDictionary["id"] as? Int {
+            self.id = id
         }
         
         if let name = jsonDictionary["name"] as? String {
