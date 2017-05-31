@@ -174,7 +174,7 @@ open class BigcommerceApi: NSObject {
                     
                     
                 } else {
-                    print(response.result.error)
+                    print(response.result.error ?? "")
                     completion([], response.result.error as NSError?)
                 }
         }
@@ -203,7 +203,7 @@ open class BigcommerceApi: NSObject {
                     
                     
                 } else {
-                    print(response.result.error)
+                    print(response.result.error ?? "")
                     completion(nil, response.result.error as NSError?)
                 }
         }
@@ -227,7 +227,7 @@ open class BigcommerceApi: NSObject {
                     
                     
                 } else {
-                    print(response.result.error)
+                    print(response.result.error ?? "")
                     completion(response.result.error as NSError?)
                 }
         }
@@ -251,7 +251,7 @@ open class BigcommerceApi: NSObject {
                     
                     
                 } else {
-                    print(response.result.error)
+                    print(response.result.error ?? "")
                     completion(response.result.error as NSError?)
                 }
         }
@@ -275,7 +275,7 @@ open class BigcommerceApi: NSObject {
                     
                     
                 } else {
-                    print(response.result.error)
+                    print(response.result.error ?? "")
                     completion(response.result.error as NSError?)
                 }
         }
@@ -313,7 +313,7 @@ open class BigcommerceApi: NSObject {
                         
                         
                     } else {
-                        print(response.result.error)
+                        print(response.result.error ?? "")
                         completion([], response.result.error as NSError?)
                     }
             }
@@ -355,7 +355,7 @@ open class BigcommerceApi: NSObject {
                         
                         
                     } else {
-                        print(response.result.error)
+                        print(response.result.error ?? "")
                         completion([], response.result.error as NSError?)
                     }
             }
@@ -395,7 +395,7 @@ open class BigcommerceApi: NSObject {
                         
                         
                     } else {
-                        print(response.result.error)
+                        print(response.result.error ?? "")
                         completion([], response.result.error as NSError?)
                     }
             }
@@ -432,7 +432,7 @@ open class BigcommerceApi: NSObject {
                     
                     
                 } else {
-                    print(response.result.error)
+                    print(response.result.error ?? "")
                     completion(nil, response.result.error as NSError?)
                 }
         }
@@ -461,7 +461,7 @@ open class BigcommerceApi: NSObject {
                     
                     
                 } else {
-                    print(response.result.error)
+                    print(response.result.error ?? "")
                     
                     self.alamofireManager.request(self.apiStoreBaseUrl + "orderstatuses", method:.get, headers:self.headers)
                         .authenticate(user: self.apiUsername, password: self.apiToken)
@@ -482,7 +482,7 @@ open class BigcommerceApi: NSObject {
                                 
                                 
                             } else {
-                                print(response2.result.error)
+                                print(response2.result.error ?? "")
                                 completion(orderStatuses, response2.result.error as NSError?)
                             }
                     }
@@ -566,7 +566,7 @@ open class BigcommerceApi: NSObject {
                     
                     
                 } else {
-                    print(response.result.error)
+                    print(response.result.error ?? "")
                     completion([], response.result.error as NSError?)
                 }
         }
@@ -598,7 +598,7 @@ open class BigcommerceApi: NSObject {
                     
                     
                 } else {
-                    print(response.result.error)
+                    print(response.result.error ?? "")
                     completion(response.result.error as NSError?)
                 }
         }
@@ -644,7 +644,7 @@ open class BigcommerceApi: NSObject {
                         
                         
                     } else {
-                        print(response.result.error)
+                        print(response.result.error ?? "")
                         completion(response.result.error as NSError?)
                     }
             }
@@ -680,7 +680,7 @@ open class BigcommerceApi: NSObject {
                     
                     
                 } else {
-                    print(response.result.error)
+                    print(response.result.error ?? "")
                     completion([], response.result.error as NSError?)
                 }
         }
@@ -715,7 +715,7 @@ open class BigcommerceApi: NSObject {
                     
                     
                 } else {
-                    print(response.result.error)
+                    print(response.result.error ?? "")
                     completion([], response.result.error as NSError?)
                 }
         }
@@ -744,7 +744,7 @@ open class BigcommerceApi: NSObject {
                     
                     
                 } else {
-                    print(response.result.error)
+                    print(response.result.error ?? "")
                     completion(response.result.error as NSError?)
                 }
         }
@@ -790,7 +790,7 @@ open class BigcommerceApi: NSObject {
                     
                     
                 } else {
-                    print(response.result.error)
+                    print(response.result.error ?? "")
                     completion([], response.result.error as NSError?)
                 }
         }
@@ -825,7 +825,7 @@ open class BigcommerceApi: NSObject {
                     
                     
                 } else {
-                    print(response.result.error)
+                    print(response.result.error ?? "")
                     completion([], response.result.error as NSError?)
                 }
         }
@@ -860,7 +860,7 @@ open class BigcommerceApi: NSObject {
                     
                     
                 } else {
-                    print(response.result.error)
+                    print(response.result.error ?? "")
                     completion([], response.result.error as NSError?)
                 }
         }
@@ -890,7 +890,7 @@ open class BigcommerceApi: NSObject {
                     
                     
                 } else {
-                    print(response.result.error)
+                    print(response.result.error ?? "")
                     completion(nil, response.result.error as NSError?)
                 }
         }

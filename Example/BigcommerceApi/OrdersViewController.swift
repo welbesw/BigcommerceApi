@@ -27,9 +27,9 @@ class OrdersViewController: UITableViewController {
             //Fetch the Bigcommerce store
             BigcommerceApi.sharedInstance.getStore({ (store, error) -> () in
                 if error == nil && store != nil {
-                    print("Loaded store: \(store!.name), logo: \(store!.logoUrl)")
+                    print("Loaded store: \(store?.name ?? ""), logo: \(store?.logoUrl ?? "")")
                 } else {
-                    print("Error loading store: \(error?.localizedDescription)")
+                    print("Error loading store: \(error?.localizedDescription ?? "")")
                 }
             })
         }

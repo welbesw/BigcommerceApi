@@ -57,7 +57,7 @@ class ProductDetailsViewController: UIViewController {
             BigcommerceApi.sharedInstance.getProductImages(productId) { (productImages, error) -> () in
                 if(error == nil) {
                     for productImage in productImages {
-                        print("Loaded \(productImage.standardUrl) product images")
+                        print("Loaded \(productImage.standardUrl ?? "") product images")
                     }
                 }
             }
@@ -69,7 +69,7 @@ class ProductDetailsViewController: UIViewController {
             BigcommerceApi.sharedInstance.getProductSkus(productId, completion: { (productSkus, error) in
                 if(error == nil) {
                     for productSku in productSkus {
-                        print("Loaded product sku: \(productSku.productSkuId?.stringValue)")
+                        print("Loaded product sku: \(productSku.productSkuId?.stringValue ?? "")")
                     }
                 }
             })

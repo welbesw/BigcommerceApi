@@ -41,7 +41,7 @@ open class OrderDetailsViewController: UIViewController {
             BigcommerceApi.sharedInstance.getOrder(orderId: orderId, completion: { (order, error) -> () in
                 DispatchQueue.main.async(execute: { () -> Void in
                     if(error == nil && order != nil) {
-                        print("Got order: \(order!.orderId)")
+                        print("Got order: \(order?.orderId ?? -1)")
                     } else {
                         print("Error getting order: \(error!.localizedDescription)")
                     }
@@ -73,7 +73,7 @@ open class OrderDetailsViewController: UIViewController {
             //Check for error
             if(error == nil) {
                 for orderProduct in orderProducts {
-                    print("Order Product: \(orderProduct.name) - (\(orderProduct.quantity))")
+                    print("Order Product: \(orderProduct.name) - (\(orderProduct.quantity ?? 0))")
                     for productOption in orderProduct.productOptions {
                         print("Order Product Option: \(productOption.displayName) : \(productOption.displayValue)")
                     }
