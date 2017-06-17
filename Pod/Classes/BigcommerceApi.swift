@@ -9,15 +9,15 @@
 import Foundation
 import Alamofire
 
-public enum InventoryTrackingType:String {
+public enum InventoryTrackingType: String {
     case None = "none"
     case Simple = "simple"
     case Sku = "sku"
 }
 
-public enum AuthMode {
-    case basic
-    case oauth
+public enum AuthMode: String {
+    case basic = "basic"
+    case oauth = "oauth"
 }
 
 open class BigcommerceApi: NSObject {

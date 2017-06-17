@@ -14,24 +14,50 @@ class CredentialsViewController: UITableViewController {
     @IBOutlet var apiUsernameTextField: UITextField!
     @IBOutlet var apiTokenTextField: UITextField!
     @IBOutlet var apiBaseUrlTextField: UITextField!
+
+    @IBOutlet var authModeSegmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        authModeSegmentedControl.addTarget(self, action: #selector(authModeDidChange), for: .valueChanged)
+
         loadCredentials()
+        updatePlaceholders()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+    @objc func authModeDidChange() {
+        updatePlaceholders()
+    }
+
+    func updatePlaceholders() {
+        apiUsernameTextField.placeholder = isOauthSelected ? "API Oauth Client ID" : "API Username"
+        apiTokenTextField.placeholder = isOauthSelected ? "API Oauth Access Token" : "API Token"
+    }
+
+    var isOauthSelected: Bool {
+        return authModeSegmentedControl.selectedSegmentIndex == 0
+    }
     
     func loadCredentials() {
         let defaultsManager = DefaultsManager.sharedInstance
-        
-        apiBaseUrlTextField.text = defaultsManager.apiStoreBaseUrl
-        apiUsernameTextField.text = defaultsManager.apiUsername
-        apiTokenTextField.text = defaultsManager.apiToken
+
+        switch defaultsManager.apiAuthMode {
+        case .basic:
+            apiBaseUrlTextField.text = defaultsManager.apiStoreBaseUrl
+            apiUsernameTextField.text = defaultsManager.apiUsername
+            apiTokenTextField.text = defaultsManager.apiToken
+        case .oauth:
+            apiBaseUrlTextField.text = defaultsManager.apiStoreBaseUrl
+            apiUsernameTextField.text = defaultsManager.apiOauthId
+            apiTokenTextField.text = defaultsManager.apiOauthToken
+        }
+
     }
     
     @IBAction func didTapSaveButton() {
@@ -40,13 +66,28 @@ class CredentialsViewController: UITableViewController {
         dismissKeyboard()
         
         let defaultsManager = DefaultsManager.sharedInstance
-        defaultsManager.apiStoreBaseUrl = apiBaseUrlTextField.text
-        defaultsManager.apiUsername = apiUsernameTextField.text
-        defaultsManager.apiToken = apiTokenTextField.text
+
+        if isOauthSelected {
+            defaultsManager.apiAuthMode = .oauth
+            defaultsManager.apiStoreBaseUrl = apiBaseUrlTextField.text
+            defaultsManager.apiOauthId = apiUsernameTextField.text
+            defaultsManager.apiOauthToken = apiTokenTextField.text
+        } else {
+            defaultsManager.apiAuthMode = .basic
+            defaultsManager.apiStoreBaseUrl = apiBaseUrlTextField.text
+            defaultsManager.apiUsername = apiUsernameTextField.text
+            defaultsManager.apiToken = apiTokenTextField.text
+        }
         
         //Set the credentials on the BigcommerceApi instance
         if(defaultsManager.apiCredentialsAreSet) {
-            BigcommerceApi.sharedInstance.setCredentials(defaultsManager.apiUsername!, token: defaultsManager.apiToken!, storeBaseUrl: defaultsManager.apiStoreBaseUrl!)
+            switch defaultsManager.apiAuthMode {
+            case .basic:
+                BigcommerceApi.sharedInstance.setCredentials(defaultsManager.apiUsername!, token: defaultsManager.apiToken!, storeBaseUrl: defaultsManager.apiStoreBaseUrl!)
+            default:
+                BigcommerceApi.sharedInstance.setCredentialsOauth(clientId: defaultsManager.apiOauthId!, accessToken: defaultsManager.apiOauthToken!, storeBaseUrl: defaultsManager.apiStoreBaseUrl!)
+            }
+
             
             //Attempt to get the store
             BigcommerceApi.sharedInstance.getStore({ (store, error) in

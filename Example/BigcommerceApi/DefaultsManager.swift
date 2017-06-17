@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BigcommerceApi
 
 open class DefaultsManager: NSObject {
    
@@ -43,10 +44,48 @@ open class DefaultsManager: NSObject {
             userDefaults.setValue(newValue, forKey: "ApiStoreBaseUrl")
         }
     }
-    
+
+    var apiOauthId: String? {
+        get {
+            return userDefaults.string(forKey: "ApiOauthId")
+        }
+        set(newValue) {
+            userDefaults.setValue(newValue, forKey: "ApiOauthId")
+        }
+    }
+
+    var apiOauthToken: String? {
+        get {
+            return userDefaults.string(forKey: "apiOauthToken")
+        }
+        set(newValue) {
+            userDefaults.setValue(newValue, forKey: "apiOauthToken")
+        }
+    }
+
+    var apiAuthMode: AuthMode {
+        get {
+            var authMode: AuthMode = .basic
+            if let stringValue = userDefaults.string(forKey: "apiAuthMode"), let mode = AuthMode(rawValue: stringValue) {
+                authMode = mode
+            }
+            return authMode
+        }
+        set(newValue) {
+            userDefaults.setValue(newValue.rawValue, forKey: "apiAuthMode")
+        }
+    }
+
     var apiCredentialsAreSet: Bool {
         get {
-            return self.apiUsername != nil && self.apiToken != nil && self.apiStoreBaseUrl != nil
+            var credentialsSet = false
+            switch apiAuthMode {
+            case .basic:
+                credentialsSet = apiUsername != nil && apiToken != nil && apiStoreBaseUrl != nil
+            case .oauth:
+                credentialsSet = apiOauthId != nil && apiOauthToken != nil && apiStoreBaseUrl != nil
+            }
+            return credentialsSet
         }
     }
 }
