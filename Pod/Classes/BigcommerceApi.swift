@@ -15,22 +15,45 @@ public enum InventoryTrackingType:String {
     case Sku = "sku"
 }
 
+public enum AuthMode {
+    case basic
+    case oauth
+}
+
 open class BigcommerceApi: NSObject {
     
     //Define a shared instance method to return a singleton of the API manager
     public static var sharedInstance = BigcommerceApi()
-    
+
+    var authMode: AuthMode = .basic
+
+    //Basic Auth - Legacy API Account
     var apiUsername = ""            //Pass in via setCredentials
     var apiToken = ""               //Pass in via setCredentials
     var apiStoreBaseUrl = ""        //Pass in via setCredentials
+
+    var apiOauthClientId = ""           //Pass in via setCredentials
+    var apiOauthAccessToken = ""        //Pass in via setCredentials
     
     public var currencyCode = "USD"        //Default to US dollars - retrieve via getStore method
     public var languageCode = "en"         //Default to english - retrieve via getStore method
     public var currencyLocale:Locale?
     
-    let headers: HTTPHeaders = [
-        "Accept": "application/json"
-    ]
+    var headers: HTTPHeaders {
+        var headers: HTTPHeaders = ["Accept": "application/json"]
+
+        //For OAuth set the client and token in the headers
+        switch authMode {
+        case .basic:
+            if let authorizationHeader = Request.authorizationHeader(user: apiUsername, password: apiToken) {
+                headers[authorizationHeader.key] = authorizationHeader.value
+            }
+        case .oauth:
+            headers["X-Auth-Client"] = apiOauthClientId
+            headers["X-Auth-Token"] = apiOauthAccessToken
+        }
+        return headers
+    }
     
     var alamofireManager: Alamofire.SessionManager!
     
@@ -47,7 +70,15 @@ open class BigcommerceApi: NSObject {
         
         initializeAlamofire()
     }
-    
+
+    public init(oauthClientId: String, oauthAccessToken: String, storeBaseUrl: String) {
+        super.init()
+
+        setCredentialsOauth(clientId: oauthClientId, accessToken: oauthAccessToken, storeBaseUrl: storeBaseUrl)
+
+        initializeAlamofire()
+    }
+
     private func initializeAlamofire() {
         
         //var defaultHeaders = Alamofire.SessionManager.default.defaultHeaders
@@ -61,8 +92,17 @@ open class BigcommerceApi: NSObject {
     
     //Set the credentials to use with the API
     open func setCredentials(_ username: String, token: String, storeBaseUrl: String) {
+        authMode = .basic
         self.apiUsername = username
         self.apiToken = token
+        self.apiStoreBaseUrl = storeBaseUrl
+    }
+
+    //Set the OAuth credentials
+    open func setCredentialsOauth(clientId: String, accessToken: String, storeBaseUrl: String) {
+        authMode = .oauth
+        self.apiOauthClientId = clientId
+        self.apiOauthAccessToken = accessToken
         self.apiStoreBaseUrl = storeBaseUrl
     }
     
@@ -145,7 +185,6 @@ open class BigcommerceApi: NSObject {
     open func getOrders(_ parameters:[String : String], completion: @escaping (_ orders:[BigcommerceOrder], _ error: NSError?) -> ()) {
         
         alamofireManager.request(apiStoreBaseUrl + "orders", method: .get, parameters:parameters, headers:headers)
-            .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
@@ -180,7 +219,6 @@ open class BigcommerceApi: NSObject {
     open func getOrder(orderId: String, completion: @escaping (_ order:BigcommerceOrder?, _ error: NSError?) -> ()) {
         
         alamofireManager.request(apiStoreBaseUrl + "orders/\(orderId)", method: .get, headers:headers)
-            .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
@@ -211,7 +249,6 @@ open class BigcommerceApi: NSObject {
         let parameters = ["status_id" : newStatusId]
         
         alamofireManager.request(apiStoreBaseUrl + "orders/\(orderId)", method: .put, parameters: parameters, encoding: JSONEncoding.default, headers:headers)
-            .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
@@ -235,7 +272,6 @@ open class BigcommerceApi: NSObject {
         let parameters = ["staff_notes" : staffNotes]
         
         alamofireManager.request(apiStoreBaseUrl + "orders/\(orderId)", method: .put, parameters: parameters, encoding: JSONEncoding.default, headers:headers)
-            .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
@@ -259,7 +295,6 @@ open class BigcommerceApi: NSObject {
         let parameters = ["customer_message" : customerMessage]
         
         alamofireManager.request(apiStoreBaseUrl + "orders/\(orderId)", method:.put, parameters:parameters, encoding:JSONEncoding.default, headers:headers)
-            .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
@@ -284,7 +319,6 @@ open class BigcommerceApi: NSObject {
         if order.productsUrl.characters.count > 0 {
         
             alamofireManager.request(order.productsUrl, method: .get, headers:headers)
-                .authenticate(user: apiUsername, password: apiToken)
                 .responseJSON { response in
                     
                     if(response.result.isSuccess) {
@@ -326,7 +360,6 @@ open class BigcommerceApi: NSObject {
         if order.shippingAddressesUrl.characters.count > 0 {
             
             alamofireManager.request(order.shippingAddressesUrl, method: .get, headers:headers)
-                .authenticate(user: apiUsername, password: apiToken)
                 .responseJSON { response in
                     
                     if(response.result.isSuccess) {
@@ -366,7 +399,6 @@ open class BigcommerceApi: NSObject {
         
         if let orderId = order.orderId {
             alamofireManager.request(apiStoreBaseUrl + "orders/\(orderId.stringValue)/shipments", method: .get, headers:headers)
-                .authenticate(user: apiUsername, password: apiToken)
                 .responseJSON { response in
                     
                     if(response.result.isSuccess) {
@@ -409,7 +441,6 @@ open class BigcommerceApi: NSObject {
         
         
         alamofireManager.request(apiStoreBaseUrl + "orders/\(orderShipmentRequest.orderId)/shipments/", method: .post, parameters:parameters, encoding:JSONEncoding.default, headers:headers)
-            .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
@@ -438,7 +469,6 @@ open class BigcommerceApi: NSObject {
     
     open func getOrderStatuses(_ completion: @escaping (_ orderStatuses:[BigcommerceOrderStatus], _ error: NSError?) -> ()) {
         alamofireManager.request(apiStoreBaseUrl + "order_statuses", method:.get, headers:headers)
-            .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 var orderStatuses:[BigcommerceOrderStatus] = []
@@ -461,7 +491,6 @@ open class BigcommerceApi: NSObject {
                     print(response.result.error ?? "")
                     
                     self.alamofireManager.request(self.apiStoreBaseUrl + "orderstatuses", method:.get, headers:self.headers)
-                        .authenticate(user: self.apiUsername, password: self.apiToken)
                         .responseJSON { response2 in
                             
                             if(response2.result.isSuccess) {
@@ -537,7 +566,6 @@ open class BigcommerceApi: NSObject {
     
     open func getProducts(_ parameters:[String : String]?, completion: @escaping (_ products:[BigcommerceProduct], _ error: NSError?) -> ())  {
         alamofireManager.request(apiStoreBaseUrl + "products", method:.get, parameters:parameters, headers:headers)
-            .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
@@ -582,7 +610,6 @@ open class BigcommerceApi: NSObject {
         }
         
         alamofireManager.request(apiStoreBaseUrl + "products/\(productId)", method:.put, parameters:parameters, encoding:JSONEncoding.default, headers:headers)
-            .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
@@ -628,7 +655,6 @@ open class BigcommerceApi: NSObject {
         if parameters.count > 0 {
         
             alamofireManager.request(apiStoreBaseUrl + "products/\(productId)", method:.put, parameters:parameters, encoding:JSONEncoding.default, headers:headers)
-                .authenticate(user: apiUsername, password: apiToken)
                 .responseJSON { response in
                     
                     if(response.result.isSuccess) {
@@ -651,7 +677,6 @@ open class BigcommerceApi: NSObject {
     open func getProductImages(_ productId:String, completion: @escaping (_ productImages:[BigcommerceProductImage], _ error: NSError?) -> ()) {
         
         alamofireManager.request(apiStoreBaseUrl + "products/\(productId)/images", method:.get, encoding:JSONEncoding.default, headers:headers)
-            .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
@@ -686,7 +711,6 @@ open class BigcommerceApi: NSObject {
     open func getProductSkus(_ productId:String, completion: @escaping (_ productSkus:[BigcommerceProductSku], _ error: NSError?) -> ()) {
         
         alamofireManager.request(apiStoreBaseUrl + "products/\(productId)/skus", method:.get, encoding:JSONEncoding.default, headers:headers)
-            .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
@@ -728,7 +752,6 @@ open class BigcommerceApi: NSObject {
         }
         
         alamofireManager.request(apiStoreBaseUrl + "products/\(productId)/skus/\(productSkuId)", method:.put, parameters:parameters, encoding:JSONEncoding.default, headers:headers)
-            .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
@@ -761,7 +784,6 @@ open class BigcommerceApi: NSObject {
     open func getCustomers(_ parameters:[String : String]?, completion: @escaping (_ customers:[BigcommerceCustomer], _ error: NSError?) -> ()) {
         
         alamofireManager.request(apiStoreBaseUrl + "customers", method:.get, parameters:parameters, headers:headers)
-            .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
@@ -796,7 +818,6 @@ open class BigcommerceApi: NSObject {
     open func getCustomerAddresses(_ customerId:String, completion: @escaping (_ customerAddresses:[BigcommerceCustomerAddress], _ error: NSError?) -> ()) {
         
         alamofireManager.request(apiStoreBaseUrl + "customers/\(customerId)/addresses", method:.get, headers:headers)
-            .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
@@ -831,7 +852,6 @@ open class BigcommerceApi: NSObject {
     open func getOrderMessages(_ orderId:String, completion: @escaping (_ orderMessages:[BigcommerceOrderMessage], _ error: NSError?) -> ()) {
         
         alamofireManager.request(apiStoreBaseUrl + "orders/\(orderId)/messages", method:.get, headers:headers)
-            .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {
@@ -866,7 +886,6 @@ open class BigcommerceApi: NSObject {
     open func getStore(_ completion: @escaping (_ store:BigcommerceStore?, _ error: NSError?) -> ()) {
         
         alamofireManager.request(apiStoreBaseUrl + "store", method:.get, headers:headers)
-            .authenticate(user: apiUsername, password: apiToken)
             .responseJSON { response in
                 
                 if(response.result.isSuccess) {

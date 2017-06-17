@@ -10,11 +10,11 @@ import Foundation
 
 public class BigcommerceUtility {
 
-    class var defaultCurrencyLocale: Locale? {
+    public class var defaultCurrencyLocale: Locale? {
         return locale(currencyCode: "USD", languageCode: "US")
     }
 
-    class func locale(currencyCode: String, languageCode: String) -> Locale? {
+    public class func locale(currencyCode: String, languageCode: String) -> Locale? {
         let localeIdentifier = Locale.identifier(fromComponents: [NSLocale.Key.languageCode.rawValue : languageCode, NSLocale.Key.currencyCode.rawValue: currencyCode])
         return Locale(identifier: localeIdentifier)
     }
