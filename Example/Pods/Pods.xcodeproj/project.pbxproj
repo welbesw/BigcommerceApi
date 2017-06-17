@@ -40,6 +40,7 @@
 		B65FCF589DA398C3EFE0128064E510EC /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155538D91ACEEEDF82069ACF6C1A02E7 /* MultipartFormData.swift */; };
 		BBEFE2F9CEB73DC7BD97FFA66A0D9D4F /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B029DBC43E49A740F12B5E4D2E6DD452 /* Validation.swift */; };
 		BE5C67A07E289FE1F9BE27335B159997 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6639346628280A0D0FAD35196BF56108 /* ParameterEncoding.swift */; };
+		BEF7DB561EF4DB1A00C03EFD /* BigcommerceUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF7DB541EF4DB1300C03EFD /* BigcommerceUtility.swift */; };
 		BF37A9762AEB1D4B98F7F5BB60641A9F /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706C7AFFE37BA158C3553250F4B5FAED /* Alamofire.framework */; };
 		CB6D60925223897FFA2662667DF83E8A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F47F5C9CDB035C5AFADEBA5BF44F1C /* Response.swift */; };
 		D36FB1E0E9A5C87682F8393249347358 /* BigcommerceOrderMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7119E579A2DB16478BD7BF6EA9578E50 /* BigcommerceOrderMessage.swift */; };
@@ -92,7 +93,7 @@
 		1E230A0448B394DE26E688DAC8E6201E /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Source/Request.swift; sourceTree = "<group>"; };
 		213A820876DC17932894231D3B18B79E /* Pods-BigcommerceApi_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BigcommerceApi_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		22C1C119BCE81C53F76CAC2BE27C38E0 /* Alamofire-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Alamofire-dummy.m"; sourceTree = "<group>"; };
-		2C88898F8D0B060042BC6495EA829078 /* Pods_BigcommerceApi_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_BigcommerceApi_Example.framework; path = "Pods-BigcommerceApi_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C88898F8D0B060042BC6495EA829078 /* Pods_BigcommerceApi_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BigcommerceApi_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		32B030D27CAC730C5EB0F22390645310 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServerTrustPolicy.swift; path = Source/ServerTrustPolicy.swift; sourceTree = "<group>"; };
 		3D60BC9955B4F7FFA62D7440CB385C11 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Source/Result.swift; sourceTree = "<group>"; };
 		3F9B2E024A80A62FE090406312870D33 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -105,12 +106,12 @@
 		6A57DF9C2871616F2808BBEA986D97F1 /* Pods-BigcommerceApi_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BigcommerceApi_Example-resources.sh"; sourceTree = "<group>"; };
 		706C7AFFE37BA158C3553250F4B5FAED /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7119E579A2DB16478BD7BF6EA9578E50 /* BigcommerceOrderMessage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderMessage.swift; sourceTree = "<group>"; };
-		7D141D1953E5C6E67E362CE73090E48A /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Alamofire.modulemap; sourceTree = "<group>"; };
+		7D141D1953E5C6E67E362CE73090E48A /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Alamofire.modulemap; sourceTree = "<group>"; };
 		80F65D765A8B2159CA637A0A53618A98 /* BigcommerceOrderShipment.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderShipment.swift; sourceTree = "<group>"; };
 		87882A1F5A92C8138D54545E51D51E6F /* Timeline.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = Source/Timeline.swift; sourceTree = "<group>"; };
-		8BEC6889342E0398D56980E355943B75 /* BigcommerceApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BigcommerceApi.framework; path = BigcommerceApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		912885AD7B0A00DD8B0F2F91B0B3EA80 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Alamofire.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		8BEC6889342E0398D56980E355943B75 /* BigcommerceApi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BigcommerceApi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		912885AD7B0A00DD8B0F2F91B0B3EA80 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		980B129A0110C284DC3915C237A7D9C1 /* BigcommerceProductImage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceProductImage.swift; sourceTree = "<group>"; };
 		9DFA647C49FB4F179766AC06D50A0562 /* BigcommerceOrderShipmentItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderShipmentItem.swift; sourceTree = "<group>"; };
 		9F5E36D58CA4669F5EA1D771A6254312 /* BigcommerceOrderProduct.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderProduct.swift; sourceTree = "<group>"; };
@@ -123,8 +124,9 @@
 		B6A88F1173C6EFBA2F8A63CC6460FC94 /* Pods-BigcommerceApi_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BigcommerceApi_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		B702AC5C209315A3C0FAA1E0F4D1DE4E /* BigcommerceCustomer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceCustomer.swift; sourceTree = "<group>"; };
 		B7C519B2E262C3D993AACD33A2DE24C3 /* BigcommerceApi.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BigcommerceApi.xcconfig; sourceTree = "<group>"; };
-		BC73B027B19BD226382A5F13E00CE332 /* Pods-BigcommerceApi_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-BigcommerceApi_Example.modulemap"; sourceTree = "<group>"; };
+		BC73B027B19BD226382A5F13E00CE332 /* Pods-BigcommerceApi_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-BigcommerceApi_Example.modulemap"; sourceTree = "<group>"; };
 		BCCA9CA7D9C1A2047BB93336C5708DFD /* Alamofire-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-prefix.pch"; sourceTree = "<group>"; };
+		BEF7DB541EF4DB1300C03EFD /* BigcommerceUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigcommerceUtility.swift; sourceTree = "<group>"; };
 		C22D915908F8273F515A25945EB1DB2C /* BigcommerceOrderShipmentRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderShipmentRequest.swift; sourceTree = "<group>"; };
 		D47677089E19ECC79A428521D3E5D87D /* BigcommerceApi-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BigcommerceApi-prefix.pch"; sourceTree = "<group>"; };
 		D52867F97F17AED735C11C6E7531E77A /* BigcommerceOrderShippingAddress.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceOrderShippingAddress.swift; sourceTree = "<group>"; };
@@ -136,7 +138,7 @@
 		E709350D82D71894184467E5906EB810 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA5EF291AA218532F61CB581468F6582 /* Pods-BigcommerceApi_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BigcommerceApi_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		F1FC1F9672631DBF66F8524A9F9AA43C /* BigcommerceStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceStore.swift; sourceTree = "<group>"; };
-		F5CEDE3B9ACAE90BEBD38738ABC6BF45 /* BigcommerceApi.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = BigcommerceApi.modulemap; sourceTree = "<group>"; };
+		F5CEDE3B9ACAE90BEBD38738ABC6BF45 /* BigcommerceApi.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = BigcommerceApi.modulemap; sourceTree = "<group>"; };
 		F77A9BB1F407E26235955CE5230AEF42 /* BigcommerceCustomerAddress.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BigcommerceCustomerAddress.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -201,7 +203,6 @@
 				B029DBC43E49A740F12B5E4D2E6DD452 /* Validation.swift */,
 				55F14F994FE7AB51F028BFE66CEF3106 /* Support Files */,
 			);
-			name = Alamofire;
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
@@ -218,7 +219,6 @@
 			children = (
 				5AA81682459E05043A116625646B1F11 /* Classes */,
 			);
-			name = Pod;
 			path = Pod;
 			sourceTree = "<group>";
 		};
@@ -264,8 +264,8 @@
 				980B129A0110C284DC3915C237A7D9C1 /* BigcommerceProductImage.swift */,
 				0FB65869240207C452E3FA163010D2B0 /* BigcommerceProductSku.swift */,
 				F1FC1F9672631DBF66F8524A9F9AA43C /* BigcommerceStore.swift */,
+				BEF7DB541EF4DB1300C03EFD /* BigcommerceUtility.swift */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -507,6 +507,7 @@
 				1677888FE1F75398929BD76238809727 /* BigcommerceOrderProductOption.swift in Sources */,
 				34B09B1220F0275E317710F66BD19679 /* BigcommerceOrderShipment.swift in Sources */,
 				052CAB538BDCDA9DFA608BB7450901A2 /* BigcommerceOrderShipmentItem.swift in Sources */,
+				BEF7DB561EF4DB1A00C03EFD /* BigcommerceUtility.swift in Sources */,
 				435B1842EFA40A4CC653B6A7ED92A5C0 /* BigcommerceOrderShipmentRequest.swift in Sources */,
 				E8EB61CBB9F609CAC1223065203D951E /* BigcommerceOrderShippingAddress.swift in Sources */,
 				536F02D0DFBC9D4741402FE40B9B0308 /* BigcommerceOrderStatus.swift in Sources */,

@@ -24,8 +24,9 @@ open class BigcommerceApi: NSObject {
     var apiToken = ""               //Pass in via setCredentials
     var apiStoreBaseUrl = ""        //Pass in via setCredentials
     
-    open var currencyCode = "USD"        //Default to US dollars - retrieve via getStore method
-    open var currencyLocale:Locale?
+    public var currencyCode = "USD"        //Default to US dollars - retrieve via getStore method
+    public var languageCode = "en"         //Default to english - retrieve via getStore method
+    public var currencyLocale:Locale?
     
     let headers: HTTPHeaders = [
         "Accept": "application/json"
@@ -47,7 +48,7 @@ open class BigcommerceApi: NSObject {
         initializeAlamofire()
     }
     
-    func initializeAlamofire() {
+    private func initializeAlamofire() {
         
         //var defaultHeaders = Alamofire.SessionManager.default.defaultHeaders
         //defaultHeaders["Accept"] = "application/json"
@@ -65,18 +66,14 @@ open class BigcommerceApi: NSObject {
         self.apiStoreBaseUrl = storeBaseUrl
     }
     
-    open func updateCurrencyLocale(_ code:String) {
-        currencyCode = code
-        
-        var components:[String : String] = [NSLocale.Key.currencyCode.rawValue : currencyCode]
-        if let language = Locale.preferredLanguages.first {
-            components.updateValue(language, forKey:NSLocale.Key.languageCode.rawValue)
-        }
-        let localeIdentifier = Locale.identifier(fromComponents: components)
-        currencyLocale = Locale(identifier: localeIdentifier)
+    open func updateCurrencyLocale(currencyCode: String, languageCode: String) {
+        self.currencyCode = currencyCode
+        self.languageCode = languageCode
+
+        currencyLocale = BigcommerceUtility.locale(currencyCode: currencyCode, languageCode: languageCode)
     }
     
-    func checkForErrorResponse(_ response:DataResponse<Any>) -> NSError? {
+    private func checkForErrorResponse(_ response:DataResponse<Any>) -> NSError? {
         var error:NSError?
         if let theResponse = response.response {
             if(theResponse.statusCode >= 400) {
@@ -163,7 +160,7 @@ open class BigcommerceApi: NSObject {
                         if let ordersArray = response.result.value as? NSArray {
                             for orderElement in ordersArray {
                                 if let orderDict = orderElement as? NSDictionary {
-                                    let order = BigcommerceOrder(jsonDictionary: orderDict)
+                                    let order = BigcommerceOrder(jsonDictionary: orderDict, currencyLocale: self.currencyLocale)
                                     orders.append(order)
                                 }
                             }
@@ -195,7 +192,7 @@ open class BigcommerceApi: NSObject {
                         var order:BigcommerceOrder? = nil
                         
                         if let orderDict = response.result.value as? NSDictionary {
-                            order = BigcommerceOrder(jsonDictionary: orderDict)
+                            order = BigcommerceOrder(jsonDictionary: orderDict, currencyLocale: self.currencyLocale)
                         }
                         
                         completion(order, nil)
@@ -302,7 +299,7 @@ open class BigcommerceApi: NSObject {
                             if let orderProductsArray = response.result.value as? NSArray {
                                 for orderProductElement in orderProductsArray {
                                     if let productDict = orderProductElement as? NSDictionary {
-                                        let orderProduct = BigcommerceOrderProduct(jsonDictionary: productDict, currencyCode: order.currencyCode)
+                                        let orderProduct = BigcommerceOrderProduct(jsonDictionary: productDict, currencyLocale: order.currencyLocale)
                                         orderProducts.append(orderProduct)
                                     }
                                 }
@@ -344,7 +341,7 @@ open class BigcommerceApi: NSObject {
                             if let orderShippingAddressesArray = response.result.value as? NSArray {
                                 for orderShippingAddressElement in orderShippingAddressesArray {
                                     if let shippingAddressDict = orderShippingAddressElement as? NSDictionary {
-                                        let orderShippingAddress = BigcommerceOrderShippingAddress(jsonDictionary: shippingAddressDict, currencyCode: order.currencyCode)
+                                        let orderShippingAddress = BigcommerceOrderShippingAddress(jsonDictionary: shippingAddressDict, currencyLocale: order.currencyLocale)
                                         orderShippingAddresses.append(orderShippingAddress)
                                     }
                                 }
@@ -490,7 +487,7 @@ open class BigcommerceApi: NSObject {
         }
     }
     
-    func processOrderStatusesResult(_ orderStatusArray:NSArray) -> [BigcommerceOrderStatus] {
+    open func processOrderStatusesResult(_ orderStatusArray:NSArray) -> [BigcommerceOrderStatus] {
         //Loop over the orders JSON object and create order objects for each one
          var orderStatuses:[BigcommerceOrderStatus] = []
         
@@ -555,7 +552,7 @@ open class BigcommerceApi: NSObject {
                         if let productsArray = response.result.value as? NSArray {
                             for productElement in productsArray {
                                 if let productDict = productElement as? NSDictionary {
-                                    let product = BigcommerceProduct(jsonDictionary: productDict, currencyCode: self.currencyCode)
+                                    let product = BigcommerceProduct(jsonDictionary: productDict, currencyLocale: self.currencyLocale)
                                     products.append(product)
                                 }
                             }
@@ -704,7 +701,7 @@ open class BigcommerceApi: NSObject {
                         if let productSkusArray = response.result.value as? NSArray {
                             for productSkuElement in productSkusArray {
                                 if let productSkuDict = productSkuElement as? NSDictionary {
-                                    let productSku = BigcommerceProductSku(jsonDictionary: productSkuDict, currencyCode: self.currencyCode)
+                                    let productSku = BigcommerceProductSku(jsonDictionary: productSkuDict, currencyLocale: self.currencyLocale)
                                     productSkus.append(productSku)
                                 }
                             }

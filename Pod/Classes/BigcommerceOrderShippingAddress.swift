@@ -46,20 +46,13 @@ open class BigcommerceOrderShippingAddress: NSObject {
     open var shippingZoneId: NSNumber?
     open var shippingZoneName: String = ""
     
-    public init(jsonDictionary:NSDictionary, currencyCode:String) {
+    public init(jsonDictionary: NSDictionary, currencyLocale: Locale?) {
         //Load the JSON dictionary into the shipping address object
         
         //Float values are returned as quote enclosed strings in the JSON from the API
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = NumberFormatter.Style.decimal
-        
-        var components:[String : String] = [NSLocale.Key.currencyCode.rawValue : currencyCode]
-        if let language = Locale.preferredLanguages.first {
-            components.updateValue(language, forKey: NSLocale.Key.languageCode.rawValue)
-        }
-        let localeIdentifier = Locale.identifier(fromComponents: components)
-        let localeForCurrency = Locale(identifier: localeIdentifier);
-        numberFormatter.locale = localeForCurrency
+        numberFormatter.locale = currencyLocale
         
         if let id = jsonDictionary["id"] as? NSNumber {
             self.id = id

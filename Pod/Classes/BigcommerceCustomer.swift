@@ -36,14 +36,6 @@ open class BigcommerceCustomer: NSObject {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = NumberFormatter.Style.decimal
         
-        var components:[String : String] = [NSLocale.Key.currencyCode.rawValue : "USD"] //Assume USD
-        if let language = Locale.preferredLanguages.first {
-            components.updateValue(language, forKey: NSLocale.Key.languageCode.rawValue)
-        }
-        let localeIdentifier = Locale.identifier(fromComponents: components)
-        let localeForCurrency = Locale(identifier: localeIdentifier);
-        numberFormatter.locale = localeForCurrency
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, d MMM yyyy HH:mm:ss zzz"
         

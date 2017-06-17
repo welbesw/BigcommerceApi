@@ -51,20 +51,13 @@ open class BigcommerceProduct: NSObject {
     open var imageThumbnailUrl:String?
     open var availability:String = ""
     
-    public init(jsonDictionary:NSDictionary, currencyCode:String) {
+    public init(jsonDictionary: NSDictionary, currencyLocale: Locale?) {
         //Load the JSON dictionary into the order object
         
         //Float values are returned as quote enclosed strings in the JSON from the API
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = NumberFormatter.Style.decimal
-        
-        var components:[String : String] = [NSLocale.Key.currencyCode.rawValue : currencyCode]
-        if let language = Locale.preferredLanguages.first {
-            components.updateValue(language, forKey: NSLocale.Key.languageCode.rawValue)
-        }
-        let localeIdentifier = Locale.identifier(fromComponents: components)
-        let localeForCurrency = Locale(identifier: localeIdentifier);
-        numberFormatter.locale = localeForCurrency
+        numberFormatter.locale = currencyLocale
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, d MMM yyyy HH:mm:ss zzz"
