@@ -7,7 +7,6 @@
 //
 
 import Foundation
-//import Alamofire
 
 public enum InventoryTrackingType: String {
     case None = "none"

@@ -34,5 +34,5 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'Foundation'
-  s.dependency 'Alamofire', '~> 4.0'
+  # s.dependency 'SomeOtherPod', '~> 4.0'
 end
