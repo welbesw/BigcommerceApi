@@ -94,7 +94,7 @@ class CredentialsViewController: UITableViewController {
                 DispatchQueue.main.async(execute: { 
                     if(error == nil) {
                         //TODO - set currency code for the store
-                        if store != nil && store!.currency.characters.count > 0 {
+                        if store != nil && store!.currency.count > 0 {
                             BigcommerceApi.sharedInstance.currencyCode = store!.currency
                         }
                         

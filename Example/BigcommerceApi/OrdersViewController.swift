@@ -21,8 +21,16 @@ class OrdersViewController: UITableViewController {
         if !defaultsManager.apiCredentialsAreSet {
             self.performSegue(withIdentifier: "ModalCredentialsSegue", sender: nil)
         } else {
+            guard let apiStoreBaseUrl = defaultsManager.apiStoreBaseUrl else {
+                return
+            }
+            
             //Set the API credentials
-            BigcommerceApi.sharedInstance.setCredentials(defaultsManager.apiUsername!, token: defaultsManager.apiToken!, storeBaseUrl: defaultsManager.apiStoreBaseUrl!)
+            if let apiUsername = defaultsManager.apiUsername, let apiToken = defaultsManager.apiToken {
+                BigcommerceApi.sharedInstance.setCredentials(apiUsername, token: apiToken, storeBaseUrl: apiStoreBaseUrl)
+            } else if let apiOauthToken = defaultsManager.apiOauthToken, let apiOauthId = defaultsManager.apiOauthId {
+                BigcommerceApi.sharedInstance.setCredentialsOauth(clientId: apiOauthId, accessToken: apiOauthToken, storeBaseUrl: apiStoreBaseUrl)
+            }
             
             //Fetch the Bigcommerce store
             BigcommerceApi.sharedInstance.getStore({ (store, error) -> () in

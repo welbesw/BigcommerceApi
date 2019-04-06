@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Alamofire
+//import Alamofire
 
 public enum InventoryTrackingType: String {
     case None = "none"
@@ -39,55 +39,36 @@ open class BigcommerceApi: NSObject {
     public var languageCode = "en"         //Default to english - retrieve via getStore method
     public var currencyLocale:Locale?
     
-    var headers: HTTPHeaders {
-        var headers: HTTPHeaders = ["Accept": "application/json"]
-
-        //For OAuth set the client and token in the headers
+    func getAuthHeader() -> [String : String] {
+        
+        var headers = ["Accept": "application/json"]
         switch authMode {
         case .basic:
-            if let authorizationHeader = Request.authorizationHeader(user: apiUsername, password: apiToken) {
-                headers[authorizationHeader.key] = authorizationHeader.value
-            }
+            let credentialData = "\(apiUsername):\(apiToken)".data(using: String.Encoding.utf8)!
+            let base64Credentials = credentialData.base64EncodedString(options: [])
+            headers["Authorization"] = "Basic \(base64Credentials)"
         case .oauth:
             headers["X-Auth-Client"] = apiOauthClientId
             headers["X-Auth-Token"] = apiOauthAccessToken
         }
+        
         return headers
     }
     
-    var alamofireManager: Alamofire.SessionManager!
-    
     override init() {
         super.init()
-        
-        initializeAlamofire()
     }
     
     public init(username: String, token: String, storeBaseUrl: String) {
         super.init()
         
         setCredentials(username, token: token, storeBaseUrl: storeBaseUrl)
-        
-        initializeAlamofire()
     }
 
     public init(oauthClientId: String, oauthAccessToken: String, storeBaseUrl: String) {
         super.init()
 
         setCredentialsOauth(clientId: oauthClientId, accessToken: oauthAccessToken, storeBaseUrl: storeBaseUrl)
-
-        initializeAlamofire()
-    }
-
-    private func initializeAlamofire() {
-        
-        //var defaultHeaders = Alamofire.SessionManager.default.defaultHeaders
-        //defaultHeaders["Accept"] = "application/json"
-        
-        //let configuration = URLSessionConfiguration.default
-        //configuration.httpAdditionalHeaders = defaultHeaders
-        
-        self.alamofireManager = Alamofire.SessionManager.default
     }
     
     //Set the credentials to use with the API
@@ -111,30 +92,6 @@ open class BigcommerceApi: NSObject {
         self.languageCode = languageCode
 
         currencyLocale = BigcommerceUtility.locale(currencyCode: currencyCode, languageCode: languageCode)
-    }
-    
-    private func checkForErrorResponse(_ response:DataResponse<Any>) -> NSError? {
-        var error:NSError?
-        if let theResponse = response.response {
-            if(theResponse.statusCode >= 400) {
-                print("Server returned an error status code of: \(theResponse.statusCode)")
-                
-                var userInfo:[String : Any] = [NSLocalizedDescriptionKey : "Error code \(theResponse.statusCode) from the web service."]
-                
-                if let resultArray = response.result.value as? NSArray {
-                    if(resultArray.count > 0) {
-                        if let resultDict = resultArray[0] as? NSDictionary {
-                            if let message = resultDict["message"] as? String {
-                                userInfo.updateValue(message, forKey: NSLocalizedDescriptionKey)
-                            }
-                        }
-                    }
-                }
-                
-                error = NSError(domain: "com.technomagination.BigcommerceApi", code: theResponse.statusCode, userInfo: userInfo)
-            }
-        }
-        return error
     }
     
     open func getOrdersForCustomer(_ customerId:String, completion: @escaping (_ orders:[BigcommerceOrder], _ error: NSError?) -> ()) {
@@ -184,86 +141,73 @@ open class BigcommerceApi: NSObject {
     //Retrieve an array of Bigcommerce order objects
     open func getOrders(_ parameters:[String : String], completion: @escaping (_ orders:[BigcommerceOrder], _ error: NSError?) -> ()) {
         
-        alamofireManager.request(apiStoreBaseUrl + "orders", method: .get, parameters:parameters, headers:headers)
-            .responseJSON { response in
+        guard let request = URLRequest.newRequest(urlString: apiStoreBaseUrl + "orders", method: .get, parameters: parameters, headers: getAuthHeader()) else {
+            return
+        }
+        
+        URLSession.newSession().apiDataTask(with: request) { (result) in
+            switch result {
+            case .success(let json):
+                var orders: [BigcommerceOrder] = []
                 
-                if(response.result.isSuccess) {
-                    
-                    if let responseError = self.checkForErrorResponse(response) {
-                        completion([], responseError)
-                    } else {
-                    
-                        var orders: [BigcommerceOrder] = []
-                        
-                        //Loop over the orders JSON object and create order objects for each one
-                        if let ordersArray = response.result.value as? NSArray {
-                            for orderElement in ordersArray {
-                                if let orderDict = orderElement as? NSDictionary {
-                                    let order = BigcommerceOrder(jsonDictionary: orderDict, currencyLocale: self.currencyLocale)
-                                    orders.append(order)
-                                }
-                            }
+                //Loop over the orders JSON object and create order objects for each one
+                if let ordersArray = json as? NSArray {
+                    for orderElement in ordersArray {
+                        if let orderDict = orderElement as? NSDictionary {
+                            let order = BigcommerceOrder(jsonDictionary: orderDict, currencyLocale: self.currencyLocale)
+                            orders.append(order)
                         }
-                        
-                        completion(orders, nil)
                     }
-                    
-                    
-                } else {
-                    print(response.result.error ?? "")
-                    completion([], response.result.error as NSError?)
                 }
+                
+                completion(orders, nil)
+            case .failure(let error):
+                print(error)
+                completion([], error as NSError)
+                break
+            }
         }
     }
     
     open func getOrder(orderId: String, completion: @escaping (_ order:BigcommerceOrder?, _ error: NSError?) -> ()) {
         
-        alamofireManager.request(apiStoreBaseUrl + "orders/\(orderId)", method: .get, headers:headers)
-            .responseJSON { response in
+        guard let request = URLRequest.newRequest(urlString: apiStoreBaseUrl + "orders/\(orderId)", method: .get, parameters: nil, headers: getAuthHeader()) else {
+            return
+        }
+        
+        URLSession.newSession().apiDataTask(with: request) { (result) in
+            switch result {
+            case .success(let json):
+                var order:BigcommerceOrder? = nil
                 
-                if(response.result.isSuccess) {
-                    
-                    if let responseError = self.checkForErrorResponse(response) {
-                        completion(nil, responseError)
-                    } else {
-                    
-                        var order:BigcommerceOrder? = nil
-                        
-                        if let orderDict = response.result.value as? NSDictionary {
-                            order = BigcommerceOrder(jsonDictionary: orderDict, currencyLocale: self.currencyLocale)
-                        }
-                        
-                        completion(order, nil)
-                    }
-                    
-                    
-                } else {
-                    print(response.result.error ?? "")
-                    completion(nil, response.result.error as NSError?)
+                if let orderDict = json as? NSDictionary {
+                    order = BigcommerceOrder(jsonDictionary: orderDict, currencyLocale: self.currencyLocale)
                 }
+                
+                completion(order, nil)
+            case .failure(let error):
+                print(error)
+                completion(nil, error as NSError)
+            }
         }
     }
     
     open func updateOrderStatus(_ orderId:String, newStatusId:Int, completion: @escaping (_ error: NSError?) -> ()) {
         
-        let parameters = ["status_id" : newStatusId]
+        let parameters = ["status_id" : "\(newStatusId)"]
         
-        alamofireManager.request(apiStoreBaseUrl + "orders/\(orderId)", method: .put, parameters: parameters, encoding: JSONEncoding.default, headers:headers)
-            .responseJSON { response in
-                
-                if(response.result.isSuccess) {
-                    
-                    if let responseError = self.checkForErrorResponse(response) {
-                        completion(responseError)
-                    } else {
-                        completion(nil)
-                    }
-                    
-                    
-                } else {
-                    print(response.result.error ?? "")
-                    completion(response.result.error as NSError?)
-                }
+        guard let request = URLRequest.newRequest(urlString: apiStoreBaseUrl + "orders/\(orderId)", method: .put, parameters: parameters, headers: getAuthHeader()) else {
+            return
+        }
+        
+        URLSession.newSession().apiDataTask(with: request) { (result) in
+            switch result {
+            case .success:
+                completion(nil)
+            case .failure(let error):
+                print(error)
+                completion(error as NSError)
+            }
         }
     }
     
@@ -271,22 +215,18 @@ open class BigcommerceApi: NSObject {
         
         let parameters = ["staff_notes" : staffNotes]
         
-        alamofireManager.request(apiStoreBaseUrl + "orders/\(orderId)", method: .put, parameters: parameters, encoding: JSONEncoding.default, headers:headers)
-            .responseJSON { response in
-                
-                if(response.result.isSuccess) {
-                    
-                    if let responseError = self.checkForErrorResponse(response) {
-                        completion(responseError)
-                    } else {
-                        completion(nil)
-                    }
-                    
-                    
-                } else {
-                    print(response.result.error ?? "")
-                    completion(response.result.error as NSError?)
-                }
+        guard let request = URLRequest.newRequest(urlString: apiStoreBaseUrl + "orders/\(orderId)", method: .put, parameters: parameters, headers: getAuthHeader()) else {
+            return
+        }
+        
+        URLSession.newSession().apiDataTask(with: request) { (result) in
+            switch result {
+            case .success:
+                completion(nil)
+            case .failure(let error):
+                print(error)
+                completion(error as NSError)
+            }
         }
     }
     
@@ -294,59 +234,50 @@ open class BigcommerceApi: NSObject {
         
         let parameters = ["customer_message" : customerMessage]
         
-        alamofireManager.request(apiStoreBaseUrl + "orders/\(orderId)", method:.put, parameters:parameters, encoding:JSONEncoding.default, headers:headers)
-            .responseJSON { response in
-                
-                if(response.result.isSuccess) {
-                    
-                    if let responseError = self.checkForErrorResponse(response) {
-                        completion(responseError)
-                    } else {
-                        completion(nil)
-                    }
-                    
-                    
-                } else {
-                    print(response.result.error ?? "")
-                    completion(response.result.error as NSError?)
-                }
+        guard let request = URLRequest.newRequest(urlString: apiStoreBaseUrl + "orders/\(orderId)", method: .put, parameters: parameters, headers: getAuthHeader()) else {
+            return
+        }
+        
+        URLSession.newSession().apiDataTask(with: request) { (result) in
+            switch result {
+            case .success:
+                completion(nil)
+            case .failure(let error):
+                print(error)
+                completion(error as NSError)
+            }
         }
     }
     
     open func getProductsForOrder(_ order:BigcommerceOrder, completion: @escaping (_ orderProducts:[BigcommerceOrderProduct], _ error: NSError?) -> ()) {
         //Use the resource specified in the order to fetch the products
         
-        if order.productsUrl.characters.count > 0 {
-        
-            alamofireManager.request(order.productsUrl, method: .get, headers:headers)
-                .responseJSON { response in
+        if order.productsUrl.count > 0 {
+            
+            guard let request = URLRequest.newRequest(urlString: order.productsUrl, method: .get, parameters: nil, headers: getAuthHeader()) else {
+                return
+            }
+            
+            URLSession.newSession().apiDataTask(with: request) { (result) in
+                switch result {
+                case .success(let json):
+                    var orderProducts: [BigcommerceOrderProduct] = []
                     
-                    if(response.result.isSuccess) {
-                        
-                        if let responseError = self.checkForErrorResponse(response) {
-                            completion([], responseError)
-                        } else {
-                        
-                            var orderProducts: [BigcommerceOrderProduct] = []
-                            
-                            //Loop over the orders JSON object and create order objects for each one
-                            if let orderProductsArray = response.result.value as? NSArray {
-                                for orderProductElement in orderProductsArray {
-                                    if let productDict = orderProductElement as? NSDictionary {
-                                        let orderProduct = BigcommerceOrderProduct(jsonDictionary: productDict, currencyLocale: order.currencyLocale)
-                                        orderProducts.append(orderProduct)
-                                    }
-                                }
+                    //Loop over the orders JSON object and create order objects for each one
+                    if let orderProductsArray = json as? NSArray {
+                        for orderProductElement in orderProductsArray {
+                            if let productDict = orderProductElement as? NSDictionary {
+                                let orderProduct = BigcommerceOrderProduct(jsonDictionary: productDict, currencyLocale: order.currencyLocale)
+                                orderProducts.append(orderProduct)
                             }
-                            
-                            completion(orderProducts, nil)
                         }
-                        
-                        
-                    } else {
-                        print(response.result.error ?? "")
-                        completion([], response.result.error as NSError?)
                     }
+                    
+                    completion(orderProducts, nil)
+                case .failure(let error):
+                    print(error)
+                    completion([], error as NSError)
+                }
             }
         } else {
             let error = NSError(domain: "com.technomagination.BigcommerceApi", code: 1, userInfo: nil)
@@ -357,162 +288,118 @@ open class BigcommerceApi: NSObject {
     open func getShippingAddressesForOrder(_ order:BigcommerceOrder, completion: @escaping (_ orderShippingAddresses:[BigcommerceOrderShippingAddress], _ error: NSError?) -> ()) {
         //Use the resource specified in the order to fetch the products
         
-        if order.shippingAddressesUrl.characters.count > 0 {
+        if order.shippingAddressesUrl.count > 0 {
             
-            alamofireManager.request(order.shippingAddressesUrl, method: .get, headers:headers)
-                .responseJSON { response in
+            guard let request = URLRequest.newRequest(urlString: order.shippingAddressesUrl, method: .get, parameters: nil, headers: getAuthHeader()) else {
+                return
+            }
+            
+            URLSession.newSession().apiDataTask(with: request) { (result) in
+                switch result {
+                case .success(let json):
+                    var orderShippingAddresses: [BigcommerceOrderShippingAddress] = []
                     
-                    if(response.result.isSuccess) {
-                        
-                        if let responseError = self.checkForErrorResponse(response) {
-                            completion([], responseError)
-                        } else {
-                        
-                            var orderShippingAddresses: [BigcommerceOrderShippingAddress] = []
-                            
-                            //Loop over the orders JSON object and create order objects for each one
-                            if let orderShippingAddressesArray = response.result.value as? NSArray {
-                                for orderShippingAddressElement in orderShippingAddressesArray {
-                                    if let shippingAddressDict = orderShippingAddressElement as? NSDictionary {
-                                        let orderShippingAddress = BigcommerceOrderShippingAddress(jsonDictionary: shippingAddressDict, currencyLocale: order.currencyLocale)
-                                        orderShippingAddresses.append(orderShippingAddress)
-                                    }
-                                }
+                    //Loop over the orders JSON object and create order objects for each one
+                    if let orderShippingAddressesArray = json as? NSArray {
+                        for orderShippingAddressElement in orderShippingAddressesArray {
+                            if let shippingAddressDict = orderShippingAddressElement as? NSDictionary {
+                                let orderShippingAddress = BigcommerceOrderShippingAddress(jsonDictionary: shippingAddressDict, currencyLocale: order.currencyLocale)
+                                orderShippingAddresses.append(orderShippingAddress)
                             }
-                            
-                            completion(orderShippingAddresses, nil)
                         }
-                        
-                        
-                    } else {
-                        print(response.result.error ?? "")
-                        completion([], response.result.error as NSError?)
                     }
+                    
+                    completion(orderShippingAddresses, nil)
+                case .failure(let error):
+                    print(error)
+                    completion([], error as NSError)
+                }
             }
         } else {
-            let error = NSError(domain: "com.technomagination.BigcommerceApi", code: 2, userInfo: nil)
-            completion([], error)
+            completion([], Utility.error("Order does not have a shipping address url", code: 2))
         }
     }
     
     open func getShipmentsForOrder(_ order:BigcommerceOrder, completion: @escaping (_ orderShipments:[BigcommerceOrderShipment], _ error: NSError?) -> ()) {
         
         if let orderId = order.orderId {
-            alamofireManager.request(apiStoreBaseUrl + "orders/\(orderId.stringValue)/shipments", method: .get, headers:headers)
-                .responseJSON { response in
+            
+            guard let request = URLRequest.newRequest(urlString: apiStoreBaseUrl + "orders/\(orderId.stringValue)/shipments", method: .get, parameters: nil, headers: getAuthHeader()) else {
+                return
+            }
+            
+            URLSession.newSession().apiDataTask(with: request) { (result) in
+                switch result {
+                case .success(let json):
+                    var orderShipments: [BigcommerceOrderShipment] = []
                     
-                    if(response.result.isSuccess) {
-                        
-                        if let responseError = self.checkForErrorResponse(response) {
-                            completion([], responseError)
-                        } else {
-                            
-                            var orderShipments: [BigcommerceOrderShipment] = []
-                            
-                            //Loop over the orders JSON object and create order objects for each one
-                            if let orderShipmentsArray = response.result.value as? NSArray {
-                                for orderShipmentElement in orderShipmentsArray {
-                                    if let shipmentDict = orderShipmentElement as? NSDictionary {
-                                        let orderShipment = BigcommerceOrderShipment(jsonDictionary: shipmentDict)
-                                        orderShipments.append(orderShipment)
-                                    }
-                                }
+                    //Loop over the orders JSON object and create order objects for each one
+                    if let orderShipmentsArray = json as? NSArray {
+                        for orderShipmentElement in orderShipmentsArray {
+                            if let shipmentDict = orderShipmentElement as? NSDictionary {
+                                let orderShipment = BigcommerceOrderShipment(jsonDictionary: shipmentDict)
+                                orderShipments.append(orderShipment)
                             }
-                            
-                            completion(orderShipments, nil)
                         }
-                        
-                        
-                    } else {
-                        print(response.result.error ?? "")
-                        completion([], response.result.error as NSError?)
                     }
+                    
+                    completion(orderShipments, nil)
+                case .failure(let error):
+                    print(error)
+                    completion([], error as NSError)
+                }
             }
         } else {
-            let error = NSError(domain: "com.technomagination.BigcommerceApi", code: 3, userInfo: nil)
-            completion([], error)
+            completion([], Utility.error("Order does not have an order id", code: 3))
         }
     }
     
     //Create an order shipment for an order.
     open func createShipmentForOrder(_ orderShipmentRequest:BigcommerceOrderShipmentRequest, completion: @escaping (_ orderShipment:BigcommerceOrderShipment?, _ error: NSError?) -> ()) {
         
-        let parameters:[String : AnyObject] = orderShipmentRequest.jsonDictionary()
+        let parameters = orderShipmentRequest.jsonDictionary()
         
+        guard let request = URLRequest.newRequest(urlString: apiStoreBaseUrl + "orders/\(orderShipmentRequest.orderId)/shipments/", method: .post, parameters: parameters, headers: getAuthHeader()) else {
+            return
+        }
         
-        alamofireManager.request(apiStoreBaseUrl + "orders/\(orderShipmentRequest.orderId)/shipments/", method: .post, parameters:parameters, encoding:JSONEncoding.default, headers:headers)
-            .responseJSON { response in
-                
-                if(response.result.isSuccess) {
-                    
-                    if let responseError = self.checkForErrorResponse(response) {
-                        completion(nil, responseError)
-                    } else {
-                        
-                        //Parse out the order shipment in the response
-                        var orderShipment:BigcommerceOrderShipment?
-                        if let shipmentDict = response.result.value as? NSDictionary {
-                            orderShipment = BigcommerceOrderShipment(jsonDictionary: shipmentDict)
-                        }
-                        
-                        completion(orderShipment, nil)
-                    }
-                    
-                    
-                } else {
-                    print(response.result.error ?? "")
-                    completion(nil, response.result.error as NSError?)
+        URLSession.newSession().apiDataTask(with: request) { (result) in
+            switch result {
+            case .success(let json):
+                //Parse out the order shipment in the response
+                var orderShipment:BigcommerceOrderShipment?
+                if let shipmentDict = json as? NSDictionary {
+                    orderShipment = BigcommerceOrderShipment(jsonDictionary: shipmentDict)
                 }
+                
+                completion(orderShipment, nil)
+            case .failure(let error):
+                print(error)
+                completion(nil, error as NSError)
+            }
         }
     }
 
     
     open func getOrderStatuses(_ completion: @escaping (_ orderStatuses:[BigcommerceOrderStatus], _ error: NSError?) -> ()) {
-        alamofireManager.request(apiStoreBaseUrl + "order_statuses", method:.get, headers:headers)
-            .responseJSON { response in
-                
+        
+        guard let request = URLRequest.newRequest(urlString: apiStoreBaseUrl + "order_statuses", method: .get, parameters: nil, headers: getAuthHeader()) else {
+            return
+        }
+        
+        URLSession.newSession().apiDataTask(with: request) { (result) in
+            switch result {
+            case .success(let json):
                 var orderStatuses:[BigcommerceOrderStatus] = []
-                
-                if(response.result.isSuccess) {
-                    
-                    if let responseError = self.checkForErrorResponse(response) {
-                        completion(orderStatuses, responseError)
-                    } else {
-                    
-                        if let orderStatusArray = response.result.value as? NSArray {
-                            orderStatuses = self.processOrderStatusesResult(orderStatusArray)
-                        }
-                        
-                        completion(orderStatuses, nil)
-                    }
-                    
-                    
-                } else {
-                    print(response.result.error ?? "")
-                    
-                    self.alamofireManager.request(self.apiStoreBaseUrl + "orderstatuses", method:.get, headers:self.headers)
-                        .responseJSON { response2 in
-                            
-                            if(response2.result.isSuccess) {
-                                
-                                if let response2Error = self.checkForErrorResponse(response2) {
-                                    completion(orderStatuses, response2Error)
-                                } else {
-                                    
-                                    if let orderStatusItemsArray = response2.result.value as? NSArray {
-                                        orderStatuses = self.processOrderStatusesResult(orderStatusItemsArray)
-                                    }
-                                    
-                                    completion(orderStatuses, nil)
-                                }
-                                
-                                
-                            } else {
-                                print(response2.result.error ?? "")
-                                completion(orderStatuses, response2.result.error as NSError?)
-                            }
-                    }
+                if let orderStatusArray = json as? NSArray {
+                    orderStatuses = self.processOrderStatusesResult(orderStatusArray)
                 }
+                
+                completion(orderStatuses, nil)
+            case .failure(let error):
+                print(error)
+                completion([], error as NSError)
+            }
         }
     }
     
@@ -565,35 +452,31 @@ open class BigcommerceApi: NSObject {
     }
     
     open func getProducts(_ parameters:[String : String]?, completion: @escaping (_ products:[BigcommerceProduct], _ error: NSError?) -> ())  {
-        alamofireManager.request(apiStoreBaseUrl + "products", method:.get, parameters:parameters, headers:headers)
-            .responseJSON { response in
+        
+        guard let request = URLRequest.newRequest(urlString: apiStoreBaseUrl + "products", method: .get, parameters: parameters, headers: getAuthHeader()) else {
+            return
+        }
+        
+        URLSession.newSession().apiDataTask(with: request) { (result) in
+            switch result {
+            case .success(let json):
+                var products: [BigcommerceProduct] = []
                 
-                if(response.result.isSuccess) {
-                    
-                    if let responseError = self.checkForErrorResponse(response) {
-                        completion([], responseError)
-                    } else {
-                    
-                        var products: [BigcommerceProduct] = []
-                        
-                        //Loop over the orders JSON object and create order objects for each one
-                        if let productsArray = response.result.value as? NSArray {
-                            for productElement in productsArray {
-                                if let productDict = productElement as? NSDictionary {
-                                    let product = BigcommerceProduct(jsonDictionary: productDict, currencyLocale: self.currencyLocale)
-                                    products.append(product)
-                                }
-                            }
+                //Loop over the orders JSON object and create order objects for each one
+                if let productsArray = json as? NSArray {
+                    for productElement in productsArray {
+                        if let productDict = productElement as? NSDictionary {
+                            let product = BigcommerceProduct(jsonDictionary: productDict, currencyLocale: self.currencyLocale)
+                            products.append(product)
                         }
-                        
-                        completion(products, nil)
                     }
-                    
-                    
-                } else {
-                    print(response.result.error ?? "")
-                    completion([], response.result.error as NSError?)
                 }
+                
+                completion(products, nil)
+            case .failure(let error):
+                print(error)
+                completion([], error as NSError)
+            }
         }
     }
     
@@ -609,22 +492,18 @@ open class BigcommerceApi: NSObject {
             parameters.updateValue(lowLevel as AnyObject, forKey: "inventory_warning_level")
         }
         
-        alamofireManager.request(apiStoreBaseUrl + "products/\(productId)", method:.put, parameters:parameters, encoding:JSONEncoding.default, headers:headers)
-            .responseJSON { response in
-                
-                if(response.result.isSuccess) {
-                    
-                    if let responseError = self.checkForErrorResponse(response) {
-                        completion(responseError)
-                    } else {
-                        completion(nil)
-                    }
-                    
-                    
-                } else {
-                    print(response.result.error ?? "")
-                    completion(response.result.error as NSError?)
-                }
+        guard let request = URLRequest.newRequest(urlString: apiStoreBaseUrl + "products/\(productId)", method: .put, parameters: parameters, headers: getAuthHeader()) else {
+            return
+        }
+        
+        URLSession.newSession().apiDataTask(with: request) { (result) in
+            switch result {
+            case .success:
+                completion(nil)
+            case .failure(let error):
+                print(error)
+                completion(error as NSError)
+            }
         }
     }
     
@@ -654,91 +533,75 @@ open class BigcommerceApi: NSObject {
         
         if parameters.count > 0 {
         
-            alamofireManager.request(apiStoreBaseUrl + "products/\(productId)", method:.put, parameters:parameters, encoding:JSONEncoding.default, headers:headers)
-                .responseJSON { response in
-                    
-                    if(response.result.isSuccess) {
-                        
-                        if let responseError = self.checkForErrorResponse(response) {
-                            completion(responseError)
-                        } else {
-                            completion(nil)
-                        }
-                        
-                        
-                    } else {
-                        print(response.result.error ?? "")
-                        completion(response.result.error as NSError?)
-                    }
+            guard let request = URLRequest.newRequest(urlString: apiStoreBaseUrl + "products/\(productId)", method: .put, parameters: parameters, headers: getAuthHeader()) else {
+                return
             }
+            
+            URLSession.newSession().apiDataTask(with: request) { (result) in
+                switch result {
+                case .success:
+                    completion(nil)
+                case .failure(let error):
+                    print(error)
+                    completion(error as NSError)
+                }
+            }
+        } else {
+            completion(Utility.error("No parameters added."))
         }
     }
     
     open func getProductImages(_ productId:String, completion: @escaping (_ productImages:[BigcommerceProductImage], _ error: NSError?) -> ()) {
         
-        alamofireManager.request(apiStoreBaseUrl + "products/\(productId)/images", method:.get, encoding:JSONEncoding.default, headers:headers)
-            .responseJSON { response in
+        guard let request = URLRequest.newRequest(urlString: apiStoreBaseUrl + "products/\(productId)/images", method: .get, parameters: nil, headers: getAuthHeader()) else {
+            return
+        }
+        
+        URLSession.newSession().apiDataTask(with: request) { (result) in
+            switch result {
+            case .success(let json):
+                var productImages: [BigcommerceProductImage] = []
                 
-                if(response.result.isSuccess) {
-                    
-                    if let responseError = self.checkForErrorResponse(response) {
-                        completion([], responseError)
-                    } else {
-                        
-                        var productImages: [BigcommerceProductImage] = []
-                        
-                        //Loop over the orders JSON object and create order objects for each one
-                        if let productImagesArray = response.result.value as? NSArray {
-                            for productImageElement in productImagesArray {
-                                if let productImageDict = productImageElement as? NSDictionary {
-                                    let productImage = BigcommerceProductImage(jsonDictionary: productImageDict)
-                                    productImages.append(productImage)
-                                }
-                            }
+                //Loop over the orders JSON object and create order objects for each one
+                if let productImagesArray = json as? NSArray {
+                    for productImageElement in productImagesArray {
+                        if let productImageDict = productImageElement as? NSDictionary {
+                            let productImage = BigcommerceProductImage(jsonDictionary: productImageDict)
+                            productImages.append(productImage)
                         }
-                        
-                        completion(productImages, nil)
                     }
-                    
-                    
-                } else {
-                    print(response.result.error ?? "")
-                    completion([], response.result.error as NSError?)
                 }
+            case .failure(let error):
+                print(error)
+                completion([], error as NSError)
+            }
         }
     }
     
     open func getProductSkus(_ productId:String, completion: @escaping (_ productSkus:[BigcommerceProductSku], _ error: NSError?) -> ()) {
         
-        alamofireManager.request(apiStoreBaseUrl + "products/\(productId)/skus", method:.get, encoding:JSONEncoding.default, headers:headers)
-            .responseJSON { response in
+        guard let request = URLRequest.newRequest(urlString: apiStoreBaseUrl + "products/\(productId)/skus", method: .get, parameters: nil, headers: getAuthHeader()) else {
+            return
+        }
+        
+        URLSession.newSession().apiDataTask(with: request) { (result) in
+            switch result {
+            case .success(let json):
+                var productSkus: [BigcommerceProductSku] = []
                 
-                if(response.result.isSuccess) {
-                    
-                    if let responseError = self.checkForErrorResponse(response) {
-                        completion([], responseError)
-                    } else {
-                        
-                        var productSkus: [BigcommerceProductSku] = []
-                        
-                        //Loop over the orders JSON object and create order objects for each one
-                        if let productSkusArray = response.result.value as? NSArray {
-                            for productSkuElement in productSkusArray {
-                                if let productSkuDict = productSkuElement as? NSDictionary {
-                                    let productSku = BigcommerceProductSku(jsonDictionary: productSkuDict, currencyLocale: self.currencyLocale)
-                                    productSkus.append(productSku)
-                                }
-                            }
+                //Loop over the orders JSON object and create order objects for each one
+                if let productSkusArray = json as? NSArray {
+                    for productSkuElement in productSkusArray {
+                        if let productSkuDict = productSkuElement as? NSDictionary {
+                            let productSku = BigcommerceProductSku(jsonDictionary: productSkuDict, currencyLocale: self.currencyLocale)
+                            productSkus.append(productSku)
                         }
-                        
-                        completion(productSkus, nil)
                     }
-                    
-                    
-                } else {
-                    print(response.result.error ?? "")
-                    completion([], response.result.error as NSError?)
                 }
+            case .failure(let error):
+                print(error)
+                completion([], error as NSError)
+            }
         }
     }
     
@@ -751,22 +614,18 @@ open class BigcommerceApi: NSObject {
             parameters.updateValue(lowLevel as AnyObject, forKey: "inventory_warning_level")
         }
         
-        alamofireManager.request(apiStoreBaseUrl + "products/\(productId)/skus/\(productSkuId)", method:.put, parameters:parameters, encoding:JSONEncoding.default, headers:headers)
-            .responseJSON { response in
-                
-                if(response.result.isSuccess) {
-                    
-                    if let responseError = self.checkForErrorResponse(response) {
-                        completion(responseError)
-                    } else {
-                        completion(nil)
-                    }
-                    
-                    
-                } else {
-                    print(response.result.error ?? "")
-                    completion(response.result.error as NSError?)
-                }
+        guard let request = URLRequest.newRequest(urlString: apiStoreBaseUrl + "products/\(productId)/skus/\(productSkuId)", method: .get, parameters: parameters, headers: getAuthHeader()) else {
+            return
+        }
+        
+        URLSession.newSession().apiDataTask(with: request) { (result) in
+            switch result {
+            case .success:
+                completion(nil)
+            case .failure(let error):
+                print(error)
+                completion(error as NSError)
+            }
         }
     }
     
@@ -783,132 +642,112 @@ open class BigcommerceApi: NSObject {
     //Retrieve an array of Bigcommerce customer objects
     open func getCustomers(_ parameters:[String : String]?, completion: @escaping (_ customers:[BigcommerceCustomer], _ error: NSError?) -> ()) {
         
-        alamofireManager.request(apiStoreBaseUrl + "customers", method:.get, parameters:parameters, headers:headers)
-            .responseJSON { response in
+        guard let request = URLRequest.newRequest(urlString: apiStoreBaseUrl + "customers", method: .get, parameters: parameters, headers: getAuthHeader()) else {
+            return
+        }
+        
+        URLSession.newSession().apiDataTask(with: request) { (result) in
+            switch result {
+            case .success(let json):
+                var customers: [BigcommerceCustomer] = []
                 
-                if(response.result.isSuccess) {
-                    
-                    if let responseError = self.checkForErrorResponse(response) {
-                        completion([], responseError)
-                    } else {
-                        
-                        var customers: [BigcommerceCustomer] = []
-                        
-                        //Loop over the orders JSON object and create order objects for each one
-                        if let customersArray = response.result.value as? NSArray {
-                            for customerElement in customersArray {
-                                if let customerDict = customerElement as? NSDictionary {
-                                    let customer = BigcommerceCustomer(jsonDictionary: customerDict)
-                                    customers.append(customer)
-                                }
-                            }
+                //Loop over the orders JSON object and create order objects for each one
+                if let customersArray = json as? NSArray {
+                    for customerElement in customersArray {
+                        if let customerDict = customerElement as? NSDictionary {
+                            let customer = BigcommerceCustomer(jsonDictionary: customerDict)
+                            customers.append(customer)
                         }
-                        
-                        completion(customers, nil)
                     }
-                    
-                    
-                } else {
-                    print(response.result.error ?? "")
-                    completion([], response.result.error as NSError?)
                 }
+                
+                completion(customers, nil)
+            case .failure(let error):
+                print(error)
+                completion([], error as NSError)
+            }
         }
     }
     
     open func getCustomerAddresses(_ customerId:String, completion: @escaping (_ customerAddresses:[BigcommerceCustomerAddress], _ error: NSError?) -> ()) {
         
-        alamofireManager.request(apiStoreBaseUrl + "customers/\(customerId)/addresses", method:.get, headers:headers)
-            .responseJSON { response in
+        guard let request = URLRequest.newRequest(urlString: apiStoreBaseUrl + "customers/\(customerId)/addresses", method: .get, parameters: nil, headers: getAuthHeader()) else {
+            return
+        }
+        
+        URLSession.newSession().apiDataTask(with: request) { (result) in
+            switch result {
+            case .success(let json):
+                var customerAddresses: [BigcommerceCustomerAddress] = []
                 
-                if(response.result.isSuccess) {
-                    
-                    if let responseError = self.checkForErrorResponse(response) {
-                        completion([], responseError)
-                    } else {
-                        
-                        var customerAddresses: [BigcommerceCustomerAddress] = []
-                        
-                        //Loop over the orders JSON object and create order objects for each one
-                        if let customersAddressArray = response.result.value as? NSArray {
-                            for customerAddressElement in customersAddressArray {
-                                if let customerAddressDict = customerAddressElement as? NSDictionary {
-                                    let customerAddress = BigcommerceCustomerAddress(jsonDictionary: customerAddressDict)
-                                    customerAddresses.append(customerAddress)
-                                }
-                            }
+                //Loop over the orders JSON object and create order objects for each one
+                if let customersAddressArray = json as? NSArray {
+                    for customerAddressElement in customersAddressArray {
+                        if let customerAddressDict = customerAddressElement as? NSDictionary {
+                            let customerAddress = BigcommerceCustomerAddress(jsonDictionary: customerAddressDict)
+                            customerAddresses.append(customerAddress)
                         }
-                        
-                        completion(customerAddresses, nil)
                     }
-                    
-                    
-                } else {
-                    print(response.result.error ?? "")
-                    completion([], response.result.error as NSError?)
                 }
+                
+                completion(customerAddresses, nil)
+            case .failure(let error):
+                print(error)
+                completion([], error as NSError)
+            }
         }
     }
     
     open func getOrderMessages(_ orderId:String, completion: @escaping (_ orderMessages:[BigcommerceOrderMessage], _ error: NSError?) -> ()) {
         
-        alamofireManager.request(apiStoreBaseUrl + "orders/\(orderId)/messages", method:.get, headers:headers)
-            .responseJSON { response in
+        guard let request = URLRequest.newRequest(urlString: apiStoreBaseUrl + "orders/\(orderId)/messages", method: .get, parameters: nil, headers: getAuthHeader()) else {
+            return
+        }
+        
+        URLSession.newSession().apiDataTask(with: request) { (result) in
+            switch result {
+            case .success(let json):
+                var orderMessages: [BigcommerceOrderMessage] = []
                 
-                if(response.result.isSuccess) {
-                    
-                    if let responseError = self.checkForErrorResponse(response) {
-                        completion([], responseError)
-                    } else {
-                        
-                        var orderMessages: [BigcommerceOrderMessage] = []
-                        
-                        //Loop over the orders JSON object and create order objects for each one
-                        if let orderMessageArray = response.result.value as? NSArray {
-                            for orderMessageElement in orderMessageArray {
-                                if let orderMessageDict = orderMessageElement as? NSDictionary {
-                                    let orderMessage = BigcommerceOrderMessage(jsonDictionary: orderMessageDict)
-                                    orderMessages.append(orderMessage)
-                                }
-                            }
+                //Loop over the orders JSON object and create order objects for each one
+                if let orderMessageArray = json as? NSArray {
+                    for orderMessageElement in orderMessageArray {
+                        if let orderMessageDict = orderMessageElement as? NSDictionary {
+                            let orderMessage = BigcommerceOrderMessage(jsonDictionary: orderMessageDict)
+                            orderMessages.append(orderMessage)
                         }
-                        
-                        completion(orderMessages, nil)
                     }
-                    
-                    
-                } else {
-                    print(response.result.error ?? "")
-                    completion([], response.result.error as NSError?)
                 }
+                
+                completion(orderMessages, nil)
+            case .failure(let error):
+                print(error)
+                completion([], error as NSError)
+            }
         }
     }
     
     open func getStore(_ completion: @escaping (_ store:BigcommerceStore?, _ error: NSError?) -> ()) {
         
-        alamofireManager.request(apiStoreBaseUrl + "store", method:.get, headers:headers)
-            .responseJSON { response in
+        guard let request = URLRequest.newRequest(urlString: apiStoreBaseUrl + "store", method: .get, parameters: nil, headers: getAuthHeader()) else {
+            return
+        }
+        
+        URLSession.newSession().apiDataTask(with: request) { (result) in
+            switch result {
+            case .success(let json):
+                var store:BigcommerceStore?
                 
-                if(response.result.isSuccess) {
-                    
-                    if let responseError = self.checkForErrorResponse(response) {
-                        completion(nil, responseError)
-                    } else {
-                        
-                        var store:BigcommerceStore?
-                        
-                        //Create the store object
-                        if let storeDict = response.result.value as? NSDictionary {
-                            store = BigcommerceStore(jsonDictionary: storeDict)
-                        }
-                        
-                        completion(store, nil)
-                    }
-                    
-                    
-                } else {
-                    print(response.result.error ?? "")
-                    completion(nil, response.result.error as NSError?)
+                //Create the store object
+                if let storeDict = json as? NSDictionary {
+                    store = BigcommerceStore(jsonDictionary: storeDict)
                 }
+                
+                completion(store, nil)
+            case .failure(let error):
+                print(error)
+                completion(nil, error as NSError)
+            }
         }
     }
 }
