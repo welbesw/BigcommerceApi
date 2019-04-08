@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "BigcommerceApi"
-  s.version          = "2.2.0"
+  s.version          = "2.3.0"
   s.summary          = "A simple Swift library to access the Bigcommerce Stores API."
   s.description      = <<-DESC
                        A simple Swift library for the Bigcommerce Stores API
