@@ -402,7 +402,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2A88BAB366C50BC13FC0F532 /* Pods-BigcommerceApi_Example.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = T9FJ9CRG8J;
 				INFOPLIST_FILE = BigcommerceApi/Info.plist;
@@ -418,7 +417,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 19D1BC2BD201C73F8669052A /* Pods-BigcommerceApi_Example.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = T9FJ9CRG8J;
 				INFOPLIST_FILE = BigcommerceApi/Info.plist;
